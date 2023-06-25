@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,9 +11,10 @@
 </head>
 <body>
 <h2></h2>
+
 <div class="container" id="container">
     <div class="form-container sign-up-container">
-        <form action="">
+        <form th:action="@{/login/sign_up}" method="post"  >
             <h1>Tạo tài khoản</h1>
             <div class="social-container">
                 <a href="#" class="social"><i class="bi bi-facebook"></i></a>
@@ -19,21 +22,24 @@
                 <a href="#" class="social"><i class="bi bi-linkedin"></i></a>
             </div>
             <span>hoặc</span>
-            <input type="text" placeholder="Họ và tên người dùng" />
-            <input type="datetime-local" placeholder="Ngày sinh">
-            <input type="email" placeholder="Email" />
-            <input type="tel" placeholder="Số điện thoại">
-            <input type="password" placeholder="Mật khẩu" />
-            <input type="password" placeholder="Nhập lại mật khẩu" />
+            <input type="text" placeholder="Họ và tên người dùng" name="username" required="required">
+            <input type="date" placeholder="Ngày sinh" name="birthday" required="required"  >
+            <input type="email" placeholder="Email" name="email" >
+            <input type="tel" placeholder="Số điện thoại" name="phone" required="required" >
+            <input type="password" placeholder="Mật khẩu" name="pass"  id="pass" required="required">
+
+            <input type="password" placeholder="Nhập lại mật khẩu" name="confirmpass" id="confirm" required="required" onkeyup="kiemTraMatKhau()">
+            <span style="color: red" id="msg" >
+            </span>
             <div style="margin-bottom: 5px">
-                <input type="checkbox" style="max-width: 15px" name="police">
+                <input type="checkbox" style="max-width: 15px" name="police" required="required" onchange="kiemTraDongY()">
                 <span>Tôi đồng ý với <a href="#" style="color: #5f61e6">Dịch vụ chính sách</a></span>
             </div>
-            <button  class="form-btn">Đăng ký</button>
+            <button  class="form-btn" type="submit" name="submit" >Đăng ký</button>
         </form>
     </div>
     <div class="form-container sign-in-container">
-        <form action="#">
+        <form th:action="@{/login/sign_in}" method="post">
             <h1>Đăng nhập</h1>
             <div class="social-container">
                 <a href="#" class="social"><i class="bi bi-facebook"></i></a>
@@ -41,10 +47,15 @@
                 <a href="#" class="social"><i class="bi bi-linkedin"></i></a>
             </div>
             <span>hoặc sử dụng tài khoản của bạn</span>
-            <input type="email" placeholder="Email/Số điện thoại" />
-            <input type="password" placeholder="Mật khẩu" />
+            <input type="tel" placeholder="Số điện thoại" name="phone" />
+            <input type="password" placeholder="Mật khẩu" name="pass" />
+            <div style="min-width: 128px">
+                <input type="checkbox" style="max-width: 15px" >
+                <span>Nhớ mật khẩu</span>
+            </div>
+
             <a href="#">Quên mật khẩu</a>
-            <button  class="form-btn" >Đăng nhập</button>
+            <button  class="form-btn" type="submit">Đăng nhập</button>
         </form>
     </div>
     <div class="overlay-container">
@@ -86,5 +97,24 @@
     signInButton.addEventListener('click', () => {
         container.classList.remove("right-panel-active");
     });
+
+    function kiemTraMatKhau(){
+       matKhau= document.getElementById('pass').value;
+       matKhauNhapLai =document.getElementById('confirm').value;
+        if(matKhau != matKhauNhapLai)
+        {
+            document.getElementById("msg").innerHTML = "Mật khẩu không khớp !" ;
+
+            return false;
+        }else
+        {
+            document.getElementById("msg").innerHTML = "" ;
+            return true;
+        }
+    }
+
+
+
 </script>
+
 </html>
