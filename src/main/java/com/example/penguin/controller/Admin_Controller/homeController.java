@@ -11,10 +11,7 @@ public class homeController {
         return "/Admin_home" ;
     }
 
-//    @GetMapping("/home")
-//    private String Admin_home(){
-//        return "/Admin_home";
-//    }
+
 
 
 

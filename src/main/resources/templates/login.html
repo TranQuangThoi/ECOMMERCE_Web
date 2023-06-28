@@ -7,14 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
     <title>Login</title>
 </head>
 <body>
-<h2></h2>
-
+<div th:if="${success}"  id="alertDiv">
+        [[${success}]]
+</div>
+<div th:if="${error}"  id="alertError" >
+    [[${error}]]
+</div>
 <div class="container" id="container">
     <div class="form-container sign-up-container">
-        <form th:action="@{/login/sign_up}" method="post"  >
+        <form th:action="@{sign_up}" method="post"  >
             <h1>Tạo tài khoản</h1>
             <div class="social-container">
                 <a href="#" class="social"><i class="bi bi-facebook"></i></a>
@@ -22,13 +27,13 @@
                 <a href="#" class="social"><i class="bi bi-linkedin"></i></a>
             </div>
             <span>hoặc</span>
-            <input type="text" placeholder="Họ và tên người dùng" name="username" required="required">
-            <input type="date" placeholder="Ngày sinh" name="birthday" required="required"  >
+            <input type="text" placeholder="Họ và tên người dùng" name="username" required="required" autofocus="autofocus">
+            <input type="date" placeholder="Ngày sinh" name="birthday" required="required" >
             <input type="email" placeholder="Email" name="email" >
             <input type="tel" placeholder="Số điện thoại" name="phone" required="required" >
             <input type="password" placeholder="Mật khẩu" name="pass"  id="pass" required="required">
 
-            <input type="password" placeholder="Nhập lại mật khẩu" name="confirmpass" id="confirm" required="required" onkeyup="kiemTraMatKhau()">
+            <input type="password" placeholder="Nhập lại mật khẩu" name="confirmpass" id="confirm" required="required" onkeyup="kiemTraMatKhau()" >
             <span style="color: red" id="msg" >
             </span>
             <div style="margin-bottom: 5px">
@@ -39,7 +44,7 @@
         </form>
     </div>
     <div class="form-container sign-in-container">
-        <form th:action="@{/login/sign_in}" method="post">
+        <form th:action="@{sign_in}" method="post">
             <h1>Đăng nhập</h1>
             <div class="social-container">
                 <a href="#" class="social"><i class="bi bi-facebook"></i></a>
@@ -47,8 +52,8 @@
                 <a href="#" class="social"><i class="bi bi-linkedin"></i></a>
             </div>
             <span>hoặc sử dụng tài khoản của bạn</span>
-            <input type="tel" placeholder="Số điện thoại" name="phone" />
-            <input type="password" placeholder="Mật khẩu" name="pass" />
+            <input type="tel" placeholder="Số điện thoại" name="phone"  required="required"/>
+            <input type="password" placeholder="Mật khẩu" name="pass"  required="required" />
             <div style="min-width: 128px">
                 <input type="checkbox" style="max-width: 15px" >
                 <span>Nhớ mật khẩu</span>
@@ -112,6 +117,24 @@
             return true;
         }
     }
+
+    // Ẩn phần tử sau 5 giây và thay đổi nội dung thành "Đăng nhập ngay"
+    setTimeout(function() {
+        var alertDiv = document.getElementById("alertDiv");
+        if (alertDiv) {
+            alertDiv.innerHTML = "Hãy đăng nhập ngay nào <3"; // Thay đổi nội dung
+            setTimeout(function() {
+                alertDiv.style.display = "none"; // Ẩn phần tử
+            }, 4000);
+        }
+    }, 2000);
+
+    setTimeout(function() {
+        var alertError = document.getElementById("alertError");
+        if (alertError) {
+            alertError.style.display = "none"; // Ẩn phần tử
+        }
+    }, 3000);
 
 
 

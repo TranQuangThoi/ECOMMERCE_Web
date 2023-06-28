@@ -26,10 +26,10 @@ public class loginController {
     public String login(Model model)
     {
         model.addAttribute("newAcc", new UserAccountEntity());
-        return "login";
+        return "/login";
     }
 
-    @PostMapping("/login/sign_up")
+    @PostMapping("sign_up")
     private String sign_up(RedirectAttributes rd ,
                            @ModelAttribute UserAccountEntity userAccount ,
                            @ModelAttribute(name="username") String username,
@@ -41,8 +41,7 @@ public class loginController {
                            )
     {
 
-        int flag = 0;
-        UserAccountEntity userAccount1 = userAccService.findNameUser(phone);
+        UserAccountEntity userAccount1 = userAccService.findByPhone(phone);
         if(userAccount1 == null)
         {
                 String password = Base64.getEncoder().encodeToString(pass.trim().getBytes());
@@ -53,24 +52,19 @@ public class loginController {
                 userAccount.setBirthDate(birthday);
                 userAccount.setRole(0);
                 userAccount.setAvatar("https://res.cloudinary.com/dqy4p8xug/image/upload/v1684272398/userImage_oujnyf.png");
+                rd.addFlashAttribute("success","Bạn đã đăng ký thành công");
                 userAccService.saveUser(userAccount);
-                flag=1;
+                return "redirect:/login";
+
 
         }else {
-            rd.addFlashAttribute("msg", "Số điện thoại này đã được sử dụng , vui lòng sử dụng số điện thoại khác");
-            flag=0;
+            rd.addFlashAttribute("error", "Số điện thoại này đã tồn tại !!!");
+            return "redirect:/login" ;
         }
 
-        if(flag== 1)
-        {
-            return "redirect:/login" ;
-        }else
-        {
-            return "redirect:/sign_up" ;
-        }
 
     }
-    @PostMapping("/login/sign_in")
+    @PostMapping("sign_in")
     private String sign_in(Model model ,
                            @ModelAttribute(name = "phone") String phone,
                            @ModelAttribute(name = "pass") String password
@@ -98,12 +92,12 @@ public class loginController {
             }else {
                 model.addAttribute("error","Mật khẩu hoặc tài khoảng không đúng nhá");
                 session.setAttribute("error","Mật khẩu hoặc tài khoảng không đúng nhá");
-                return "redirect:/login";
+                return "/login";
             }
         }else {
             model.addAttribute("error","Mật khẩu hoặc tài khoảng không đúng nhá");
             session.setAttribute("error","Mật khẩu hoặc tài khoảng không đúng nhá");
-            return "redirect:/login";
+            return "/login";
         }
 
 

@@ -254,3 +254,23 @@ footer a {
     color: #3c97bf;
     text-decoration: none;
 }
+
+#alertError{
+	font-size: 16px;
+	border-radius: 5px;
+	padding: 18px 80px 18px 80px;
+	margin-bottom: 5px;
+	color: #cc0000;
+	background-color: #fde7e7;
+	text-align: center;
+}
+#alertDiv{
+	font-size: 16px;
+	border-radius: 5px;
+	padding: 18px 80px 18px 80px;
+	margin-bottom: 5px;
+	color: #006600;
+	background-color: #cce6cc;
+	text-align: center;
+}
+

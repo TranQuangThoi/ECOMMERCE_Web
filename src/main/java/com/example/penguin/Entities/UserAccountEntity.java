@@ -14,7 +14,10 @@ public class UserAccountEntity {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private int id ;
     private String name ;
+
+    @Column(unique = true)
     private String phone;
+
     private String email ;
     private String address;
     private String password;
