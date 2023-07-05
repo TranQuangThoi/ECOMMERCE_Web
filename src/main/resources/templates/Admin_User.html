@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html
-        lang="en" xmlns:th="http://www.thymeleaf.org/" >
-
+<html lang="en"  xmlns:th="http://www.thymeleaf.org/"
+>
 <head>
     <meta charset="utf-8" />
     <meta
@@ -9,7 +8,7 @@
             content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Category</title>
+    <title>USER</title>
 
     <meta name="description" content="" />
 
@@ -25,29 +24,26 @@
     />
 
     <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="assets/vendor/fonts/boxicons.css" />
+    <link rel="stylesheet" href="./assets/vendor/fonts/boxicons.css" />
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="assets/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="assets/css/demo.css" />
-
-<!--    boostrap-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./assets/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="./assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="./assets/css/demo.css" />
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="./assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
-    <link rel="stylesheet" href="assets/vendor/libs/apex-charts/apex-charts.css" />
+    <link rel="stylesheet" href="./assets/vendor/libs/apex-charts/apex-charts.css" />
 
     <!-- Page CSS -->
+<!--    //boostrap-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
     <!-- Helpers -->
-    <script src="assets/vendor/js/helpers.js"></script>
+    <script src="./assets/vendor/js/helpers.js"></script>
 
-    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="assets/js/config.js"></script>
+   <script src="./assets/js/config.js"></script>
 </head>
 
 <body>
@@ -129,7 +125,7 @@
                 <li class="menu-item ">
                     <a th:href="@{/Admin_Home}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                        <div data-i18n="Analytics">Dashboard</div>
+                        <div data-i18n="Analytics">Manage</div>
                     </a>
                 </li>
 
@@ -173,7 +169,6 @@
                     </a>
                 </li>
 
-
             </ul>
         </aside>
         <!-- / Menu -->
@@ -206,132 +201,68 @@
                     </div>
                     <!-- /Search -->
                     <ul class="navbar-nav flex-row align-items-center ms-auto">
-                                                <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                                                    <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                                                        <div class="avatar avatar-online">
-                                                            <img src="./assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
-                                                        </div>
-                                                    </a>
-                                                    <ul class="dropdown-menu dropdown-menu-end">
-                                                        <li>
-                                                            <a class="dropdown-item" href="#">
-                                                                <div class="d-flex">
-                                                                    <div class="flex-shrink-0 me-3">
-                                                                        <div class="avatar avatar-online">
-                                                                            <img src="./assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="flex-grow-1">
-                                                                        <span class="fw-semibold d-block">John Doe</span>
-                                                                        <small class="text-muted">Admin</small>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <div class="dropdown-divider"></div>
-                                                        </li>
-                                                        <li>
-                                                            <a class="dropdown-item" href="#">
-                                                                <i class="bx bx-user me-2"></i>
-                                                                <span class="align-middle">My Profile</span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="dropdown-item" href="#">
-                                                                <i class="bx bx-cog me-2"></i>
-                                                                <span class="align-middle">Settings</span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="dropdown-item" href="#">
-                                                <span class="d-flex align-items-center align-middle">
-                                                  <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                                                  <span class="flex-grow-1 align-middle">Billing</span>
-                                                  <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <div class="dropdown-divider"></div>
-                                                        </li>
-                                                        <li>
-                                                            <a class="dropdown-item" href="auth-login-basic.html">
-                                                                <i class="bx bx-power-off me-2"></i>
-                                                                <span class="align-middle">Log Out</span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                    </ul>
+                        <!-- Place this tag where you want the button to render. -->
 
+
+                        <!--/ User -->
+                    </ul>
                 </div>
             </nav>
             <!-- / Navbar -->
 
             <!-- Content wrapper -->
             <div class="content-wrapper">
-                <!-- Content -->
-
-                <div class="container-xxl flex-grow-1 container-p-y">
-                    <h4 class="fw-bold py-3 mb-4">
-                        <span class="text-muted fw-light">Manage/</span> Quản lý danh mục
-                    </h4>
-
-                    <!-- Hoverable Table rows -->
+                <div class="container-xxl flex-grow-1 container-p-y " >
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Manage /</span> User </h4>
                     <div class="card">
-                        <h5 class="card-header">Danh sách danh mục</h5>
-
                         <div th:if="${mesage}" class=" alert alert-success text-center"  style="font-size: 18px" id="mesage" >
 
-<!--                            <h3 th:text="${mesage}"></h3>-->
                             [[${mesage}]]
                         </div>
-                        <a th:href="@{/Add_Category}" style="width:170px; margin-left: 20px;margin-top:10px; margin-bottom:10px ; color:black" class="btn btn-primary" >Thêm Danh mục</a>
+                        <h5 class="card-header">Danh sách khách hàng</h5>
                         <div class="table-responsive text-nowrap">
-                            <table class="table table-hover">
+                            <table class="table">
                                 <thead>
                                 <tr>
                                     <th>STT</th>
-                                    <th>Tên danh mục</th>
-                                    <th>Trạng thái</th>
+                                    <th>Tên người dùng</th>
+                                    <th>EMAIL</th>
+                                    <th>Địa chỉ</th>
+                                    <th>Số điện thoại</th>
                                     <th></th>
                                 </tr>
                                 </thead>
-
-                                <tbody class="table-border-bottom-0" >
-                                <th:block th:each="category , loop : ${allCategory}" >
-                                    <tr th:class="${category.status == 1} ? 'table-while' : 'table-warning'">
+                                <tbody class="table-border-bottom-0">
+                                <th:block th:each="user , loop : ${userAcc}">
+                                    <tr>
                                         <td th:text="${loop.index + 1}"></td>
-                                        <td th:text="${category.nameCategory}"><i class="fab fa-react fa-lg text-info me-3"></i> <strong></strong></td>
-                                        <td  >
-                                            <span th:if="${category.status == 1}">Đang bán</span>
-
-                                            <span th:if="${category.status == 0}">Dừng bán</span>
-                                        </td>
+                                        <td th:text="${user.name}"></td>
+                                        <td th:text="${user.email}"></td>
+                                        <td th:text="${user.address}"></td>
+                                        <td th:text="${user.phone}"></td>
                                         <td>
+<!--                                            <a  class="btn btn-secondary" onclick="return confirm('Bạn có chắc chắn muốn xóa đi người dùng này?')"  th:href="@{/DeleteUser/{id} (id=${user.id})} "><i class="bi bi-trash3"></i></a>-->
                                             <a  class="btn "   style="background: #8592a3;color: white;box-shadow: 0 0.125rem 0.25rem 0 rgba(133, 146, 163, 0.4);
 
-                                             border-radius: 7px;" th:onclick="'javascript:customConfirm(\'' + ${category.idCategory} + '\');'"><i class="bi bi-trash3"></i>
+                                             border-radius: 7px;" th:onclick="'javascript:customConfirm(\'' + ${user.id} + '\');'"><i class="bi bi-trash3"></i>
 
-                                            </a>                                        </td>
+                                            </a>
+
+                                        </td>
                                     </tr>
-
                                 </th:block>
 
 
+
                                 </tbody>
-
                             </table>
-
                         </div>
-
                     </div>
+
                     <div class="content-backdrop fade"></div>
                 </div>
-                <!-- Content wrapper -->
-            </div>
 
+            </div>
 
             <!-- Content wrapper -->
         </div>
@@ -347,24 +278,25 @@
 
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
-<script src="assets/vendor/libs/jquery/jquery.js"></script>
-<script src="assets/vendor/libs/popper/popper.js"></script>
-<script src="assets/vendor/js/bootstrap.js"></script>
-<script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+<script src="./assets/vendor/libs/jquery/jquery.js"></script>
+<script src="./assets/vendor/libs/popper/popper.js"></script>
+<script src="./assets/vendor/js/bootstrap.js"></script>
+<script src="./assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-<script src="assets/vendor/js/menu.js"></script>
+<script src="./assets/vendor/js/menu.js"></script>
 <!-- endbuild -->
 
 <!-- Vendors JS -->
-<script src="assets/vendor/libs/apex-charts/apexcharts.js"></script>
+<script src="./assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
 <!-- Main JS -->
-<script src="assets/js/main.js"></script>
+<script src="./assets/js/main.js"></script>
 
 <!-- Page JS -->
-<script src="assets/js/dashboards-analytics.js"></script>
+<script src="./assets/js/dashboards-analytics.js"></script>
 
-<!--xử ly thời gian hiển thị thông báo -->
+<!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
 <script>
 
     setTimeout(function (){
@@ -376,9 +308,9 @@
     },3000)
 
 </script>
-<!--xử lý confim xóa -->
+
 <script>
-    function customConfirm(cateId) {
+    function customConfirm(userId) {
         const confirmBox = document.createElement('div');
         confirmBox.classList.add('custom-confirm-box');
 
@@ -386,13 +318,13 @@
         overlay.classList.add('custom-confirm-overlay');
 
         const confirmMessage = document.createElement('p');
-        confirmMessage.textContent = 'Bạn có chắc chắn muốn xóa đi danh mục này?';
+        confirmMessage.textContent = 'Bạn có chắc chắn muốn xóa đi người dùng này?';
 
         const confirmButton = document.createElement('button');
         confirmButton.textContent = 'Xác nhận';
         confirmButton.classList.add('confirm-button');
         confirmButton.addEventListener('click', () => {
-            window.location.href = '/Delete/' + cateId;
+            window.location.href = '/DeleteUser/' + userId;
             confirmBox.remove();
             overlay.remove();
         });
@@ -463,6 +395,5 @@
     /*}*/
 
 </style>
-
 </body>
 </html>

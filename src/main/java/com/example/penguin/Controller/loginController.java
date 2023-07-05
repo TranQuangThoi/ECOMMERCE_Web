@@ -1,4 +1,4 @@
-package com.example.penguin.controller;
+package com.example.penguin.Controller;
 
 import com.example.penguin.Entities.UserAccountEntity;
 import com.example.penguin.Service.UserAccService;
@@ -77,14 +77,15 @@ public class loginController {
 
         if(userAccount != null)
         {
+
             // giải mã mk đã được mã hóa
             String decodePass = new String(Base64.getDecoder().decode(userAccount.getPassword()));
             // . trim xóa khoản trắng ở đầu và cuối chuỗi
             if(decodePass.equals(password.trim()))
             {
-
                 session.setAttribute("account", userAccount);
                 if(userAccount.getRole()==1){
+
                     return "Admin_home";
                 }else {
                     return "redirect:/login";
@@ -101,10 +102,13 @@ public class loginController {
         }
 
 
+    }
 
-
-
-
+    @GetMapping("/logout")
+    public String loggout()
+    {
+        session.removeAttribute("account");
+        return "/index";
     }
 
 

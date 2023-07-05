@@ -71,7 +71,14 @@
             <ul class="menu-inner py-1">
                 <!-- Dashboard -->
                 <li class="menu-item ">
-                    <a th:href="@{/Admin_DashBoard}" class="menu-link">
+
+                    <div data-i18n="Analytics">xin chào <h3 th:text="${session.account.name}">
+
+                    </h3></div>
+
+                </li>
+                <li class="menu-item ">
+                    <a th:href="@{/Admin_Home}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
                         <div data-i18n="Analytics">Dashboard</div>
                     </a>
@@ -108,6 +115,18 @@
                     <a th:href="@{/Admin_Revenue}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-line-chart"></i>
                         <div data-i18n="Analytics">Doanh thu</div>
+                    </a>
+                </li>
+                <li class="menu-item ">
+                    <a th:href="@{/logout}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-line-chart"></i>
+                        <div data-i18n="Analytics">Đăng xuất</div>
+                    </a>
+                </li>
+                <li class="menu-item ">
+                    <a th:href="@{/logout}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-log-out"></i>
+                        <div data-i18n="Analytics">Đăng xuất</div>
                     </a>
                 </li>
 

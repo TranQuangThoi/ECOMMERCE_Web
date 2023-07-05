@@ -13,6 +13,6 @@ public class CategoryEntity {
     private int idCategory;
 
     private String nameCategory;
-    private String subCategory;
+    private int status;
 
 }

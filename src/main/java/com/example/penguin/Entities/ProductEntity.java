@@ -17,12 +17,13 @@ public class ProductEntity {
     private CategoryEntity category;
 
     private String productName;
-    private String price;
-    private Double discount;
+    private int price;
+    private int discount;
     private int rating;
     private String reviews;
     private String description;
-    private long quantity;
+    private int quantity;
+    private int available;
 
 
 }

@@ -5,6 +5,9 @@ import com.example.penguin.Repository.UserAccRepositoy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class UserAccService{
 
@@ -22,6 +25,20 @@ public class UserAccService{
 
     }
 
+    public List<UserAccountEntity> findAllUser()
+    {
+        return repositoy.findAll();
+    }
+
+    public void deleteById(int id)
+    {
+
+         repositoy.deleteById(id);
+    }
+    public Optional<UserAccountEntity> findById(int id)
+    {
+        return repositoy.findById(id);
+    }
     public UserAccountEntity findByPhone(String phone)
     {
         return repositoy.findByPhone(phone);
