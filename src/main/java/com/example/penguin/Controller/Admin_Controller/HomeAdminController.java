@@ -1,6 +1,5 @@
 package com.example.penguin.Controller.Admin_Controller;
 
-import com.example.penguin.Entities.UserAccountEntity;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,8 +15,9 @@ public class HomeAdminController {
     @GetMapping("/Admin_Home")
     private String showManage(Model model){
 
-        return "/Admin_home" ;
+        return "/Admin_Home";
     }
+
 
 
 

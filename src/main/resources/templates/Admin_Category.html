@@ -129,7 +129,7 @@
                 <li class="menu-item ">
                     <a th:href="@{/Admin_Home}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                        <div data-i18n="Analytics">Dashboard</div>
+                        <div data-i18n="Analytics">Manage</div>
                     </a>
                 </li>
 
@@ -282,34 +282,41 @@
                     <div class="card">
                         <h5 class="card-header">Danh sách danh mục</h5>
 
-                        <div th:if="${mesage}" class=" alert alert-success text-center"  style="font-size: 18px" id="mesage" >
+                        <div th:if="${message}" class=" alert alert-success text-center"  style="font-size: 18px" id="mesage" >
 
 <!--                            <h3 th:text="${mesage}"></h3>-->
-                            [[${mesage}]]
+                            [[${message}]]
                         </div>
                         <a th:href="@{/Add_Category}" style="width:170px; margin-left: 20px;margin-top:10px; margin-bottom:10px ; color:black" class="btn btn-primary" >Thêm Danh mục</a>
                         <div class="table-responsive text-nowrap">
                             <table class="table table-hover">
                                 <thead>
-                                <tr>
+                                <tr class="text-center">
                                     <th>STT</th>
                                     <th>Tên danh mục</th>
                                     <th>Trạng thái</th>
+                                    <th >Số sản phẩm</th>
                                     <th></th>
                                 </tr>
                                 </thead>
 
                                 <tbody class="table-border-bottom-0" >
                                 <th:block th:each="category , loop : ${allCategory}" >
-                                    <tr th:class="${category.status == 1} ? 'table-while' : 'table-warning'">
-                                        <td th:text="${loop.index + 1}"></td>
-                                        <td th:text="${category.nameCategory}"><i class="fab fa-react fa-lg text-info me-3"></i> <strong></strong></td>
-                                        <td  >
+                                    <tr th:class="${category.status == 1} ? 'table-while' :(${category.status==0} ?'table-warning' : 'table-success')" >
+                                        <td class="text-center" th:text="${loop.index + 1}"></td>
+                                        <td class="text-center" th:text="${category.nameCategory}"><i class="fab fa-react fa-lg text-info me-3"></i> <strong></strong></td>
+                                        <td class="text-center" >
+                                            <span th:if="${category.status == 2}">Dự kiến </span>
                                             <span th:if="${category.status == 1}">Đang bán</span>
-
                                             <span th:if="${category.status == 0}">Dừng bán</span>
                                         </td>
-                                        <td>
+                                        <td  class="text-center" th:text="${category.productCount}" >
+
+                                        </td>
+                                        <td class="text-center">
+                                            <a class="btn"  style="background: #8592a3;color: white;box-shadow: 0 0.125rem 0.25rem 0 rgba(133, 146, 163, 0.4);
+
+                                             border-radius: 7px;"  th:href="@{'/Admin_Category/edit_InfoCate/' + ${category.idCategory} }" ><i class="bx bx-edit-alt"></i></a>
                                             <a  class="btn "   style="background: #8592a3;color: white;box-shadow: 0 0.125rem 0.25rem 0 rgba(133, 146, 163, 0.4);
 
                                              border-radius: 7px;" th:onclick="'javascript:customConfirm(\'' + ${category.idCategory} + '\');'"><i class="bi bi-trash3"></i>
@@ -373,7 +380,7 @@
         {
             mesage.style.display="none";
         }
-    },3000)
+    },3500)
 
 </script>
 <!--xử lý confim xóa -->
@@ -392,7 +399,7 @@
         confirmButton.textContent = 'Xác nhận';
         confirmButton.classList.add('confirm-button');
         confirmButton.addEventListener('click', () => {
-            window.location.href = '/Delete/' + cateId;
+            window.location.href = '/Admin_Category/Delete/' + cateId;
             confirmBox.remove();
             overlay.remove();
         });

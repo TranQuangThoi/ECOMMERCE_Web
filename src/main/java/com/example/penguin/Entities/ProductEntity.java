@@ -2,6 +2,7 @@ package com.example.penguin.Entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.lang.Nullable;
 
 @Entity
 @Data
@@ -18,12 +19,18 @@ public class ProductEntity {
 
     private String productName;
     private int price;
+    @Column(nullable = true)
     private int discount;
+
     private int rating;
     private String reviews;
     private String description;
-    private int quantity;
+
+    @Column(nullable = false)
+    private int quantity = 0;
+
     private int available;
+
 
 
 }

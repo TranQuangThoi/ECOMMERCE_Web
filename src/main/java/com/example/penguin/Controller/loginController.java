@@ -86,7 +86,7 @@ public class loginController {
                 session.setAttribute("account", userAccount);
                 if(userAccount.getRole()==1){
 
-                    return "Admin_home";
+                    return "Admin_Home";
                 }else {
                     return "redirect:/login";
                 }

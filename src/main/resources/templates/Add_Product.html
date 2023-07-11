@@ -129,9 +129,9 @@
             <ul class="menu-inner py-1">
                 <!-- Dashboard -->
                 <li class="menu-item ">
-                    <a th:href="@{/Admin_DashBoard}" class="menu-link">
+                    <a th:href="@{/Admin_Home}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                        <div data-i18n="Analytics">Dashboard</div>
+                        <div data-i18n="Analytics">Manage</div>
                     </a>
                 </li>
 
@@ -168,22 +168,12 @@
                         <div data-i18n="Analytics">Doanh thu</div>
                     </a>
                 </li>
-
-                <!--                <li class="menu-item ">-->
-                <!--                    <a href="../Admin/Setting.html" class="menu-link">-->
-                <!--                        <i class="menu-icon tf-icons bx bxs-cog"></i>-->
-                <!--                        <div data-i18n="Analytics">Cài đặt</div>-->
-                <!--                    </a>-->
-                <!--                </li>-->
-
-                <!--                <li class="menu-item ">-->
-                <!--                    <a href="#" class="menu-link">-->
-                <!--                        <i class="menu-icon tf-icons bx bx-log-out"></i>-->
-                <!--                        <div data-i18n="Analytics">Đăng xuất</div>-->
-                <!--                    </a>-->
-                <!--                </li>-->
-
-                <!-- Layouts -->
+                <li class="menu-item ">
+                    <a th:href="@{/logout}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-log-out"></i>
+                        <div data-i18n="Analytics">Đăng xuất</div>
+                    </a>
+                </li>
 
             </ul>
         </aside>
@@ -236,29 +226,27 @@
                         <div class="col-xl">
                             <div class="card mb-4">
                                 <div class="card-body">
-
                                     <form th:action="@{/Add_Product/save}" method="post" >
-                                        <input type="hidden" name="action" value="addWatch">
                                         <div class="mb-3">
                                             <label class="form-label" for="basic-default-fullname">Tên sản phẩm</label>
-                                            <input type="text" class="form-control" id="basic-default-fullname" name="name" value="">
+                                            <input type="text" class="form-control" id="basic-default-fullname" name="name" value="" required="required">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="exampleFormControlSelect1" class="form-label">Danh mục</label>
-                                            <select class="form-select" name="categpory" aria-label="Default select example" >
+                                            <label for="exampleFormControlSelect1" class="form-label" >Danh mục</label>
+                                            <select class="form-select" name="category" aria-label="Default select example" required="required">
                                                 <option selected="">Chọn danh mục sản phẩm</option>
                                                 <option th:each="itemCate : ${listCategory}" th:text="${itemCate.nameCategory}" th:value="${itemCate.idCategory}" ></option>
                                             </select>
                                         </div>
 
                                         <div class="mb-3">
-                                            <label class="form-label" for="basic-default-fullname">Số lượng</label>
-                                            <input type="text"  class="form-control" id="soluongsanpham" name="quantity" value="">
+                                            <label class="form-label" for="basic-default-fullname" required="required">Số lượng</label>
+                                            <input class="form-control"  name="quantity" value="">
                                         </div>
 
                                         <div class="mb-3">
-                                            <label for="exampleFormControlSelect1" class="form-label">TRẠNG THÁI</label>
-                                            <select class="form-select" name="category" id="exampleFormControlSelect1" aria-label="Default select example" >
+                                            <label for="exampleFormControlSelect1" class="form-label" required="required">TRẠNG THÁI</label>
+                                            <select class="form-select" name="available" id="exampleFormControlSelect1" aria-label="Default select example" >
                                                 <option selected="">Trạng thái sản phẩm</option>
                                                 <option value=1 >Còn hàng trong kho</option>
                                                 <option value=0 >Đang nhập</option>
@@ -267,24 +255,16 @@
                                         </div>
 
                                         <div class="mb-3">
-
-
-                                        </div>
-                                        <div class="mb-3">
                                             <label class="form-label">Mô tả sản phẩm</label>
-                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description" value=""></textarea>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Gía giảm</label>
-                                            <textarea class="form-control" rows="3" name="discount" value=""></textarea>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" name="description" value=""></textarea>
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Hình ảnh sản phầm</label>
-                                            <input class="form-control" rows="3" name="image" value="" >
+                                            <input class="form-control"  name="image" value="" >
 
                                         </div>
                                         <div class="mb-3">
-                                            <label class="form-label">Giá gốc</label>
+                                            <label class="form-label">Giá</label>
                                             <input type="text" class="form-control" name="price" value="">
                                         </div>
                                         <button type="submit"  class="btn btn-primary mr-3">Thêm</button>
