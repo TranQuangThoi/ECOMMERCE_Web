@@ -29,6 +29,8 @@ public class loginController {
         return "/login";
     }
 
+
+
     @PostMapping("sign_up")
     private String sign_up(RedirectAttributes rd ,
                            @ModelAttribute UserAccountEntity userAccount ,
@@ -87,7 +89,11 @@ public class loginController {
                 if(userAccount.getRole()==1){
 
                     return "Admin_Home";
-                }else {
+                }else if(userAccount.getRole()==0)
+                {
+                    return "home";
+                }
+                else {
                     return "redirect:/login";
                 }
             }else {
