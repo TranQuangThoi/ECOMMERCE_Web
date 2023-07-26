@@ -12,4 +12,12 @@ public class OrderDetailEntity {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private int idOrderDetail;
 
+    @ManyToOne
+    @JoinColumn(name = "idProduct")
+    private ProductEntity product;
+
+    @OneToOne
+    @JoinColumn(name ="idOrder")
+    private OrderEntity order;
+
 }

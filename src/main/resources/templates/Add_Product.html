@@ -226,13 +226,14 @@
                         <div class="col-xl">
                             <div class="card mb-4">
                                 <div class="card-body">
-                                    <form th:action="@{/Add_Product/save}" method="post" >
+
+                                    <form th:action="@{/Add_Product/save}" method="post"  enctype="multipart/form-data" >
                                         <div class="mb-3">
                                             <label class="form-label" for="basic-default-fullname">Tên sản phẩm</label>
                                             <input type="text" class="form-control" id="basic-default-fullname" name="name" value="" required="required">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="exampleFormControlSelect1" class="form-label" >Danh mục</label>
+                                            <label class="form-label" >Danh mục</label>
                                             <select class="form-select" name="category" aria-label="Default select example" required="required">
                                                 <option selected="">Chọn danh mục sản phẩm</option>
                                                 <option th:each="itemCate : ${listCategory}" th:text="${itemCate.nameCategory}" th:value="${itemCate.idCategory}" ></option>
@@ -260,12 +261,16 @@
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Hình ảnh sản phầm</label>
-                                            <input class="form-control"  name="image" value="" >
+                                            <div class="col-lg-6 mx-auto">
+                                                <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                                                    <input id="upload" name="image" type="file" onchange="readURL(this);"  accept="image/*" class="form-control border-0 " multiple>
+                                                </div>
+                                            </div>
 
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Giá</label>
-                                            <input type="text" class="form-control" name="price" value="">
+                                            <input type="number" class="form-control" name="price" value="">
                                         </div>
                                         <button type="submit"  class="btn btn-primary mr-3">Thêm</button>
                                         <button type="button"  class="btn btn-primary" onclick="cancelForm()">Cancel</button>
@@ -322,15 +327,7 @@
 
 
 </script>
-<script>
-    // Lắng nghe sự kiện khi dropdown thay đổi giá trị
-    document.getElementById("exampleFormControlSelect1").addEventListener("change", function() {
-        // Lấy giá trị được chọn
-        var selectedValue = this.value;
+<!--  hiển thị ảnh lên khi chọn -->
 
-        // Gán giá trị lựa chọn cho trường status
-        document.getElementsByName("status")[0].value = selectedValue;
-    });
-</script>
 </body>
 </html>

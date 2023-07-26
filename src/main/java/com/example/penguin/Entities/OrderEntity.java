@@ -3,9 +3,9 @@ package com.example.penguin.Entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.sql.Date;
+import java.util.Date;
 
-@Entity
+@Entity(name = "OrderEntity")
 @Table
 @Data
 public class OrderEntity {
@@ -18,10 +18,10 @@ public class OrderEntity {
     @JoinColumn(name = "id")
     private UserAccountEntity userAccount;
 
-    private Date orderDate;
+    private java.util.Date orderDate=new Date(new java.util.Date().getTime());
     protected long totalPrice;
     private int satus;
-    private int payment;
+
 
 
 }

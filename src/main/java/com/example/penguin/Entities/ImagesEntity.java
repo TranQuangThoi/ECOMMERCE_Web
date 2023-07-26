@@ -2,7 +2,9 @@ package com.example.penguin.Entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.data.repository.query.Param;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table
@@ -13,12 +15,12 @@ public class ImagesEntity {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private int idImage;
 
+
     private String url;
 
     @ManyToOne
     @JoinColumn(name="idProduct")
     private ProductEntity product;
-
 
 
 }

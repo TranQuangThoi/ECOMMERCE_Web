@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.lang.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 @Table
@@ -16,6 +19,8 @@ public class ProductEntity {
     @ManyToOne
     @JoinColumn(name = "idCategory")
     private CategoryEntity category;
+
+
 
     private String productName;
     private int price;
@@ -30,6 +35,11 @@ public class ProductEntity {
     private int quantity = 0;
 
     private int available;
+
+
+    @OneToMany(mappedBy = "product")
+    private List<ImagesEntity>imageList;
+
 
 
 

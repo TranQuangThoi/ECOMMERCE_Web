@@ -218,7 +218,7 @@
                     <!-- Hoverable Table rows -->
                     <div class="card">
                         <h5 style="padding-bottom:12px;" class="card-header">Danh sách sản phẩm</h5>
-                        <div th:if="${message}" class=" alert alert-success text-center"
+                        <div id="message" th:if="${message}" class=" alert alert-success text-center"
                         >
                             [[${message}]]
                         </div>
@@ -227,7 +227,7 @@
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
-                                    <th>STT</th>
+                                    <th>Mã sản phẩm</th>
                                     <th>Tên sản phẩm</th>
                                     <th>Danh mục</th>
                                     <th>số lượng</th>
@@ -241,7 +241,7 @@
                                 <tbody class="table-border-bottom-0">
 
                                 <th:block th:each="itemProduct : ${products}" >
-                                    <tr >
+                                    <tr  >
                                         <td th:text="${itemProduct.idProduct}"></td>
                                         <td th:text="${itemProduct.productName}"><i class="fab fa-react fa-lg text-info me-3"></i> <strong></strong>
                                         </td>
@@ -288,13 +288,6 @@
                                 </a>
                             </li>
 
-                            <!-- Thêm trang đầu -->
-<!--                            <li class="page-item" th:if="${currentPage > 3}">-->
-<!--                                <a class="page-link" th:href="@{'/Admin_Product/page/' + 1}">0</a>-->
-<!--                            </li>-->
-<!--                            <li class="page-item" th:if="${currentPage > 3}">-->
-<!--                                <span class="page-link">...</span>-->
-<!--                            </li>-->
 
                             <!-- Hiển thị các trang -->
                             <li class="page-item" th:each="i: ${#numbers.sequence(1, totalPage)}">
@@ -311,33 +304,6 @@
                             </li>
                         </ul>
 
-
-
-                        <!--                        //////////////////////////////////////////////////////-->
-<!--                        <ul class="pagination justify-content-end">-->
-<!--                            &lt;!&ndash;                           <span th:each="i : ${#numbers.sequence(1,totalPages)}">&ndash;&gt;-->
-<!--                            &lt;!&ndash;                               <a th:href="@{'/Admin_Product/page/' +${i} }">[[${i}]]</a>&ndash;&gt;-->
-<!--                            &lt;!&ndash;                           </span>&ndash;&gt;-->
-
-<!--                            <li class="page-item  ">-->
-<!--                                <a class="page-link" th:if="${currentPage >1}" th:href="@{/Admin_Product/page/1}" > <i class="tf-icon bx bx-chevrons-left"></i></a>-->
-
-<!--                            </li>-->
-
-
-<!--                            <li class="page-item"  th:each="i: ${#numbers.sequence(1,totalPages)}">-->
-
-<!--                                <a class="page-link" active th:href="@{'/Admin_Product/page/' + ${i}}">[[${i}]]</a>-->
-<!--                            </li>-->
-<!--                            <li class="page-item ">-->
-<!--                                <a class="page-link" th:if="${currentPage < totalPages}" th:href="@{'/Admin_Product/page/' +${currentPage + 1 } }" ><i class="tf-icon bx bx-chevrons-right"></i></a>-->
-<!--                                <span th:unless="${currentPage < totalItems}"></span>-->
-<!--                            </li>-->
-<!--                            &lt;!&ndash;                            <li class="page-item ">&ndash;&gt;-->
-<!--                            &lt;!&ndash;                                <a class="page-link" th:if="${currentPage < totalPages}" th:href="@{'/Admin_Product/page/' +${totalPages } }" >End</i></a>&ndash;&gt;-->
-<!--                            &lt;!&ndash;                                <span th:unless="${currentPage < totalItems}"></span>&ndash;&gt;-->
-<!--                            &lt;!&ndash;                            </li>&ndash;&gt;-->
-<!--                        </ul>-->
                     </nav>
                     <div class="content-backdrop fade"></div>
                 </div>
@@ -382,7 +348,7 @@
 <script>
 
     setTimeout(function (){
-        var mesage = document.getElementById("mesage");
+        var mesage = document.getElementById("message");
         if(mesage)
         {
             mesage.style.display="none";
@@ -390,7 +356,7 @@
     },3000)
 
 </script>
-<!--// xử lý xác nhận xáo sản phẩm -->
+<!--// xử lý xác nhận xóa sản phẩm -->
 <script>
     function customConfirm(proId) {
         const confirmBox = document.createElement('div');

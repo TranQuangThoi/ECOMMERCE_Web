@@ -108,7 +108,7 @@ public class loginController {
     public String loggout()
     {
         session.removeAttribute("account");
-        return "/index";
+        return "home";
     }
 
 

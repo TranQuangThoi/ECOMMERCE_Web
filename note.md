@@ -1,0 +1,1 @@
+sử dụng enctype=multipart/form-data, dữ liệu form sẽ được mã hóa thành một định dạng đặc biệt, cho phép tải lên (upload) các tệp tin (file) cùng với các trường thông tin khác trong form.

@@ -13,14 +13,14 @@ public class Sales_figureEntity {
     private int idSelled;
 
     @ManyToOne
-    @JoinColumn(name = "idOrderDetail")
-    private OrderDetailEntity orderDetailEntity;
+    @JoinColumn(name = "idOrder")
+    private OrderEntity orderEntity;
 
     @ManyToOne
     @JoinColumn(name ="id")
     private UserAccountEntity userAccount;
 
-    private int totalOrder;
+
     private long totalPrice;
 
 }

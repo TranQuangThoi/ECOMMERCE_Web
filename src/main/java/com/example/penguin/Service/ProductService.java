@@ -1,6 +1,8 @@
 package com.example.penguin.Service;
 
+import com.example.penguin.Entities.ImagesEntity;
 import com.example.penguin.Entities.ProductEntity;
+import com.example.penguin.Repository.ImageReposity;
 import com.example.penguin.Repository.ProductReposity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,6 +18,8 @@ public class ProductService {
 
     @Autowired
     ProductReposity productReposity;
+    @Autowired
+    ImageReposity imageReposity;
 
     public List<ProductEntity> findAll()
     {
@@ -38,12 +42,6 @@ public class ProductService {
         return this.productReposity.findAll(pageable);
     }
 
-    public void deleteById(int id)
-    {
-        ProductEntity product = productReposity.findById(id);
-        productReposity.delete(product);
-    }
-
     public void delete(ProductEntity product)
     {
         productReposity.delete(product);
@@ -56,6 +54,25 @@ public class ProductService {
 
         return (List<ProductEntity>)productReposity.findByCate(id);
     }
+
+    public void deleteImageByPro(int id)
+    {
+        List<ImagesEntity> imageList = imageReposity.findByPro(id);
+        for(ImagesEntity itemImage : imageList)
+        {
+            imageReposity.delete(itemImage);
+        }
+    }
+    public void deleteProById(int id)
+    {
+        List<ImagesEntity> imageList = imageReposity.findByPro(id);
+        for(ImagesEntity itemImage : imageList)
+        {
+            imageReposity.delete(itemImage);
+        }
+        productReposity.deleteById(id);
+    }
+
 
 
 }

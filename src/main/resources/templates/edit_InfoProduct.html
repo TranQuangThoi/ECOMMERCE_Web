@@ -129,7 +129,7 @@
             <ul class="menu-inner py-1">
                 <!-- Dashboard -->
                 <li class="menu-item ">
-                    <a th:href="@{/Admin_home}" class="menu-link">
+                    <a th:href="@{/Admin_Home}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
                         <div data-i18n="Analytics">Manage</div>
                     </a>
@@ -218,7 +218,7 @@
 
                 <div class="container-xxl flex-grow-1 container-p-y">
                     <h4 class="fw-bold py-3 mb-4">
-                        <span class="text-muted fw-light">Quản lý sản phẩm/</span> Thêm sản phẩm
+                        <span class="text-muted fw-light">Quản lý sản phẩm/</span> Sửa thông tin sản phẩm
                     </h4>
 
                     <!-- Basic Layout -->
@@ -226,7 +226,7 @@
                         <div class="col-xl">
                             <div class="card mb-4">
                                 <div class="card-body">
-                                    <form th:action="@{/edit_InfoProduct/update/{id}(id=${product.idProduct})}" method="post">
+                                    <form th:action="@{/edit_InfoProduct/update/{id}(id=${product.idProduct})}" method="post" enctype="multipart/form-data">
                                         <div class="mb-3">
                                             <label class="form-label" for="basic-default-fullname">Tên sản phẩm</label>
                                             <input type="text" class="form-control" id="basic-default-fullname" name="name" th:value="${product.productName}">
@@ -263,10 +263,29 @@
                                             <textarea class="form-control" id="exampleFormControlTextarea1" name="description" th:text="${product.description}" th:value="${product.description}"></textarea>
                                         </div>
                                         <div class="mb-3">
-                                            <label class="form-label">Hình ảnh sản phầm</label>
-                                            <input class="form-control"  name="image" value="" >
+                                            <label class="form-label">Hình ảnh sản phẩm</label>
+                                            <div class="row">
+                                                 <div class="col-lg-6"  th:each="image :${listImage}"  >
+                                                         <div class="input-group mb-3 px-2 py-2  bg-white shadow-sm">
+                                                           <img id="previewImage" th:src="${image.url}" width="424" height="238" >
+                                                          <input id="upload" name="image" type="file" onchange="previewFile(this);"  accept="image/*" class="form-control border-0 " multiple>
 
+                                                         </div>
+
+                                                 </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Thêm hình ảnh</label>
+                                                <div class="row">
+                                                        <div class="input-group mb-3 px-2 py-2  bg-white shadow-sm">
+                                                            <input name="image" type="file" onchange="readUrl(this);"  accept="image/*" class="form-control border-0 " multiple>
+                                                        </div>
+
+                                                </div>
+                                            </div>
                                         </div>
+
+
                                         <div class="mb-3">
                                             <label class="form-label">Giá</label>
                                             <input type="text" class="form-control" name="price" th:value="${product.price}">
@@ -326,6 +345,25 @@
 
 
 </script>
+<script>
+    function previewFile(input) {
+        var preview = input.previousElementSibling;
+        var file = input.files[0];
+        var reader = new FileReader();
 
+        reader.onloadend = function () {
+            preview.src = reader.result;
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = "";
+        }
+    }
+
+
+
+</script>
 </body>
 </html>

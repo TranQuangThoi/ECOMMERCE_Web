@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en"    xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/all.min.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+        <title>Ecommerce Website</title>
+    </head>
+
+    <body>
+
+        <!-- Start Header -->
+        <section id="header">
+            <a href=""> <img src="images/logo2.png" class="logo" style="height: 70px;"></a>
+
+
+            <div>
+                <ul id="navbar">
+                    <li>
+                        <div class="search-box">
+                          <input class="search-box_input" type="text" placeholder="bạn muốn tìm gì ?" required>
+                          <button class="search-box_btn" ><i class="bi bi-search"></i> </button>
+                        </div>
+                       </li>
+                    <li><a th:href="@{/}">Home</a></li>
+                    <li><a th:href="@{/shop}">Shope</a></li>
+                    <li><a th:href="@{/blog}">Blog</a></li>
+                    <li><a th:href="@{/about}" >About</a></li>
+                    <li><a th:href="@{contact}">Contact</a></li>
+                    <li ><a th:href="@{/cart}"><i class="bi bi-cart3" style="font-size: 25px;"></i></a></li>
+                    <li ><a th:href="@{/account}" class="active"><i class="bi bi-person-circle" style="font-size: 25px;"></i></a></li>
+                    <a href="#" id="close"><i class="fas fa-times"></i></a>
+                </ul>
+            </div>
+            <div id="mobile">
+                <a href="cart.html"><i class="fa-solid fa-bag-shopping"></i></a>
+                <span id="bar">
+                    <i class="fas fa-outdent"></i>
+                </span>
+            </div>
+        </section>
+        <!-- End Header -->
+
+
+
+        <!-- Start page header Section -->
+        <section id="page-header" class="about-header">
+            <h2>Xin chào Quang thời</h2>
+            <p>Chúc bạn có một ngày tốt lành <3 </p>
+        </section>
+        <!-- End  page header Section -->
+
+
+        <!-- infomaton user -->
+
+        <section  class="section-p1">
+            <div class="user-info-container">
+              <div class="user-info">
+                    <div class="user-avatar" >
+                        <img src="images/logo2.png" alt="User Avatar" style="width: 100%;">
+                    </div>
+                    <h3 class="user-name">Quang Thời <span>( nam )</span></h3>
+                
+                    <div class="user-info-item" >
+                        <p class="address">Địa chỉ :<span>Street 32, San Franciscoời</span></p>
+                    
+                    </div>
+                    <div>
+                        <p>Ngày sinh : <span >2002/10</span>  </p> 
+                    </div>
+                    <div class="user-info-item" >
+                        <p class="u">Email :<span>quang@gmail</span></p>
+                    
+                    </div>
+                    <div class="user-info-item" >
+                        <p class="u">Username :<span>quang thời</span></p>
+                    
+                    </div>
+                    <div class="user-info-item">
+                        <p> Password: <span>*************</span></p>
+                    
+                    </div>
+
+                    <div class="user-info-item">
+                        <p> Phone: <span>01 2222 365</span></p>
+                    
+                    </div>
+
+                    <div>
+                        <button class="btn update " type="submit">Cập nhật</button>
+                        <button class="btn">Đổi mật khẩu</button>
+                    </div>
+               
+               
+                </div>
+              
+              <div class="user_history">
+                <table>
+                    <h3 style="margin-bottom: 10px; color:#24081a ;"> <i class="bi bi-clock-history" style="margin-right: 10px;"></i>Lịch sử mua hàng</h3>
+                    <thead>
+                        <tr>
+                            <th>Mã đơn hàng</th>
+                            <th>Sản phẩm</th>
+                            <th>Trạng thái</th>
+                            <th>Giá</th>
+                            <th>Ngày</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>123456</td>
+                            <td>Sản phẩm A</td>
+                            <td>Đã nhận</td>
+                            <td>$50.00</td>
+                            <td>2023-07-25</td>
+                          </tr>
+                    </tbody>
+                </table>
+
+              </div>
+            </div>
+
+           
+            
+
+          </section>
+          
+        <!-- End Cart -->
+
+        <!-- End Coupon And Subtotal Section -->
+        <style>
+            .user-info-container{
+               display: flex;
+               justify-content: center;
+                width: 100%;  
+                
+            }
+            .user-history{
+                width: 55%;
+            }
+            /* CSS for styling the user_history table */
+            .user_history table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #e1a9cc ; /* Border for the entire table */
+            }
+
+            .user_history th,
+            .user_history td {
+            /* Borders for table cells */
+            border-bottom: 1px solid #ccc; 
+            padding: 15px; /* Add padding to cells for spacing */
+            }
+
+            .user_history thead {
+            background-color: #f0d4e6; /* Background color for the table header */
+            }
+
+            /* Optional: Alternate row colors */
+            .user_history tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+            }
+
+            .user-info{
+                display: flex;
+                width: 45%;
+                flex-direction: column;
+                justify-content: center;
+                
+            }
+            .update{
+              
+                margin-right: 30px;
+                
+                
+            }
+        
+            
+            .btn{
+                padding: 15px 35px 10px 35px;
+               border-radius: 15px;
+               border: 0.5px solid #ffe6e6 ;
+               background-color: #99cc99;
+               color: black;
+               font-size: 15px;
+               cursor: pointer;
+             
+
+            }
+            .user-info h3{
+                margin-top: 10px;
+            }
+            .user-info div{
+                margin-top: 10px;
+            }
+            .user-avatar{
+                width: 150px;
+                height: 150px;
+                border-radius: 50%;
+                overflow: hidden;
+                border: 3px solid #e6f2e6;
+                box-shadow:  0px -10px 10px 4px #f59e9e; /* Add the vignette shadow effect */
+                box-sizing: border-box;
+        
+            }
+            .user-avatar img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center top;
+            }
+        
+        </style>
+        
+
+
+
+        <!-- Start Footer -->
+        <footer class="section-p1" style="border-top: 1px solid black;" >
+            <div class="col">
+                <a href=""> <img src="images/logo2.png" class="logo" style="height: 70px;"></a>
+                <h4>Contact</h4>
+                <p><strong>Address: </strong> 562 Wellington Roadm Street 32, San Francisco</p>
+                <p><strong>Phone: </strong> +01 2222 365 /(+91) 01 2345 6789</p>
+                <p><strong>Hours: </strong> 10:00 - 18:00. Mon - Sat</p>
+                <div class="follow">
+                    <h4>Follow us</h4>
+                    <div class="icons">
+                        <div class="icon">
+                            <i class="fab fa-facebook"></i>
+                        </div>
+                        <div class="icon">
+                            <i class="fab fa-twitter"></i>
+                        </div>
+                        <div class="icon">
+                            <i class="fab fa-instagram"></i>
+                        </div>
+                        <div class="icon">
+                            <i class="fab fa-pinterest-p"></i>
+                        </div>
+                        <div class="icon">
+                            <i class="fab fa-youtube"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <h4>About</h4>
+                <a href="#">About Us</a>
+                <a href="#">Delivery Information</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms & Conditions</a>
+                <a href="#">Contact Us</a>
+            </div>
+
+            <div class="col">
+                <h4>My Account</h4>
+                <a href="#">Sign In</a>
+                <a href="#">View Cart</a>
+                <a href="#">My Wishlist</a>
+                <a href="#">Track My Order</a>
+                <a href="#">Help</a>
+            </div>
+
+            <div class="col install">
+                <h4>Install App</h4>
+                <p>From App Store or Google Play</p>
+                <div class="row">
+                    <img src="images/pay/app.jpg" alt="">
+                    <img src="images/pay/play.jpg" alt="">
+                </div>
+                <p>Secured Payment Gateways</p>
+                <img src="images/pay/pay.png" alt="">
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2022, Tech2 etc - HTML CSS Ecommerce Template</p>
+            </div>
+        </footer>
+        <!-- End Footer -->
+        <script src="js/all.min.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+
+</html>
