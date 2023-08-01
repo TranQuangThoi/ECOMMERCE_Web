@@ -18,7 +18,7 @@ public class Sales_figureEntity {
 
     @ManyToOne
     @JoinColumn(name ="id")
-    private UserAccountEntity userAccount;
+    private UserEntity userAccount;
 
 
     private long totalPrice;

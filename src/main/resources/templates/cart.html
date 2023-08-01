@@ -56,6 +56,8 @@
 
 
 
+
+
         <!-- Start page header Section -->
         <section id="page-header" class="about-header">
             <h2>Hãy để lại đánh giá</h2>
@@ -63,15 +65,25 @@
         </section>
         <!-- End  page header Section -->
 
+        <th:block th:if="${session.account== null}">
+            <section class="section-p1" style="margin-top: 5%; margin-bottom: 5%; ; display: flex; justify-content: center;align-items: center; ">
+
+                <h3 style="font-size: 25px;">Hãy đăng nhập để có thể trải nhiệm mua hàng nào </h3>
+                <a th:href="@{/login}" style="color: #6ac950">
+                    <i class="bi bi-door-open" style="font-size: 60px; margin-left: 6px"  ></i>
+                </a>
+
+            </section>
+
+        </th:block>
 
         <!-- Start Cart -->
+        <th:block th:if="${session.account!= null}">
+            <section id="cart" class="section-p1">
 
-        <section id="cart" class="section-p1">
 
-            <table width="100%">
-
-                <thead>
-
+                <table width="100%">
+                    <thead>
                     <tr>
                         <td>Remove</td>
                         <td>Image</td>
@@ -82,115 +94,85 @@
                     </tr>
 
 
-                </thead>
+                    </thead>
 
-                <tbody>
+                    <tbody>
 
-                    <tr>
-
-                        <td><a href="#"><i class="far fa-times-circle"></i></a></td>
-                        <td><img src="images/products/f1.jpg" alt=""></td>
-                        <td>Cartoon Astronaut T-Shirts</td>
-                        <td>$118.19</td>
-                        <td><input type="number" value="1"></td>
-                        <td>$118.19</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td><a href="#"><i class="far fa-times-circle"></i></a></td>
-                        <td><img src="images/products/f2.jpg" alt=""></td>
-                        <td>Cartoon Astronaut T-Shirts</td>
-                        <td>$118.19</td>
-                        <td><input type="number" value="1"></td>
-                        <td>$118.19</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td><a href="#"><i class="far fa-times-circle"></i></a></td>
-                        <td><img src="images/products/f3.jpg" alt=""></td>
-                        <td>Cartoon Astronaut T-Shirts</td>
-                        <td>$118.19</td>
-                        <td><input type="number" value="1"></td>
-                        <td>$118.19</td>
-
-                    </tr>
-
-
-                </tbody>
-
-            </table>
-
-
-        </section>
-
-        <!-- End Cart -->
-
-
-
-
-        <!-- Start Coupon And Subtotal Section -->
-
-        <section id="cart-add" class="section-p1">
-
-            <div id="coupon">
-
-                <h3>Apply Coupon</h3>
-                <div>
-                    <input type="text" placeholder="Enter Your Coupon">
-                    <button class="normal">Apply</button>
-                </div>
-
-            </div>
-
-            <div id="subtotal">
-
-                <h3>Cart Totals</h3>
-
-                <table>
-
-                    <tr>
-                        <td>Cart Subtotal</td>
-                        <td>$ 335</td>
-                    </tr>
-
-
-                    <tr>
-                        <td>Shipping</td>
-                        <td>Free</td>
-                    </tr>
-
-
-                    <tr>
-                        <td><strong>Total</strong></td>
-                        <td><strong>$ 335</strong></td>
-
-                    </tr>
+                    <th:block th:each="itemcartDetail : ${cartDetailList}" >
+                        <tr>
+                            <td><a href="#"><i class="far fa-times-circle"></i></a></td>
+                            <td><img th:src="${itemcartDetail.getProduct().imageList.get(0).getUrl()}" alt=""></td>
+                            <td th:text="${itemcartDetail.getProduct().getProductName()}"></td>
+                            <td th:text="${itemcartDetail.price}" >$118.19</td>
+                            <td><input type="number" th:value="${itemcartDetail.quantity}" name="quantity"></td>
+                            <td th:text="${itemcartDetail.price}+ VND">$118.19</td>
+                        </tr>
+                    </th:block>
+                    </tbody>
 
                 </table>
 
-                <button class="normal">proceed to checkout</button>
-
-
-            </div>
-
-
-        </section>
 
 
 
-
-        <!-- End Coupon And Subtotal Section -->
-
+            </section>
 
 
+            <!-- Start Coupon And Subtotal Section -->
+
+            <section id="cart-add" class="section-p1">
+
+                <div id="coupon">
+
+                    <h3>Apply Coupon</h3>
+                    <div>
+                        <input type="text" placeholder="Enter Your Coupon">
+                        <button class="normal">Apply</button>
+                    </div>
+
+                </div>
+
+                <div id="subtotal">
+
+                    <h3>Cart Totals</h3>
+
+                    <table>
+
+                        <tr>
+                            <td>Cart Subtotal</td>
+                            <td th:text="${cart.totalPrice}+ VND">$ 335</td>
+                        </tr>
 
 
+                        <tr>
+                            <td>Shipping</td>
+                            <td>Free</td>
+                        </tr>
 
 
+                        <tr>
+                            <td><strong >Total</strong></td>
+                            <td><strong th:text="${cart.totalPrice} +VND" >$ 335</strong></td>
+
+                        </tr>
+
+                    </table>
+
+                    <button class="normal">proceed to checkout</button>
+
+
+                </div>
+
+
+            </section>
+
+
+            <!-- End Coupon And Subtotal Section -->
+
+        </th:block>
+
+
+        <!-- End Cart -->
 
 
 
@@ -198,7 +180,7 @@
 
 
         <!-- Start Footer -->
-        <footer class="section-p1 "style="border-top: 1px solid black;">
+        <footer class="section-p1 ">
             <div class="col">
                 <a href=""> <img src="images/logo2.png" class="logo" style="height: 70px;"></a>
                 <h4>Contact</h4>

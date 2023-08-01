@@ -12,7 +12,7 @@ public class Vouchers {
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
-    private int idVoucher;
+    private int voucherId;
     private Date startDate;
     private Date exprie;
     private String description;

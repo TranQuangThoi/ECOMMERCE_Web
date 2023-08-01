@@ -30,7 +30,7 @@ public class CategoryAdminController {
         model.addAttribute("allCategory" ,listAll);
 
         for (CategoryEntity itemCate : listAll) {
-            List<ProductEntity> product = productService.findListById(itemCate.getIdCategory());
+            List<ProductEntity> product = productService.findProByCategoryId(itemCate.getIdCategory());
             long count = product.size(); // Đếm số lượng sản phẩm
             itemCate.setProductCount(count); // Gán số lượng sản phẩm vào thuộc tính productCount
 
@@ -48,18 +48,22 @@ public class CategoryAdminController {
 
         CategoryEntity category = categoryService.findById(id);
 
-        List<ProductEntity> listPro = productService.findListById(id);
+        List<ProductEntity> listPro = productService.findProByCategoryId(id);
 
         if(listPro != null)
         {
             for(ProductEntity itemPro : listPro)
             {
-                productService.delete(itemPro);
+//                productService.delete(itemPro);
+                productService.deleteProById(itemPro.getIdProduct());
             }
+
             this.categoryService.deleteById(id);
         }else {
             this.categoryService.deleteById(id);
         }
+
+
 
         this.categoryService.deleteById(id);
 

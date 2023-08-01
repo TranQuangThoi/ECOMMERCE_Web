@@ -1,23 +1,21 @@
 package com.example.penguin.Repository;
 
-import com.example.penguin.Entities.UserAccountEntity;
+import com.example.penguin.Entities.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface UserAccRepositoy extends JpaRepository<UserAccountEntity , Integer> {
+public interface UserAccRepositoy extends JpaRepository<UserEntity, Integer> {
 
 
-    UserAccountEntity findByName(String username);
+    UserEntity findByName(String username);
 
-   @Query("select user from UserAccount user where user.email=:email")
-   UserAccountEntity findByEmail(String email);
+   @Query("select user from user user where user.email=:email")
+   UserEntity findByEmail(String email);
 
 
 
-    @Query("select user FROM UserAccount user WHERE user.phone=:phone")
-    UserAccountEntity findByPhone(String phone);
+    @Query("select user FROM user user WHERE user.phone=:phone")
+    UserEntity findByPhone(String phone);
 }

@@ -14,9 +14,9 @@
         <!-- font awsome -->
 
 
-        <link rel="stylesheet" href="css/all.min.css">
+        <link rel="stylesheet" href="/css/all.min.css">
 
-        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="/css/main.css">
 
         <title>Ecommerce Website</title>
     </head>
@@ -26,7 +26,7 @@
         <!-- Start Header -->
         <section id="header">
 
-            <a href=""> <img src="images/logo2.png" class="logo" style="height: 70px;"></a>
+            <a href=""> <img src="/images/logo2.png" class="logo" style="height: 70px;"></a>
 
             <div>
 
@@ -37,7 +37,7 @@
                           <button class="search-box_btn" ><i class="bi bi-search"></i> </button>
                         </div>
                     </li>
-                    <li><a th:href="@{/}" class="active">Home</a></li>
+                    <li><a th:href="@{/}" >Home</a></li>
                     <li><a th:href="@{/shop}">Shope</a></li>
                     <li><a th:href="@{/blog}">Blog</a></li>
                     <li><a th:href="@{/about}" >About</a></li>
@@ -66,74 +66,57 @@
 
                 </span>
 
-
-
-
-
-
             </div>
-
-
         </section>
         <!-- End Header -->
 
         <!-- Start Product Details -->
+        <form method="get" th:action="@{/Cart/{id}(id = ${product.idProduct})}" >
+            <section id="prodetalis" class="section-p1">
+                <div class="single-pro-image">
 
-        <section id="prodetalis" class="section-p1">
+                    <img th:src="${product.imageList.get(0).getUrl()}" width="100%" id="MainImg" alt="" >
+                    <div class="small-img-group" >
+                        <th:block th:each="itemImage :${imagesList}">
+                            <div class="small-img-col">
+                                <img th:src="${itemImage.url}" width="100%" class="small-img" alt="" style="height: 100%">
+                            </div>
+                        </th:block>
 
-            <div class="single-pro-image">
-
-                <img src="images/products/f1.jpg" width="100%" id="MainImg" alt="">
-
-                <div class="small-img-group">
-
-                    <div class="small-img-col">
-                        <img src="images/products/f1.jpg" width="100%" class="small-img" alt="">
-                    </div>
-
-                    <div class="small-img-col">
-                        <img src="images/products/f2.jpg" width="100%" class="small-img" alt="">
-                    </div>
-
-                    <div class="small-img-col">
-                        <img src="images/products/f3.jpg" width="100%" class="small-img" alt="">
-                    </div>
-
-                    <div class="small-img-col">
-                        <img src="images/products/f4.jpg" width="100%" class="small-img" alt="">
                     </div>
 
                 </div>
 
-            </div>
+                <div class="single-pro-details" >
 
-            <div class="single-pro-details">
+                    <h5>Home / <span th:text="${product.category.nameCategory}"></span> </h5>
+                    <h2 th:text="${product.productName}">Men Fashion T Shirt</h2>
+                    <h3 th:text="${product.price}">$139.00</h3>
 
-                <h6>Home / T-Shirt</h6>
-                <h4>Men Fashion T Shirt</h4>
-                <h2>$139.00</h2>
+                    <select name="size" required>
+                        <option value=1 >XL</option>
+                        <option value=2  >XXL</option>
+                        <option value=3 >Small</option>
+                        <option value=4 >Large</option>
+                    </select>
 
-                <select>
-                    <option>Select Size</option>
-                    <option>XL</option>
-                    <option>XXL</option>
-                    <option>Small</option>
-                    <option>Large</option>
-                </select>
+                    <input type="number" th:default="1" name="quantity">
 
-                <input type="number" value="1">
-                <button class="normal">Add To Cart</button>
-                <h4>Product Details</h4>
+                    <button class="normal" type="submit"  >Add To Cart</button>
+                    <h4>Product Details</h4>
 
-                <span>
+                    <span th:text="${product.description}">
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim quisquam itaque commodi quia!
                     Aspernatur, ipsum. Inventore animi, enim placeat autem illum sit doloremque dolores laborum
                     recusandae accusantium libero ab expedita.
                 </span>
 
-            </div>
+                </div>
 
-        </section>
+
+            </section>
+        </form>
+
 
 
         <!-- End Product Details -->
@@ -242,7 +225,7 @@
                 </div>
                 <div class="pro">
 
-                    <img src="images/products/n4.jpg" alt="">
+                    <img src="/images/products/n4.jpg" alt="">
 
                     <div class="des">
 
@@ -308,7 +291,7 @@
 
             <div class="col">
 
-                <a href=""> <img src="images/logo2.png" class="logo" style="height: 70px;"></a>
+                <a href=""> <img src="/images/logo2.png" class="logo" style="height: 70px;"></a>
 
                 <h4>Contact</h4>
                 <p><Strong>Address:</Strong>562 Welling Roadm Street 32, San Francisco</p>
@@ -381,11 +364,11 @@
                 <h4>Install App</h4>
                 <p>From App Store or Google play</p>
                 <div class="row">
-                    <img src="images/pay/app.jpg" alt="">
-                    <img src="images/pay/play.jpg" alt="">
+                    <img src="/images/pay/app.jpg" alt="">
+                    <img src="/images/pay/play.jpg" alt="">
                 </div>
                 <p>Secured Payment Gateways</p>
-                <img src="images/pay/pay.png" alt="">
+                <img src="/images/pay/pay.png" alt="">
 
             </div>
 
@@ -421,8 +404,8 @@
 
         </script>
 
-        <script src="js/main.js"></script>
-        <script src="js/all.min.js"></script>
+        <script src="/js/main.js"></script>
+        <script src="/js/all.min.js"></script>
 
     </body>
 

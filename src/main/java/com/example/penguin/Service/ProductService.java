@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,6 +41,8 @@ public class ProductService {
         return this.productReposity.findAll(pageable);
     }
 
+
+
     public void delete(ProductEntity product)
     {
         productReposity.delete(product);
@@ -49,7 +50,7 @@ public class ProductService {
 
 
     // trả về danh sách sản phẩm theo category
-    public List<ProductEntity> findListById(int id)
+    public List<ProductEntity> findProByCategoryId(int id)
     {
 
         return (List<ProductEntity>)productReposity.findByCate(id);

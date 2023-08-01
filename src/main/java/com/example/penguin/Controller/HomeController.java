@@ -1,11 +1,14 @@
 package com.example.penguin.Controller;
 
+import com.example.penguin.Entities.ImagesEntity;
 import com.example.penguin.Entities.ProductEntity;
+import com.example.penguin.Service.ImageService;
 import com.example.penguin.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -15,19 +18,14 @@ public class HomeController {
 
     @Autowired
     ProductService productService;
+    @Autowired
+    ImageService imageService;
     @GetMapping("/")
     public String showHomePage(){
         return "home";
     }
 
-    @GetMapping("/shop")
-    public String showPageShop(Model model)
-    {
 
-        List<ProductEntity> productList = productService.findAll();
-        model.addAttribute("productList",productList);
-        return "shop";
-    }
 
     @GetMapping("/about")
     public String showPageAbout()
@@ -42,11 +40,7 @@ public class HomeController {
         return "blog";
     }
 
-    @GetMapping("/cart")
-    public String showPageCart()
-    {
-        return "cart";
-    }
+
 
     @GetMapping("/contact")
     public String showContact()
@@ -54,9 +48,15 @@ public class HomeController {
         return "contact";
     }
 
-    @GetMapping("/sproduct")
-    public String showPageProduct()
+    @GetMapping("/sproduct/{id}")
+    public String showPageProduct(Model model , @PathVariable(name = "id")int id)
     {
+
+        List<ImagesEntity> imagesList = imageService.findByIdPro(id);
+        ProductEntity product = productService.findById(id);
+
+        model.addAttribute("imagesList",imagesList);
+        model.addAttribute("product",product);
         return "sproduct";
     }
 

@@ -20,8 +20,6 @@ public class ProductEntity {
     @JoinColumn(name = "idCategory")
     private CategoryEntity category;
 
-
-
     private String productName;
     private int price;
     @Column(nullable = true)
@@ -36,9 +34,12 @@ public class ProductEntity {
 
     private int available;
 
+    private int size;
 
     @OneToMany(mappedBy = "product")
     private List<ImagesEntity>imageList;
+
+
 
 
 

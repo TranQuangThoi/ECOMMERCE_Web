@@ -13,11 +13,13 @@ public class OrderDetailEntity {
     private int idOrderDetail;
 
     @ManyToOne
-    @JoinColumn(name = "idProduct")
+    @JoinColumn(name = "ProductId")
     private ProductEntity product;
 
     @OneToOne
-    @JoinColumn(name ="idOrder")
+    @JoinColumn(name ="OrderId")
     private OrderEntity order;
+
+    private int quantity;
 
 }

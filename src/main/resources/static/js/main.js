@@ -18,4 +18,22 @@ pro.forEach((e) => {
   });
 });
 
-/// search
+///
+// Thêm sự kiện click cho các nút danh mục
+const categoryLinks = document.querySelectorAll('#page-Category a[data-category-id]');
+categoryLinks.forEach(link => {
+  link.addEventListener('click', (event) => {
+    event.preventDefault(); // Ngăn chặn hành vi mặc định khi nhấp vào liên kết
+    const categoryId = link.getAttribute('data-category-id'); // Lấy giá trị data-category-id
+    scrollToCategory(categoryId); // Cuộn đến danh sách sản phẩm danh mục tương ứng
+  });
+});
+
+// Hàm cuộn đến danh sách sản phẩm danh mục tương ứng
+function scrollToCategory(categoryId) {
+  const section = document.querySelector(`#product1[data-category-id="${categoryId}"]`);
+  if (section) {
+    // Sử dụng phương thức scrollIntoView để cuộn trang đến phần tử có data-category-id tương ứng
+    section.scrollIntoView({ behavior: 'smooth' });
+  }
+}

@@ -1,6 +1,6 @@
 package com.example.penguin.Controller;
 
-import com.example.penguin.Entities.UserAccountEntity;
+import com.example.penguin.Entities.UserEntity;
 import com.example.penguin.Service.UserAccService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class loginController {
     @GetMapping("/login")
     public String login(Model model)
     {
-        model.addAttribute("newAcc", new UserAccountEntity());
+        model.addAttribute("newAcc", new UserEntity());
         return "/login";
     }
 
@@ -33,7 +33,7 @@ public class loginController {
 
     @PostMapping("sign_up")
     private String sign_up(RedirectAttributes rd ,
-                           @ModelAttribute UserAccountEntity userAccount ,
+                           @ModelAttribute UserEntity userAccount ,
                            @ModelAttribute(name="username") String username,
                            @ModelAttribute(name = "birthday") Date birthday,
                            @ModelAttribute(name="phone") String phone,
@@ -43,7 +43,7 @@ public class loginController {
                            )
     {
 
-        UserAccountEntity userAccount1 = userAccService.findByPhone(phone);
+        UserEntity userAccount1 = userAccService.findByPhone(phone);
         if(userAccount1 == null)
         {
                 String password = Base64.getEncoder().encodeToString(pass.trim().getBytes());
@@ -74,7 +74,7 @@ public class loginController {
     {
 
         // tìm kiếm người dùng dựa trên số điện thoại
-        UserAccountEntity userAccount = userAccService.findByPhone(phone);
+        UserEntity userAccount = userAccService.findByPhone(phone);
 
 
         if(userAccount != null)

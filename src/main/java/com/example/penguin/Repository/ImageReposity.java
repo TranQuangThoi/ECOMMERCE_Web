@@ -15,4 +15,5 @@ public interface ImageReposity extends JpaRepository<ImagesEntity , Integer> {
     List<ImagesEntity> findByPro(int idProduct);
 
 
+
 }

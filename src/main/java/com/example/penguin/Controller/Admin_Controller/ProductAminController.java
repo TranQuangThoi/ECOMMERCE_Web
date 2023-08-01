@@ -3,7 +3,7 @@ package com.example.penguin.Controller.Admin_Controller;
 import com.example.penguin.Entities.CategoryEntity;
 import com.example.penguin.Entities.ImagesEntity;
 import com.example.penguin.Entities.ProductEntity;
-import com.example.penguin.Entities.UserAccountEntity;
+import com.example.penguin.Entities.UserEntity;
 import com.example.penguin.Service.CategoryService;
 import com.example.penguin.Service.CloudinaryService;
 import com.example.penguin.Service.ImageService;
@@ -20,12 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.awt.*;
-import java.math.BigInteger;
-import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 @Controller
 public class ProductAminController {
@@ -119,7 +114,7 @@ public class ProductAminController {
     @GetMapping("/Admin_Product")
     public String viewHomePage(Model model )
     {
-        UserAccountEntity account =  (UserAccountEntity) session.getAttribute("account");
+        UserEntity account =  (UserEntity) session.getAttribute("account");
 
 
         return getOnePage(1,model) ;
@@ -206,33 +201,40 @@ public class ProductAminController {
         product.setCategory(categoryService.findById(category));
         productService.saveProduct(product);
 
-//        thay đổi ảnh theo anh goc
-//        for (int i=0 ; i<imagesEntityList.size() ; i++)
-//        {
-//            ImagesEntity imagesEntity = imagesEntityList.get(i);
-//            MultipartFile imageM = image[i];
-//
-//            // Kiểm tra ảnh có được chọn thay đổi hay không
-//            if(imageM!= null && !imageM.isEmpty() )
-//            {
-//                String url = cloudinaryService.uploadFile(imageM);
-//                imagesEntity.setUrl(url);
-//                imageService.saveImage(imagesEntity);
-//            }
-//        }
+        List<ImagesEntity> imagesEntityList = imageService.findByIdPro(id);
 
-        productService.deleteImageByPro(id);
-        for(MultipartFile itemImage: image)
+//        thay đổi ảnh theo anh goc
+        for (int i=0 ; i<imagesEntityList.size() ; i++)
         {
-            if(!itemImage.isEmpty() )
+            ImagesEntity imagesEntity = imagesEntityList.get(i);
+            MultipartFile imageM = image[i];
+
+            // Kiểm tra ảnh có được chọn thay đổi hay không
+            if(imageM!= null && !imageM.isEmpty() )
             {
-                String url = cloudinaryService.uploadFile(itemImage);
-                ImagesEntity imagesEntity = new ImagesEntity();
+                String url = cloudinaryService.uploadFile(imageM);
                 imagesEntity.setUrl(url);
-                imagesEntity.setProduct(product);
                 imageService.saveImage(imagesEntity);
             }
         }
+
+//        productService.deleteImageByPro(id);
+        // theem anh
+        if(imagesEntityList.size()<image.length)
+        {
+            for(MultipartFile itemImage: image)
+            {
+                if(!itemImage.isEmpty() )
+                {
+                    String url = cloudinaryService.uploadFile(itemImage);
+                    ImagesEntity imagesEntity = new ImagesEntity();
+                    imagesEntity.setUrl(url);
+                    imagesEntity.setProduct(product);
+                    imageService.saveImage(imagesEntity);
+                }
+            }
+        }
+
 
 
         rd.addFlashAttribute("message","Đã lưu thay đổi thành công");

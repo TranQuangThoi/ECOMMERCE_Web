@@ -12,11 +12,11 @@ public class OrderEntity {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private int idOrder;
+    private int orderId;
 
     @ManyToOne
-    @JoinColumn(name = "id")
-    private UserAccountEntity userAccount;
+    @JoinColumn(name = "userId")
+    private UserEntity userEntity;
 
     private java.util.Date orderDate=new Date(new java.util.Date().getTime());
     protected long totalPrice;

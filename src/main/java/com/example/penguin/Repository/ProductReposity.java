@@ -1,6 +1,10 @@
 package com.example.penguin.Repository;
 
+import com.example.penguin.Entities.ImagesEntity;
+import com.example.penguin.Entities.OrderEntity;
 import com.example.penguin.Entities.ProductEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -17,6 +21,16 @@ public interface ProductReposity extends JpaRepository<ProductEntity , Integer> 
     // lấy danh sách sản phẩm theo idcategory
     @Query("select pro from ProductEntity pro where pro.category.idCategory=:id")
     List<ProductEntity> findByCate(int id);
+
+
+
+
+
+
+
+
+
+
 
 
 

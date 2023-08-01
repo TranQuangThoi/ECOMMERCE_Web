@@ -13,7 +13,7 @@ public class CommentEntity {
     private int idComment;
 
     @ManyToOne
-    @JoinColumn(name = "idProduct")
+    @JoinColumn(name = "ProductId")
     private ProductEntity product;
 
 

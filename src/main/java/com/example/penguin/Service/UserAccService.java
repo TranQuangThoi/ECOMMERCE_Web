@@ -1,6 +1,6 @@
 package com.example.penguin.Service;
 
-import com.example.penguin.Entities.UserAccountEntity;
+import com.example.penguin.Entities.UserEntity;
 import com.example.penguin.Repository.UserAccRepositoy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,18 +14,18 @@ public class UserAccService {
     @Autowired
     UserAccRepositoy repositoy;
 
-    public UserAccountEntity saveUser(UserAccountEntity userAccount)
+    public UserEntity saveUser(UserEntity userEntity)
     {
-        return repositoy.save(userAccount);
+        return repositoy.save(userEntity);
     }
 
-    public UserAccountEntity findNameUser(String username)
+    public UserEntity findNameUser(String username)
     {
         return repositoy.findByName(username);
 
     }
 
-    public List<UserAccountEntity> findAllUser()
+    public List<UserEntity> findAllUser()
     {
         return repositoy.findAll();
     }
@@ -35,11 +35,11 @@ public class UserAccService {
 
          repositoy.deleteById(id);
     }
-    public Optional<UserAccountEntity> findById(int id)
+    public Optional<UserEntity> findById(int id)
     {
         return repositoy.findById(id);
     }
-    public UserAccountEntity findByPhone(String phone)
+    public UserEntity findByPhone(String phone)
     {
         return repositoy.findByPhone(phone);
     }
