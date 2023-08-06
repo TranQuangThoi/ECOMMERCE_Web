@@ -1,5 +1,6 @@
 package com.example.penguin.Service;
 
+import com.example.penguin.Entities.OrderDetailEntity;
 import com.example.penguin.Entities.OrderEntity;
 import com.example.penguin.Entities.ProductEntity;
 import com.example.penguin.Repository.OrderRepository;
@@ -41,5 +42,17 @@ public class OrderService {
 //        Date end = java.sql.Date.valueOf(endDate);
         return orderRepository.findOrderSoldByDateRange(startDate, startDate);
     }
+
+
+    public OrderEntity findOrderByIdUser(int id)
+    {
+        return orderRepository.findOrderByIdUser(id);
+    }
+
+    public void saveOrder(OrderEntity orderEntity)
+    {
+        orderRepository.save(orderEntity);
+    }
+
 
 }

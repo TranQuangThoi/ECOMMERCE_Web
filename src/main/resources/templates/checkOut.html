@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/all.min.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+  <title>Ecommerce Website</title>
+</head>
+
+<body>
+
+<!-- Start Header -->
+<section id="header">
+  <a href=""> <img src="images/logo2.png" class="logo" style="height: 70px;"></a>
+
+
+  <div>
+    <ul id="navbar">
+      <li>
+        <div class="search-box">
+          <input class="search-box_input" type="text" placeholder="bạn muốn tìm gì ?" required>
+          <button class="search-box_btn" ><i class="bi bi-search"></i> </button>
+        </div>
+      </li>
+      <li><a th:href="@{/}">Home</a></li>
+      <li><a th:href="@{/shop}">Shope</a></li>
+      <li><a th:href="@{/blog}">Blog</a></li>
+      <li><a th:href="@{/about}" >About</a></li>
+      <li><a th:href="@{contact}">Contact</a></li>
+      <li ><a th:href="@{/cart}" class="active"><i class="bi bi-cart3" style="font-size: 25px;"></i></a></li>
+      <li th:if="${session.account == null}">
+        <a th:href="@{/login}">Đăng nhập</a>
+      </li>
+      <li th:if="${session.account != null}">
+        <a th:href="@{/account}">
+          <i class="bi bi-person-circle" style="font-size: 25px;"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div id="mobile">
+    <a href="cart.html"><i class="fa-solid fa-bag-shopping"></i></a>
+    <span id="bar">
+                    <i class="fas fa-outdent"></i>
+                </span>
+  </div>
+</section>
+<!-- End Header -->
+
+
+
+
+
+<!-- Start page header Section -->
+<section id="page-header" class="about-header">
+  <h2>Hãy để lại đánh giá</h2>
+  <p>Chúng tôi muốn lắng nghe ý kiến của bạn về sản phẩm của chúng tôi !</p>
+</section>
+<!-- End  page header Section -->
+
+<th:block th:if="${session.account== null}">
+  <section class="section-p1" style="margin-top: 5%; margin-bottom: 5%; ; display: flex; justify-content: center;align-items: center; ">
+
+    <h3 style="font-size: 25px;">Hãy đăng nhập để có thể trải nhiệm mua hàng nào </h3>
+    <a th:href="@{/login}" style="color: #6ac950">
+      <i class="bi bi-door-open" style="font-size: 60px; margin-left: 6px"  ></i>
+    </a>
+
+  </section>
+
+</th:block>
+
+
+<!-- start add order -->
+
+<form th:action="@{Cart/checkOut/{id}(id=${session.account.id})}" method="post" >
+
+  <!-- Start Cart -->
+
+  <section class="container-checkout">
+
+    <div class="info-user">
+
+      <div class="info-user-item">
+        <label>Họ và tên</label>
+        <input placeholder="họ bà tên " required th:value="${session.account.name}">
+      </div>
+
+      <div  class="info-user-item">
+        <label>Địa chỉ nhận</label>
+        <input placeholder="Địa chỉ"  name="address">
+      </div>
+      <div  class="info-user-item">
+        <label>Số điện thoại</label>
+        <input placeholder="SĐT" required th:value="${session.account.phone}">
+      </div>
+      <div  class="info-user-item">
+        <label>Email</label>
+        <input placeholder="email" th:value="${session.account.email}">
+      </div>
+      <div  class="info-user-item">
+        <label>Phương thức thanh toán</label>
+
+      </div>
+
+
+    </div>
+
+    <div class="info-order">
+      <div class="info-title">Chi tiết đơn hàng </div>
+
+      <th:block th:each="itemCart : ${cartDetailList}">
+        <div class="info-order-item infoPro">
+          <label th:text="${itemCart.getProduct().productName}"></label>
+          <label th:text="${itemCart.quantity}"></label>
+          <label th:text="${itemCart.price}"></label>
+        </div>
+      </th:block>
+
+
+
+      <div class="info-title">Chi tiết thanh toán </div>
+
+
+      <div class="info-order-item">
+        <label>Tổng tiền hàng</label>
+        <label  th:text="${cart.totalPrice} + VND">$</label>
+      </div>
+      <div class="info-order-item">
+        <label> Tổng tiền phí vận chuyển</label>
+        <label>$</label>
+      </div>
+      <div class="info-order-item">
+        <label> Giảm giá phí vận chuyển</label>
+        <label>$</label>
+      </div>
+      <div class="info-order-item">
+        <label> Tổng thanh toán</label>
+        <label  th:text="${cart.totalPrice} + VND">$</label>
+      </div>
+
+      <div class="info-order-btn" ><button type="submit" >Đặt hàng</button></div>
+
+
+
+    </div>
+
+
+  </section>
+  <!-- End Cart -->
+
+</form>
+
+<!-- end add order -->
+
+
+
+<!-- Start Footer -->
+<footer class="section-p1 ">
+  <div class="col">
+    <a href=""> <img src="images/logo2.png" class="logo" style="height: 70px;"></a>
+    <h4>Contact</h4>
+    <p><strong>Address: </strong> 562 Wellington Roadm Street 32, San Francisco</p>
+    <p><strong>Phone: </strong> +01 2222 365 /(+91) 01 2345 6789</p>
+    <p><strong>Hours: </strong> 10:00 - 18:00. Mon - Sat</p>
+    <div class="follow">
+      <h4>Follow us</h4>
+      <div class="icons">
+        <div class="icon">
+          <i class="fab fa-facebook"></i>
+        </div>
+        <div class="icon">
+          <i class="fab fa-twitter"></i>
+        </div>
+        <div class="icon">
+          <i class="fab fa-instagram"></i>
+        </div>
+        <div class="icon">
+          <i class="fab fa-pinterest-p"></i>
+        </div>
+        <div class="icon">
+          <i class="fab fa-youtube"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <h4>About</h4>
+    <a href="#">About Us</a>
+    <a href="#">Delivery Information</a>
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms & Conditions</a>
+    <a href="#">Contact Us</a>
+  </div>
+
+  <div class="col">
+    <h4>My Account</h4>
+    <a href="#">Sign In</a>
+    <a href="#">View Cart</a>
+    <a href="#">My Wishlist</a>
+    <a href="#">Track My Order</a>
+    <a href="#">Help</a>
+  </div>
+
+  <div class="col install">
+    <h4>Install App</h4>
+    <p>From App Store or Google Play</p>
+    <div class="row">
+      <img src="images/pay/app.jpg" alt="">
+      <img src="images/pay/play.jpg" alt="">
+    </div>
+    <p>Secured Payment Gateways</p>
+    <img src="images/pay/pay.png" alt="">
+  </div>
+
+  <div class="copyright">
+    <p>&copy; 2023</p>
+  </div>
+</footer>
+<!-- End Footer -->
+<script src="js/all.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+
+</html>

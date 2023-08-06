@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity(name = "OrderEntity")
 @Table
@@ -18,9 +19,14 @@ public class OrderEntity {
     @JoinColumn(name = "userId")
     private UserEntity userEntity;
 
+    // mappedBy phải trùng tên bên orderdetail
+    @OneToMany(mappedBy = "order")
+    private List<OrderDetailEntity> orderDetailList;
+
     private java.util.Date orderDate=new Date(new java.util.Date().getTime());
     protected long totalPrice;
     private int satus;
+    private String deliveryAddress;
 
 
 

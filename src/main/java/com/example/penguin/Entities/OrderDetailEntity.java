@@ -12,14 +12,14 @@ public class OrderDetailEntity {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private int idOrderDetail;
 
-    @ManyToOne
-    @JoinColumn(name = "ProductId")
-    private ProductEntity product;
 
-    @OneToOne
-    @JoinColumn(name ="OrderId")
+    @ManyToOne
+    @JoinColumn(name ="OrderEntity")
     private OrderEntity order;
 
     private int quantity;
+    private int price;
+    private String productName;
+
 
 }

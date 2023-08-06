@@ -29,6 +29,9 @@ public class UserEntity {
     @OneToOne(mappedBy = "userEntity")
     private CartEntity cart;
 
+    @OneToMany(mappedBy = "userEntity")
+    private List<OrderEntity> order;
+
 
 
 

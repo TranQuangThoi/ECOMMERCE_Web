@@ -93,6 +93,7 @@
                     <h2 th:text="${product.productName}">Men Fashion T Shirt</h2>
                     <h3 th:text="${product.price}">$139.00</h3>
 
+                    <label>Kích thước</label>
                     <select name="size" required>
                         <option value=1 >XL</option>
                         <option value=2  >XXL</option>
@@ -100,16 +101,21 @@
                         <option value=4 >Large</option>
                     </select>
 
-                    <input type="number" th:default="1" name="quantity">
+                    <label>Số lượng</label>
+                    <input type="number" th:default=1 name="quantity">
 
-                    <button class="normal" type="submit"  >Add To Cart</button>
-                    <h4>Product Details</h4>
+                    <button class="btn-addCart" type="submit"  >Add To Cart</button>
+                    <h4>Mô tả sản phẩm</h4>
 
                     <span th:text="${product.description}">
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim quisquam itaque commodi quia!
                     Aspernatur, ipsum. Inventore animi, enim placeat autem illum sit doloremque dolores laborum
                     recusandae accusantium libero ab expedita.
                 </span>
+                    <div>
+                        <h3>Bình luận </h3>
+                    </div>
+
 
                 </div>
 

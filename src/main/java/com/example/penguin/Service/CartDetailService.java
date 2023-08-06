@@ -15,4 +15,9 @@ public class CartDetailService {
         cartDetailReposity.save(cartDetailEntity);
     }
 
+    public void deleteCartDetailById(int id)
+    {
+        cartDetailReposity.deleteById(id);
+    }
+
 }
