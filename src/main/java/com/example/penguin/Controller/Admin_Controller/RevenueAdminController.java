@@ -25,7 +25,6 @@ public class RevenueAdminController {
         List<OrderEntity> orderSold = orderService.findOrderSold();
 
         model.addAttribute("orderSold",orderSold);
-
             return "/Admin_Revenue";
     }
     @PostMapping("/findOrderOfDate")
@@ -34,7 +33,6 @@ public class RevenueAdminController {
                                   RedirectAttributes rd
     )
     {
-
         List<OrderEntity> orderEntityList = orderService.findOrderOfDate(startDate,endDate);
         if (orderEntityList.isEmpty())
         {

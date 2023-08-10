@@ -239,7 +239,7 @@
                             <button type="submit" style="width:80px;margin-top:20px;margin-left: 30px" class="btn btn-primary">Lọc</button>
                         </form>
 
-                        <div th:text="${error}" th:if="${error}" class="row" style="color: #8f201e; background: #ffd7d6; padding: 12px 12px; text-align: center; line-height: 36px !important;" role="alert"></div>
+<!--                        <div th:text="${error}" th:if="${error}" class="row" style="color: #8f201e; background: #ffd7d6; padding: 12px 12px; text-align: center; line-height: 36px !important;" role="alert"></div>-->
 
                         <div class="table-responsive text-nowrap">
                             <table class="table table-hover">
@@ -256,22 +256,19 @@
 
                                 <tbody class="table-border-bottom-0">
 
-                                <th:block th:each="itemOrder: ${orderList}">
+                                <th:block th:each="item :${orderSold}">
                                     <tr>
-                                        <td th:text="${itemOrder.getUserAccount().id}"></td>
-                                        <td><i class="fab fa-react fa-lg text-info me-3"></i> <strong th:text="${itemOrder.getUserAccount().name}"></strong>
+                                        <td th:text="${item.getUserEntity().id}"></td>
+                                        <td><i class="fab fa-react fa-lg text-info me-3"></i> <strong th:text="${item.getUserEntity().name}"></strong>
                                         </td>
 
-                                        <td th:text="${itemOrder.getUserAccount().phone}">
+                                        <td th:text="${item.getUserEntity().phone}">
                                         </td>
-                                        <td th:text="${itemOrder.idOrder}"></td>
-                                        <td th:text="${itemOrder.totalPrice}"></td>
-                                        <td th:text="${#dates.format(itemOrder.orderDate,'dd/MM/yyyy')}">
+                                        <td th:text="${item.orderId}"></td>
+                                        <td th:text="${item.totalPrice}"></td>
+                                        <td th:text="${#dates.format(item.orderDate,'dd/MM/yyyy')}">
 
                                         </td>
-
-
-
                                     </tr>
                                 </th:block>
 

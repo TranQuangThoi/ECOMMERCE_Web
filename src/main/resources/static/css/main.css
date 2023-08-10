@@ -497,9 +497,17 @@ body {
     padding-left: 50px;
 }
 .info-order .info-order-btn{
-
+    font-size: 15px;
+    border: none;
+    border-radius: 24px;
+    padding: 16px 34px 16px 34px;
     margin-top: 60px;
+    background: #2a8662;
 
+}
+.info-order .info-order-btn:hover{
+    cursor: pointer;
+    background: #4fba61;
 }
 .info-order a{
     border-radius: 18px;

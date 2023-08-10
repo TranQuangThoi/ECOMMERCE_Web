@@ -40,7 +40,7 @@ public class OrderService {
 //        // Chuyển đổi kiểu dữ liệu từ String sang java.util.Date hoặc java.sql.Date
 //        Date start = java.sql.Date.valueOf(startDate);
 //        Date end = java.sql.Date.valueOf(endDate);
-        return orderRepository.findOrderSoldByDateRange(startDate, startDate);
+        return orderRepository.findOrderSoldByDateRange(startDate, endDate);
     }
 
 
