@@ -1,40 +1,42 @@
-package com.example.penguin.Service;
+package com.example.penguin.Service.ServiceImpl;
 
-import com.example.penguin.Entities.OrderDetailEntity;
 import com.example.penguin.Entities.OrderEntity;
-import com.example.penguin.Entities.ProductEntity;
 import com.example.penguin.Repository.OrderRepository;
+import com.example.penguin.Service.OrderDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
 import java.util.List;
 
 @Service
-public class OrderService {
+public class OrderServiceImpl implements OrderDetail {
 
     @Autowired
     OrderRepository orderRepository;
 
+    @Override
    public List<OrderEntity> findAll()
     {
         return  orderRepository.findAll();
     }
 
+    @Override
     public List<OrderEntity> findOrderSold()
     {
         return orderRepository.sales_figure();
     }
 
+    @Override
     public Page<OrderEntity> findPage(int pageNumber , int pageSize)
     {
         Pageable pageable = PageRequest.of(pageNumber -1,pageSize);
         return this.orderRepository.findAll(pageable);
     }
 
+    @Override
     public List<OrderEntity> findOrderOfDate(String startDate, String endDate) {
 
 //        // Chuyển đổi kiểu dữ liệu từ String sang java.util.Date hoặc java.sql.Date
@@ -44,11 +46,13 @@ public class OrderService {
     }
 
 
+    @Override
     public OrderEntity findOrderByIdUser(int id)
     {
         return orderRepository.findOrderByIdUser(id);
     }
 
+    @Override
     public void saveOrder(OrderEntity orderEntity)
     {
         orderRepository.save(orderEntity);

@@ -2,8 +2,8 @@ package com.example.penguin.Controller.Admin_Controller;
 
 import com.example.penguin.Entities.CategoryEntity;
 import com.example.penguin.Entities.ProductEntity;
-import com.example.penguin.Service.CategoryService;
-import com.example.penguin.Service.ProductService;
+import com.example.penguin.Service.ServiceImpl.CategoryServiceImpl;
+import com.example.penguin.Service.ServiceImpl.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,17 +20,17 @@ import java.util.List;
 public class CategoryAdminController {
 
     @Autowired
-    ProductService productService;
+    ProductServiceImpl productServiceImpl;
     @Autowired
-    CategoryService categoryService;
+    CategoryServiceImpl categoryServiceImpl;
     @GetMapping("/Admin_Category")
     public String showCategory(Model model)
     {
-        List<CategoryEntity> listAll = categoryService.findAll();
+        List<CategoryEntity> listAll = categoryServiceImpl.findAll();
         model.addAttribute("allCategory" ,listAll);
 
         for (CategoryEntity itemCate : listAll) {
-            List<ProductEntity> product = productService.findProByCategoryId(itemCate.getIdCategory());
+            List<ProductEntity> product = productServiceImpl.findProByCategoryId(itemCate.getIdCategory());
             long count = product.size(); // Đếm số lượng sản phẩm
             itemCate.setProductCount(count); // Gán số lượng sản phẩm vào thuộc tính productCount
 
@@ -46,26 +46,26 @@ public class CategoryAdminController {
     {
 
 
-        CategoryEntity category = categoryService.findById(id);
+        CategoryEntity category = categoryServiceImpl.findById(id);
 
-        List<ProductEntity> listPro = productService.findProByCategoryId(id);
+        List<ProductEntity> listPro = productServiceImpl.findProByCategoryId(id);
 
         if(listPro != null)
         {
             for(ProductEntity itemPro : listPro)
             {
 //                productService.delete(itemPro);
-                productService.deleteProById(itemPro.getIdProduct());
+                productServiceImpl.deleteProById(itemPro.getIdProduct());
             }
 
-            this.categoryService.deleteById(id);
+            this.categoryServiceImpl.deleteById(id);
         }else {
-            this.categoryService.deleteById(id);
+            this.categoryServiceImpl.deleteById(id);
         }
 
 
 
-        this.categoryService.deleteById(id);
+        this.categoryServiceImpl.deleteById(id);
 
         rd.addFlashAttribute("message" ,"Đã xóa " +category.getNameCategory()  +" thành công");
         return "redirect:/Admin_Category";
@@ -88,7 +88,7 @@ public class CategoryAdminController {
 
         categoryEntity.setNameCategory(name);
         categoryEntity.setStatus(status);
-        categoryService.saveCategory(categoryEntity);
+        categoryServiceImpl.saveCategory(categoryEntity);
         rd.addFlashAttribute("message","Đã thêm danh mục mới thành công");
 
         return "redirect:/Admin_Category";
@@ -99,7 +99,7 @@ public class CategoryAdminController {
     public String showEditCate(@PathVariable(value = "id")int id , Model model)
     {
 
-        CategoryEntity category = categoryService.findById(id);
+        CategoryEntity category = categoryServiceImpl.findById(id);
         model.addAttribute("category",category);
 
         return "/edit_InfoCate";
@@ -114,12 +114,12 @@ public class CategoryAdminController {
                               )
     {
 
-        CategoryEntity category = categoryService.findById(id);
+        CategoryEntity category = categoryServiceImpl.findById(id);
 
         category.setNameCategory(namecate);
         category.setStatus(status);
 
-        categoryService.saveCategory(category);
+        categoryServiceImpl.saveCategory(category);
 
 
 

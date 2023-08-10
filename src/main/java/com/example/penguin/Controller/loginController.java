@@ -1,7 +1,7 @@
 package com.example.penguin.Controller;
 
 import com.example.penguin.Entities.UserEntity;
-import com.example.penguin.Service.UserAccService;
+import com.example.penguin.Service.ServiceImpl.UserAccServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +16,7 @@ import java.util.Base64;
 public class loginController {
 
     @Autowired
-    UserAccService userAccService;
+    UserAccServiceImpl userAccServiceImpl;
 
     @Autowired
     HttpSession session;
@@ -43,7 +43,7 @@ public class loginController {
                            )
     {
 
-        UserEntity userAccount1 = userAccService.findByPhone(phone);
+        UserEntity userAccount1 = userAccServiceImpl.findByPhone(phone);
         if(userAccount1 == null)
         {
                 String password = Base64.getEncoder().encodeToString(pass.trim().getBytes());
@@ -55,7 +55,7 @@ public class loginController {
                 userAccount.setRole(0);
                 userAccount.setAvatar("https://res.cloudinary.com/dqy4p8xug/image/upload/v1684272398/userImage_oujnyf.png");
                 rd.addFlashAttribute("success","Bạn đã đăng ký thành công");
-                userAccService.saveUser(userAccount);
+                userAccServiceImpl.saveUser(userAccount);
                 return "redirect:/login";
 
 
@@ -74,7 +74,7 @@ public class loginController {
     {
 
         // tìm kiếm người dùng dựa trên số điện thoại
-        UserEntity userAccount = userAccService.findByPhone(phone);
+        UserEntity userAccount = userAccServiceImpl.findByPhone(phone);
 
 
         if(userAccount != null)

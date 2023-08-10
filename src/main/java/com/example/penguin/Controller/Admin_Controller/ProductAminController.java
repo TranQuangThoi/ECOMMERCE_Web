@@ -4,10 +4,10 @@ import com.example.penguin.Entities.CategoryEntity;
 import com.example.penguin.Entities.ImagesEntity;
 import com.example.penguin.Entities.ProductEntity;
 import com.example.penguin.Entities.UserEntity;
-import com.example.penguin.Service.CategoryService;
-import com.example.penguin.Service.CloudinaryService;
-import com.example.penguin.Service.ImageService;
-import com.example.penguin.Service.ProductService;
+import com.example.penguin.Service.ServiceImpl.CategoryServiceImpl;
+import com.example.penguin.Service.ServiceImpl.CloudinaryService;
+import com.example.penguin.Service.ServiceImpl.ImageServiceImpl;
+import com.example.penguin.Service.ServiceImpl.ProductServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,17 +26,17 @@ import java.util.List;
 public class ProductAminController {
 
     @Autowired
-    ProductService productService;
+    ProductServiceImpl productServiceImpl;
 
     @Autowired
-    ImageService imageService;
+    ImageServiceImpl imageServiceImpl;
     @Autowired
     CloudinaryService cloudinaryService;
     @Autowired
     HttpSession session;
 
     @Autowired
-    CategoryService categoryService;
+    CategoryServiceImpl categoryServiceImpl;
 //    @GetMapping("/Admin_Product")
 //    public String showProduct(Model model)
 //    {
@@ -50,7 +50,7 @@ public class ProductAminController {
     @GetMapping("/Add_Product")
     public String addPro_Page(Model model)
     {
-        List<CategoryEntity> listCategory = categoryService.findAll();
+        List<CategoryEntity> listCategory = categoryServiceImpl.findAll();
         model.addAttribute("listCategory",listCategory);
         return "Add_Product";
     }
@@ -76,8 +76,8 @@ public class ProductAminController {
         product.setQuantity(quantity);
         product.setAvailable(availble);
         product.setPrice(price);
-        product.setCategory(categoryService.findById(category));
-        productService.saveProduct(product);
+        product.setCategory(categoryServiceImpl.findById(category));
+        productServiceImpl.saveProduct(product);
 
             for (MultipartFile itemmage : image) {
                     if(!itemmage.isEmpty())
@@ -86,7 +86,7 @@ public class ProductAminController {
                         ImagesEntity imagesEntity = new ImagesEntity();
                         imagesEntity.setUrl(urlImage);
                         imagesEntity.setProduct(product);
-                        imageService.saveImage(imagesEntity);
+                        imageServiceImpl.saveImage(imagesEntity);
                     }
 
 
@@ -102,9 +102,9 @@ public class ProductAminController {
                                    )
     {
 
-        ProductEntity product = productService.findById(id);
+        ProductEntity product = productServiceImpl.findById(id);
 
-        List<ImagesEntity> listImage = imageService.findByIdPro(id);
+        List<ImagesEntity> listImage = imageServiceImpl.findByIdPro(id);
 
         model.addAttribute("listImage",listImage);
         model.addAttribute("product" , product);
@@ -132,7 +132,7 @@ public class ProductAminController {
 //            return "redirect:/" ;
 //        }
         int pageSize = 5;
-        Page<ProductEntity> productEntitiesPage = productService.findPage(pageNumber,pageSize);
+        Page<ProductEntity> productEntitiesPage = productServiceImpl.findPage(pageNumber,pageSize);
 
         int totalPage = productEntitiesPage.getTotalPages();
         List<ProductEntity> productEntities = productEntitiesPage.getContent();
@@ -152,10 +152,10 @@ public class ProductAminController {
     @GetMapping("/Admin_Product/Delete/{id}")
     public String Delete(@PathVariable(value = "id") int id , RedirectAttributes rd)
     {
-        ProductEntity product = productService.findById(id);
+        ProductEntity product = productServiceImpl.findById(id);
 
         rd.addFlashAttribute("message","đã xóa sản phẩm " +product.getProductName()  +"thành công");
-        productService.deleteProById(id);
+        productServiceImpl.deleteProById(id);
 
         return "redirect:/Admin_Product";
 
@@ -165,10 +165,10 @@ public class ProductAminController {
     public String showPageEdit(@PathVariable(value = "id")int id , Model model)
     {
 
-        List<CategoryEntity> categoryEntityList = categoryService.findAll();
-        List<ImagesEntity> imagesEntityList=  imageService.findByIdPro(id);
+        List<CategoryEntity> categoryEntityList = categoryServiceImpl.findAll();
+        List<ImagesEntity> imagesEntityList=  imageServiceImpl.findByIdPro(id);
 
-        ProductEntity product = productService.findById(id);
+        ProductEntity product = productServiceImpl.findById(id);
         CategoryEntity category = product.getCategory();
 
 
@@ -191,17 +191,17 @@ public class ProductAminController {
                               RedirectAttributes rd)
     {
 
-        ProductEntity product = productService.findById(id);
+        ProductEntity product = productServiceImpl.findById(id);
 
         product.setProductName(name);
         product.setDescription(description);
         product.setPrice(price);
         product.setQuantity(quantity);
         product.setAvailable(availble);
-        product.setCategory(categoryService.findById(category));
-        productService.saveProduct(product);
+        product.setCategory(categoryServiceImpl.findById(category));
+        productServiceImpl.saveProduct(product);
 
-        List<ImagesEntity> imagesEntityList = imageService.findByIdPro(id);
+        List<ImagesEntity> imagesEntityList = imageServiceImpl.findByIdPro(id);
 
 //        thay đổi ảnh theo anh goc
         for (int i=0 ; i<imagesEntityList.size() ; i++)
@@ -214,7 +214,7 @@ public class ProductAminController {
             {
                 String url = cloudinaryService.uploadFile(imageM);
                 imagesEntity.setUrl(url);
-                imageService.saveImage(imagesEntity);
+                imageServiceImpl.saveImage(imagesEntity);
             }
         }
 
@@ -230,7 +230,7 @@ public class ProductAminController {
                     ImagesEntity imagesEntity = new ImagesEntity();
                     imagesEntity.setUrl(url);
                     imagesEntity.setProduct(product);
-                    imageService.saveImage(imagesEntity);
+                    imageServiceImpl.saveImage(imagesEntity);
                 }
             }
         }

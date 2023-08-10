@@ -4,9 +4,9 @@ import com.example.penguin.Entities.CartDetailEntity;
 import com.example.penguin.Entities.CartEntity;
 import com.example.penguin.Entities.ProductEntity;
 import com.example.penguin.Entities.UserEntity;
-import com.example.penguin.Service.CartDetailService;
-import com.example.penguin.Service.CartService;
-import com.example.penguin.Service.ProductService;
+import com.example.penguin.Service.ServiceImpl.CartDetailServiceImpl;
+import com.example.penguin.Service.ServiceImpl.CartServiceImpl;
+import com.example.penguin.Service.ServiceImpl.ProductServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -28,11 +27,11 @@ public class CartController {
     @Autowired
     HttpSession session;
     @Autowired
-    CartService cartService;
+    CartServiceImpl cartServiceImpl;
     @Autowired
-    CartDetailService cartDetailService;
+    CartDetailServiceImpl cartDetailServiceImpl;
     @Autowired
-    ProductService productService;
+    ProductServiceImpl productServiceImpl;
 
     @GetMapping("cart")
     public String showCart(Model model)
@@ -42,7 +41,7 @@ public class CartController {
         if(user!= null)
         {
 
-            CartEntity cart = cartService.findCartByUserId(user.getId());
+            CartEntity cart = cartServiceImpl.findCartByUserId(user.getId());
             model.addAttribute("cart",cart);
             if(cart==null)
             {
@@ -81,8 +80,8 @@ public class CartController {
         UserEntity user = (UserEntity) session.getAttribute("account");
 
         if (user != null) {
-            CartEntity cart = cartService.findCartByUserId(user.getId());
-            ProductEntity product = productService.findById(id);
+            CartEntity cart = cartServiceImpl.findCartByUserId(user.getId());
+            ProductEntity product = productServiceImpl.findById(id);
             int totalPrice = 0;
 
             CartDetailEntity cartDetail = null;
@@ -103,7 +102,7 @@ public class CartController {
                             if (product.getQuantity() >= c.getQuantity()) {
                                 c.setPrice(c.getQuantity() * c.getProduct().getPrice());
                                 cartDetail = c;
-                                cartDetailService.saveCartDetail(cartDetail);
+                                cartDetailServiceImpl.saveCartDetail(cartDetail);
                             } else {
                                 // Xóa cart detail nếu số lượng vượt quá số lượng sản phẩm có sẵn
                                 iterator.remove();
@@ -123,7 +122,7 @@ public class CartController {
                         cartDetail.setSize(size);
                         cartDetail.setProduct(product);
                         cartDetail.setPrice(cartDetail.getQuantity() * product.getPrice());
-                        cartDetailService.saveCartDetail(cartDetail);
+                        cartDetailServiceImpl.saveCartDetail(cartDetail);
                     }
                 }
                 for (CartDetailEntity a : cart.getCartDetailList()) {
@@ -134,14 +133,14 @@ public class CartController {
             } else {
                cart =new CartEntity();
                cart.setUserEntity(user);
-               cartService.saveCart(cart);
+               cartServiceImpl.saveCart(cart);
                CartDetailEntity cartDetail1 = new CartDetailEntity();
                cartDetail1.setCart(cart);
                cartDetail1.setProduct(product);
                cartDetail1.setSize(size);
                cartDetail1.setQuantity(quantity);
                cartDetail1.setPrice(cartDetail1.getProduct().getPrice() * cartDetail.getQuantity());
-               cartDetailService.saveCartDetail(cartDetail1);
+               cartDetailServiceImpl.saveCartDetail(cartDetail1);
                 for (CartDetailEntity a : cart.getCartDetailList()) {
                     totalPrice += a.getPrice();
                 }
@@ -149,7 +148,7 @@ public class CartController {
 
 
             cart.setTotalPrice(totalPrice);
-            cartService.saveCart(cart);
+            cartServiceImpl.saveCart(cart);
         }
 
         return "redirect:/cart";
@@ -159,7 +158,7 @@ public class CartController {
     @GetMapping("/Cart/Delete/{id}")
     private String deleteCartItem(@PathVariable(name = "id") int id , Model model)
     {
-        cartDetailService.deleteCartDetailById(id);
+        cartDetailServiceImpl.deleteCartDetailById(id);
         return "redirect:/cart";
     }
     @PostMapping("/Cart/update")
@@ -167,7 +166,7 @@ public class CartController {
     {
         UserEntity user = (UserEntity) session.getAttribute("account");
 
-            CartEntity cart = cartService.findCartByUserId(user.getId());
+            CartEntity cart = cartServiceImpl.findCartByUserId(user.getId());
 
             List<CartDetailEntity> cartDetailList = cart.getCartDetailList();
             int i=0 ;

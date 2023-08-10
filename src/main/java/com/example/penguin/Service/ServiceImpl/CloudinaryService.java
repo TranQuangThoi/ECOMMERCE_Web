@@ -1,4 +1,4 @@
-package com.example.penguin.Service;
+package com.example.penguin.Service.ServiceImpl;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;

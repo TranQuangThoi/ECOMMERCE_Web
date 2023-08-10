@@ -2,8 +2,8 @@ package com.example.penguin.Controller;
 
 import com.example.penguin.Entities.ImagesEntity;
 import com.example.penguin.Entities.ProductEntity;
-import com.example.penguin.Service.ImageService;
-import com.example.penguin.Service.ProductService;
+import com.example.penguin.Service.ServiceImpl.ImageServiceImpl;
+import com.example.penguin.Service.ServiceImpl.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,9 +17,9 @@ import java.util.List;
 public class HomeController {
 
     @Autowired
-    ProductService productService;
+    ProductServiceImpl productServiceImpl;
     @Autowired
-    ImageService imageService;
+    ImageServiceImpl imageServiceImpl;
     @GetMapping("/")
     public String showHomePage(){
         return "home";
@@ -52,8 +52,8 @@ public class HomeController {
     public String showPageProduct(Model model , @PathVariable(name = "id")int id)
     {
 
-        List<ImagesEntity> imagesList = imageService.findByIdPro(id);
-        ProductEntity product = productService.findById(id);
+        List<ImagesEntity> imagesList = imageServiceImpl.findByIdPro(id);
+        ProductEntity product = productServiceImpl.findById(id);
 
         model.addAttribute("imagesList",imagesList);
         model.addAttribute("product",product);

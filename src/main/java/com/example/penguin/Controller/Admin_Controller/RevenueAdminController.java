@@ -1,7 +1,7 @@
 package com.example.penguin.Controller.Admin_Controller;
 
 import com.example.penguin.Entities.OrderEntity;
-import com.example.penguin.Service.OrderService;
+import com.example.penguin.Service.ServiceImpl.OrderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -11,18 +11,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.sql.Date;
 import java.util.List;
 
 @Controller
 public class RevenueAdminController {
 
     @Autowired
-    OrderService orderService;
+    OrderServiceImpl orderServiceImpl;
     @GetMapping("Admin_Revenue")
     public String showRevenue(Model model)
     {
-        List<OrderEntity> orderSold = orderService.findOrderSold();
+        List<OrderEntity> orderSold = orderServiceImpl.findOrderSold();
 
         model.addAttribute("orderSold",orderSold);
             return "/Admin_Revenue";
@@ -33,7 +32,7 @@ public class RevenueAdminController {
                                   RedirectAttributes rd
     )
     {
-        List<OrderEntity> orderEntityList = orderService.findOrderOfDate(startDate,endDate);
+        List<OrderEntity> orderEntityList = orderServiceImpl.findOrderOfDate(startDate,endDate);
         if (orderEntityList.isEmpty())
         {
             rd.addFlashAttribute("error","Không có đơn hàng nào trong thời gian này");

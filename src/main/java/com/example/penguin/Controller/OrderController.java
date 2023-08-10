@@ -1,7 +1,7 @@
 package com.example.penguin.Controller;
 
 import com.example.penguin.Entities.*;
-import com.example.penguin.Service.*;
+import com.example.penguin.Service.ServiceImpl.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,23 +19,23 @@ public class OrderController {
     @Autowired
     HttpSession session;
     @Autowired
-    CartService cartService;
+    CartServiceImpl cartServiceImpl;
 
     @Autowired
-    OrderService orderService;
+    OrderServiceImpl orderServiceImpl;
 
     @Autowired
-    OrderDetailService orderDetailService;
+    OrderDetailServiceImpl orderDetailServiceImpl;
     @Autowired
-    UserAccService userAccService;
+    UserAccServiceImpl userAccServiceImpl;
     @Autowired
-    ProductService productService;
+    ProductServiceImpl productServiceImpl;
 
     @GetMapping("checkOut")
     public String pageCheckOut(Model model)
     {
         UserEntity user = (UserEntity) session.getAttribute("account");
-            CartEntity cart = cartService.findCartByUserId(user.getId());
+            CartEntity cart = cartServiceImpl.findCartByUserId(user.getId());
         List<CartDetailEntity> cartDetailList = cart.getCartDetailList();
 
 
@@ -49,14 +49,14 @@ public class OrderController {
     {
 
         UserEntity user = (UserEntity) session.getAttribute("account");
-        CartEntity cart = cartService.findCartByUserId(idUser);
+        CartEntity cart = cartServiceImpl.findCartByUserId(idUser);
         List<CartDetailEntity> cartDetailEntityList = cart.getCartDetailList();
             OrderEntity order = new OrderEntity();
             order.setUserEntity(user);
             order.setTotalPrice(cart.getTotalPrice());
             order.setSatus(1);
             order.setDeliveryAddress(address);
-            orderService.saveOrder(order);
+            orderServiceImpl.saveOrder(order);
 
 
        for (CartDetailEntity cartDetail :cartDetailEntityList)
@@ -66,14 +66,14 @@ public class OrderController {
            orderDetail.setPrice(cartDetail.getPrice());
            orderDetail.setOrder(order);
            orderDetail.setProductName(cartDetail.getProduct().getProductName());
-           orderDetailService.saveOrderDetail(orderDetail);
+           orderDetailServiceImpl.saveOrderDetail(orderDetail);
 
-           ProductEntity product = productService.findById(cartDetail.getProduct().getIdProduct());
+           ProductEntity product = productServiceImpl.findById(cartDetail.getProduct().getIdProduct());
            product.setQuantity(product.getQuantity()-orderDetail.getQuantity());
 
        }
 
-       cartService.deleteByCart(cart);
+       cartServiceImpl.deleteByCart(cart);
         return "redirect:/cart";
     }
 
