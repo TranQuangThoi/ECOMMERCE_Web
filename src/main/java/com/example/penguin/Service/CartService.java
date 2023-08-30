@@ -7,4 +7,6 @@ public interface CartService {
      CartEntity findCartByUserId(int id);
      void saveCart(CartEntity cart);
      void deleteByCart(CartEntity cart);
+
+
 }

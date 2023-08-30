@@ -10,7 +10,7 @@ public interface CartRepository extends JpaRepository<CartEntity,Integer> {
 
 
     @Query("select o from cart o where o.userEntity.id=:id")
-    public CartEntity findByIdUser(int id);
+    CartEntity findByIdUser(int id);
 
 
 

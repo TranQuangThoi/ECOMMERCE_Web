@@ -19,17 +19,20 @@ public class OrderController {
     @Autowired
     HttpSession session;
     @Autowired
-    CartServiceImpl cartServiceImpl;
+    private CartServiceImpl cartServiceImpl;
 
     @Autowired
-    OrderServiceImpl orderServiceImpl;
+    private OrderServiceImpl orderServiceImpl;
 
     @Autowired
-    OrderDetailServiceImpl orderDetailServiceImpl;
+    private OrderDetailServiceImpl orderDetailServiceImpl;
     @Autowired
-    UserAccServiceImpl userAccServiceImpl;
+    private UserAccServiceImpl userAccServiceImpl;
     @Autowired
-    ProductServiceImpl productServiceImpl;
+    private ProductServiceImpl productServiceImpl;
+
+    @Autowired
+    private MailServiceImpl mailService;
 
     @GetMapping("checkOut")
     public String pageCheckOut(Model model)
@@ -73,6 +76,7 @@ public class OrderController {
 
        }
 
+       mailService.sendOrderMail(order);
        cartServiceImpl.deleteByCart(cart);
         return "redirect:/cart";
     }

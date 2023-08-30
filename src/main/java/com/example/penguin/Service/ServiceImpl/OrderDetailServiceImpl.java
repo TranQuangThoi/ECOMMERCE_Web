@@ -6,6 +6,8 @@ import com.example.penguin.Service.OrderDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class OrderDetailServiceImpl implements OrderDetailService {
     @Autowired
@@ -16,4 +18,12 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     {
         orderDetailRepository.save(orderDetail);
     }
+
+    @Override
+    public List<OrderDetailEntity> findHistoryByUserId(int id) {
+
+        return orderDetailRepository.findAllByUserId(id);
+    }
+
+
 }

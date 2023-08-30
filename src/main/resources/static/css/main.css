@@ -1411,6 +1411,23 @@ footer .copyright {
 
 /* End Cart page */
 
+/* Start number page */
+#paging{
+    display: flex;
+    justify-content:flex-end;
+    list-style: none;
+
+}
+#paging .page-link{
+    text-decoration: none;
+}
+#paging .page-item{
+    padding: 5px;
+}
+
+
+/* End number page */
+
 
 
 

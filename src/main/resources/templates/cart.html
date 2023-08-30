@@ -79,8 +79,9 @@
 
         <!-- Start Cart -->
         <th:block th:if="${session.account!= null}">
-            <section id="cart" class="section-p1">
 
+            <section id="cart" class="section-p1">
+                <form method="post">
 
                 <table width="100%">
                     <thead>
@@ -100,29 +101,31 @@
                     <tbody>
 
                     <th:block th:if="${cart!=null}" th:each="itemcartDetail : ${cartDetailList}"  >
-                        <tr>
-                            <td><img th:src="${itemcartDetail.getProduct().imageList.get(0).getUrl()}" alt=""></td>
-                            <td th:text="${itemcartDetail.getProduct().getProductName()}" ></td>
-                            <td th:text="${itemcartDetail.getProduct().getPrice()}" >$118.19</td>
-                            <td>
-                                <input type="number" th:value="${itemcartDetail.quantity}" name="quantity" style="width: 35px; border: none; height: 40px;"
-                                       th:max="${itemcartDetail.getProduct().getQuantity()}"></td>
-<!--                            <td>-->
-<!--                                <select th:value="${itemcartDetail.size}" name="size" th:each="item : ${itemcartDetail}">-->
-<!--                                    <option value=1 th:if="${itemcartDetail.size==1}">XL</option>-->
-<!--                                    <option value=2 th:if="${itemcartDetail.size==2}" >XXL</option>-->
-<!--                                    <option value=3 th:if="${itemcartDetail.size==3}">Small</option>-->
-<!--                                    <option value=4 th:if="${itemcartDetail.size==4}">Large</option>-->
-<!--                                </select>-->
+                            <tr>
+                                <td><img th:src="${itemcartDetail.getProduct().imageList.get(0).getUrl()}" alt=""></td>
+                                <td th:text="${itemcartDetail.getProduct().getProductName()}" ></td>
+                                <td th:text="${itemcartDetail.getProduct().getPrice()}" >$118.19</td>
+                                <td>
+                                    <input  type="number" th:value="${itemcartDetail.quantity}" name="quantity" style="width: 35px; border: none; height: 40px;"
+                                            th:min="1" th:max="${itemcartDetail.getProduct().getQuantity()}"></td>
+                                <!--                            <td>-->
+                                <!--                                <select th:value="${itemcartDetail.size}" name="size" th:each="item : ${itemcartDetail}">-->
+                                <!--                                    <option value=1 th:if="${itemcartDetail.size==1}">XL</option>-->
+                                <!--                                    <option value=2 th:if="${itemcartDetail.size==2}" >XXL</option>-->
+                                <!--                                    <option value=3 th:if="${itemcartDetail.size==3}">Small</option>-->
+                                <!--                                    <option value=4 th:if="${itemcartDetail.size==4}">Large</option>-->
+                                <!--                                </select>-->
 
-<!--                            </td>-->
-                            <td th:text="${itemcartDetail.price}+ VND">$118.19</td>
-                            <td >
-                                <a th:href="@{/Cart/Delete/{id}(id=${itemcartDetail.id})}" type="submit" style="color: crimson; font-size: 23px;" >
-                                    <i class="bi bi-trash3"></i>
-                                </a>
-                            </td>
-                        </tr>
+                                <!--                            </td>-->
+                                <td th:text="${itemcartDetail.price}+ VND">$118.19</td>
+                                <td >
+                                    <a th:href="@{/Cart/Delete/{id}(id=${itemcartDetail.id})}" type="submit" style="color: crimson; font-size: 23px;" >
+                                        <i class="bi bi-trash3"></i>
+                                    </a>
+                                </td>
+                            </tr>
+
+
 
                     </th:block>
                     </tbody>
@@ -131,11 +134,14 @@
 <!--                <form method="post" th:href="@{Cart/update}">-->
 <!--                    <button class="btn_update"  type="submit" style="text-decoration: none ; color: white"> Update</button>-->
 <!--                </form>-->
-                <div class="btn_update">
-                    <a th:href="@{Cart/update}" style="text-decoration: none;padding: 10px 20px 11px 25px;color: white">Update</a>
-                </div>
+<!--                <div class="btn_update">-->
+<!--                    <a th:href="@{/Cart/update}" style="text-decoration: none;padding: 10px 20px 11px 25px;color: white">Update</a>-->
+<!--                </div>-->
+                <button class="btn_update" formaction="/Cart/update">Update</button>
+            </form>
 
             </section>
+
 
 
             <!-- Start Coupon And Subtotal Section -->

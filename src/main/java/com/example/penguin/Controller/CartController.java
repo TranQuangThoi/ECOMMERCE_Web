@@ -11,12 +11,10 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -139,13 +137,17 @@ public class CartController {
                cartDetail1.setProduct(product);
                cartDetail1.setSize(size);
                cartDetail1.setQuantity(quantity);
-               cartDetail1.setPrice(cartDetail1.getProduct().getPrice() * cartDetail.getQuantity());
-               cartDetailServiceImpl.saveCartDetail(cartDetail1);
-                for (CartDetailEntity a : cart.getCartDetailList()) {
-                    totalPrice += a.getPrice();
-                }
-            }
+               cartDetail1.setPrice(cartDetail1.getProduct().getPrice() * cartDetail1.getQuantity());
+                cartDetailServiceImpl.saveCartDetail(cartDetail1);
+               if(cart.getCartDetailList()!= null)
+               {
+                   for (CartDetailEntity a : cart.getCartDetailList()) {
+                       totalPrice += a.getPrice();
+                   }
+               }
 
+
+            }
 
             cart.setTotalPrice(totalPrice);
             cartServiceImpl.saveCart(cart);
@@ -162,26 +164,31 @@ public class CartController {
         return "redirect:/cart";
     }
     @PostMapping("/Cart/update")
-    public String updateCart(HttpServletRequest request)
+    public String updateCart(@RequestParam(name = "quantity") int[] quantity , Model model)
     {
-        UserEntity user = (UserEntity) session.getAttribute("account");
-
-            CartEntity cart = cartServiceImpl.findCartByUserId(user.getId());
-
-            List<CartDetailEntity> cartDetailList = cart.getCartDetailList();
-            int i=0 ;
-            String[]  Q = request.getParameterValues("quantity");
-
-
-           for (CartDetailEntity c : cartDetailList)
-           {
-
-               c.setQuantity(Integer.parseInt(Q[i]));
-               c.setPrice(c.getQuantity() * c.getProduct().getPrice());
-               i++;
-           }
-
-        return "cart";
+        UserEntity customer = (UserEntity) session.getAttribute("account");
+        if(customer != null){
+            CartEntity cart = cartServiceImpl.findCartByUserId(customer.getId());
+            if(cart != null){
+                List<CartDetailEntity> list = cart.getCartDetailList();
+                if(list != null){
+                    int i = 0;
+                    for(CartDetailEntity c : list){
+                        int quantityParam = quantity[i];
+                        c.setQuantity(quantityParam);
+                        c.setPrice(c.getQuantity() * c.getProduct().getPrice());
+                          i++;
+                    }
+                    int total = 0;
+                    for (CartDetailEntity c : list)
+                        total += c.getPrice();
+                    cart.setTotalPrice(total);
+                    cart.setCartDetailList(list);
+                    cartServiceImpl.saveCart(cart);
+                }
+            }
+        }
+        return "redirect:/cart";
     }
 
 

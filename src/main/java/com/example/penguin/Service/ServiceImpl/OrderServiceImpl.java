@@ -2,7 +2,7 @@ package com.example.penguin.Service.ServiceImpl;
 
 import com.example.penguin.Entities.OrderEntity;
 import com.example.penguin.Repository.OrderRepository;
-import com.example.penguin.Service.OrderDetail;
+import com.example.penguin.Service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class OrderServiceImpl implements OrderDetail {
+public class OrderServiceImpl implements OrderService {
 
     @Autowired
     OrderRepository orderRepository;
@@ -37,6 +37,13 @@ public class OrderServiceImpl implements OrderDetail {
     }
 
     @Override
+    public Page<OrderEntity> findPageByUser(int pageNumber, int pageSize , int userId) {
+
+        Pageable pageable = PageRequest.of(pageNumber-1 , pageSize);
+        return orderRepository.findOrderEntitiesByUserEntityId(userId,pageable);
+    }
+
+    @Override
     public List<OrderEntity> findOrderOfDate(String startDate, String endDate) {
 
 //        // Chuyển đổi kiểu dữ liệu từ String sang java.util.Date hoặc java.sql.Date
@@ -47,9 +54,10 @@ public class OrderServiceImpl implements OrderDetail {
 
 
     @Override
-    public OrderEntity findOrderByIdUser(int id)
+    public List<OrderEntity> findOrderByIdUser(int id)
     {
-        return orderRepository.findOrderByIdUser(id);
+        List<OrderEntity> listOrder = orderRepository.findOrderEntitiesByUserEntityId(id);
+        return listOrder ;
     }
 
     @Override

@@ -107,7 +107,7 @@ public class CategoryAdminController {
 
     @PostMapping("/Admin_Category/update/{id}")
     public  String updateCate(@PathVariable(value = "id") int id ,
-                             @ModelAttribute(name = "name") String namecate,
+                              @ModelAttribute(name = "name") String namecate,
                               @ModelAttribute(name = "status") int status,
                               RedirectAttributes rd,
                               Model model
