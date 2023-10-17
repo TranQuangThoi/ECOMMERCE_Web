@@ -21,6 +21,4 @@ public class CartDetailEntity {
     @JoinColumn(name = "cartId")
     private CartEntity cart;
 
-
-
 }

@@ -2,6 +2,7 @@ package com.example.penguin.Entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 @Entity
 @Table
@@ -20,6 +21,13 @@ public class OrderDetailEntity {
     private int quantity;
     private int price;
     private String productName;
+
+    @ManyToOne
+    @JoinColumn(name = "productId")
+    @ToString.Exclude
+    private ProductEntity product;
+
+
 
 
 }

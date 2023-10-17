@@ -25,5 +25,16 @@ public class OrderDetailServiceImpl implements OrderDetailService {
         return orderDetailRepository.findAllByUserId(id);
     }
 
+    @Override
+    public void deleteItemOrderDetail(OrderDetailEntity orderDetail) {
+
+        orderDetailRepository.delete(orderDetail);
+    }
+
+    @Override
+    public Long countSoldPro(int productId) {
+       return orderDetailRepository.countSoldProd(productId);
+    }
+
 
 }

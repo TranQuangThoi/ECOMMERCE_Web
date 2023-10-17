@@ -19,5 +19,4 @@ public class Mail {
     private String contentType = "text/plain";
     private List<Object> attachments;
 
-
 }

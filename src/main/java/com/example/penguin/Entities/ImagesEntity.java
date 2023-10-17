@@ -14,8 +14,6 @@ public class ImagesEntity {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private int idImage;
-
-
     private String url;
 
     @ManyToOne

@@ -38,7 +38,6 @@ public class Account {
     public String getOnePage(Model model , @PathVariable(name = "pageNumber")int pageNumber)
     {
         UserEntity account =  (UserEntity) session.getAttribute("account");
-
         int pageSize = 10;
 
         model.addAttribute("account",account);
@@ -54,5 +53,22 @@ public class Account {
         }
         return "account";
 
+    }
+    @GetMapping("/deleteHistory/{id}")
+    public String deleteHistory(@PathVariable(value = "id") int id)
+    {
+
+
+        OrderEntity order = orderService.findOrderById(id);
+        List<OrderDetailEntity> orderDetailEntityList = order.getOrderDetailList();
+
+        for(OrderDetailEntity item : orderDetailEntityList)
+        {
+            orderDetailService.deleteItemOrderDetail(item);
+        }
+
+        orderService.deleteOrder(order);
+
+        return "redirect:/account";
     }
 }

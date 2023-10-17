@@ -18,7 +18,7 @@ public class RevenueAdminController {
 
     @Autowired
     OrderServiceImpl orderServiceImpl;
-    @GetMapping("Admin_Revenue")
+    @GetMapping("/Admin_Revenue")
     public String showRevenue(Model model)
     {
         List<OrderEntity> orderSold = orderServiceImpl.findOrderSold();

@@ -23,11 +23,11 @@ public class AccAdminController {
     @GetMapping("Admin_User")
     public String showUser(Model model)
     {
-
         List<UserEntity> userAcc = userAccServiceImpl.findAllUser();
         model.addAttribute("userAcc" , userAcc);
         return "Admin_User";
     }
+
 
     @GetMapping("DeleteUser/{id}")
     public String deleteUser( @PathVariable(value = "id") int id , RedirectAttributes rd )

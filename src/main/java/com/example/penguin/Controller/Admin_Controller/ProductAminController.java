@@ -147,8 +147,6 @@ public class ProductAminController {
     }
 
 
-
-
     @GetMapping("/Admin_Product/Delete/{id}")
     public String Delete(@PathVariable(value = "id") int id , RedirectAttributes rd)
     {
@@ -156,6 +154,7 @@ public class ProductAminController {
 
         rd.addFlashAttribute("message","đã xóa sản phẩm " +product.getProductName()  +"thành công");
         productServiceImpl.deleteProById(id);
+
 
         return "redirect:/Admin_Product";
 

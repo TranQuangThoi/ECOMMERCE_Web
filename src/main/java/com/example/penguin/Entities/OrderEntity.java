@@ -27,7 +27,8 @@ public class OrderEntity {
     @OneToMany(mappedBy = "order")
     private List<OrderDetailEntity> orderDetailList;
 
-    private Date orderDate=new Date(new java.util.Date().getTime());
+
+    private Date orderDate=new Date();
     protected long totalPrice;
     private int satus;
     private String deliveryAddress;

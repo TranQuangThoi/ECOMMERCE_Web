@@ -40,23 +40,22 @@ public class MailServiceImpl implements MailService {
         Mail mail = new Mail();
         mail.setMailFrom("thoidepzai@gmail.com");
         mail.setMailTo(order.getUserEntity().getEmail());
-        mail.setMailSubject("Nhà cái đến từ châu âu - chúc mừng bạn đã tin tưởng dịch vụ cầm đồ");
+        mail.setMailSubject("Web Bán hàng Online - Bạn đặt hàng thành công");
         String content = "Tổng giá : " + order.getTotalPrice() +"\n";
 
         List<OrderDetailEntity> orderDetailList = order.getOrderDetailList();
         if (orderDetailList != null) {
             for (OrderDetailEntity item : orderDetailList) {
-                content += item.getProductName() + "    số lượng :" + item.getQuantity() + "Gía :" + item.getPrice() + "\n";
+                content += "Sản phẩm :  " +item.getProductName() + "    số lượng :  " + item.getQuantity() + "Gía :  " + item.getPrice() + "VND"+"\n";
             }
         } else {
-            content += "Không có chi tiết đơn hàng.";
+            content += "Không có chi tiết đơn hàng."+"\n";
         }
 
-        content += "Sản phẩm được đặt bởi: " + order.getUserEntity().getName()+"dễ thương"+"\n";
-        content +="Ngày đặt :" +order.getOrderDate();
-        content +="Địa chỉ nhận hàng" + order.getDeliveryAddress();
-        content +="Số điện thoại ngời nhận" +order.getUserEntity().getPhone();
-        content +="Cảm ơn các con nợ";
+        content += "Sản phẩm được đặt bởi:  " + order.getUserEntity().getName()+"\n";
+        content +="Ngày đặt : " +order.getOrderDate() +"\n";
+        content +="Địa chỉ nhận hàng : " + order.getDeliveryAddress() +"\n";
+        content +="Số điện thoại  : " +order.getUserEntity().getPhone();
         mail.setMailContent(content);
         sendMail(mail);
 

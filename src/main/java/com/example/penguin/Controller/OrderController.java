@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -60,6 +61,7 @@ public class OrderController {
             order.setSatus(1);
             order.setDeliveryAddress(address);
             orderServiceImpl.saveOrder(order);
+            List<OrderDetailEntity> orderDetailEntityList = new ArrayList<>();
 
 
        for (CartDetailEntity cartDetail :cartDetailEntityList)
@@ -70,12 +72,14 @@ public class OrderController {
            orderDetail.setOrder(order);
            orderDetail.setProductName(cartDetail.getProduct().getProductName());
            orderDetailServiceImpl.saveOrderDetail(orderDetail);
+           orderDetailEntityList.add(orderDetail);
 
            ProductEntity product = productServiceImpl.findById(cartDetail.getProduct().getIdProduct());
            product.setQuantity(product.getQuantity()-orderDetail.getQuantity());
 
        }
 
+       order.setOrderDetailList(orderDetailEntityList);
        mailService.sendOrderMail(order);
        cartServiceImpl.deleteByCart(cart);
         return "redirect:/cart";

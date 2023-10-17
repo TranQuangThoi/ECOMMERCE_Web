@@ -73,22 +73,19 @@ public class loginController {
                            )
     {
 
-        // tìm kiếm người dùng dựa trên số điện thoại
         UserEntity userAccount = userAccServiceImpl.findByPhone(phone);
 
 
         if(userAccount != null)
         {
 
-            // giải mã mk đã được mã hóa
             String decodePass = new String(Base64.getDecoder().decode(userAccount.getPassword()));
-            // . trim xóa khoản trắng ở đầu và cuối chuỗi
             if(decodePass.equals(password.trim()))
             {
                 session.setAttribute("account", userAccount);
                 if(userAccount.getRole()==1){
 
-                    return "Admin_Home";
+                    return "redirect:/Admin_Category";
                 }else if(userAccount.getRole()==0)
                 {
                     return "home";

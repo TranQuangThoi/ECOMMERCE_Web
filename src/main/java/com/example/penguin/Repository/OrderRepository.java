@@ -32,4 +32,9 @@ public interface OrderRepository extends JpaRepository<OrderEntity , Integer> {
      // lay don hang theo user
     Page<OrderEntity> findOrderEntitiesByUserEntityId(int userId, Pageable pageable);
 
+
+    OrderEntity findByOrderId(int id);
+
+
+
 }

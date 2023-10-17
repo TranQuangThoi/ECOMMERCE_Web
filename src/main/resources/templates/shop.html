@@ -37,7 +37,7 @@
                         <button class="search-box_btn" ><i class="bi bi-search"></i> </button>
                       </div>
                      </li>
-                    <li><a th:href="@{/}" >Home</a></li>
+                    <li><a th:href="@{/home}" >Home</a></li>
                     <li><a th:href="@{/shop}" class="active">Shope</a></li>
                     <li><a th:href="@{/blog}">Blog</a></li>
                     <li><a th:href="@{/about}" >About</a></li>
@@ -107,7 +107,7 @@
                     <th:block   th:each="item : ${itemCate.productEntities}" >
                         <div class="pro">
                             <a class="pro_a" th:href="@{/sproduct/{id}(id=${item.idProduct})}">
-                                <img th:src="${item.imageList.get(0).getUrl()}" style="height: 67% ; width: 100% ; border: 1px solid #9fc1a5">
+                                <img th:if="${item.imageList!=null}" th:src="${item.imageList.get(0).getUrl()}" style="height: 67% ; width: 100% ; border: 1px solid #9fc1a5">
                                 <div class="des">
 
                                     <span th:text="${item.category.nameCategory}">adidas</span>
