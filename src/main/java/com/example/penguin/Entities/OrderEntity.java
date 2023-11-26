@@ -31,7 +31,8 @@ public class OrderEntity {
     protected long totalPrice;
     private int satus;
     private String deliveryAddress;
-
+    private String email;
+    private String phone;
 
 
 }

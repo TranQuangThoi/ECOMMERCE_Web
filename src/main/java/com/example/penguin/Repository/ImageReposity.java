@@ -10,7 +10,6 @@ import java.util.List;
 @Repository
 public interface ImageReposity extends JpaRepository<ImagesEntity , Integer> {
 
-    // lấy ra hình ảnh của sản phẩm theo id sản phẩm
     @Query("select i from ImagesEntity i where  i.product.idProduct =:idProduct")
     List<ImagesEntity> findByPro(int idProduct);
 

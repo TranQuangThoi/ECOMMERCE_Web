@@ -1,5 +1,6 @@
 package com.example.penguin.Controller.Admin_Controller;
 
+import com.example.penguin.Service.UserAccService;
 import org.springframework.ui.Model;
 import com.example.penguin.Entities.UserEntity;
 import com.example.penguin.Service.ServiceImpl.UserAccServiceImpl;
@@ -18,7 +19,7 @@ import java.util.Optional;
 public class AccAdminController {
 
     @Autowired
-    UserAccServiceImpl userAccServiceImpl;
+    private UserAccService userAccServiceImpl;
 
     @GetMapping("Admin_User")
     public String showUser(Model model)

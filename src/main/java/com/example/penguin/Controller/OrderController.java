@@ -1,6 +1,7 @@
 package com.example.penguin.Controller;
 
 import com.example.penguin.Entities.*;
+import com.example.penguin.Service.*;
 import com.example.penguin.Service.ServiceImpl.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,20 +20,20 @@ public class OrderController {
     @Autowired
     HttpSession session;
     @Autowired
-    private CartServiceImpl cartServiceImpl;
+    private CartService cartServiceImpl;
 
     @Autowired
-    private OrderServiceImpl orderServiceImpl;
+    private OrderService orderServiceImpl;
 
     @Autowired
-    private OrderDetailServiceImpl orderDetailServiceImpl;
+    private OrderDetailService orderDetailServiceImpl;
     @Autowired
-    private UserAccServiceImpl userAccServiceImpl;
+    private UserAccService userAccServiceImpl;
     @Autowired
-    private ProductServiceImpl productServiceImpl;
+    private ProductService productServiceImpl;
 
     @Autowired
-    private MailServiceImpl mailService;
+    private MailService mailService;
 
     @GetMapping("checkOut")
     public String pageCheckOut(Model model)
@@ -48,7 +49,9 @@ public class OrderController {
     }
     @PostMapping("Cart/checkOut/{id}")
    public String compliteCheckOut(@PathVariable(name = "id")int idUser , Model model ,
-                                  @RequestParam(name="address") String address)
+                                  @RequestParam(name="address") String address,
+                                  @RequestParam(name="email") String email,
+                                  @RequestParam(name="phone") String phone)
     {
 
         UserEntity user = (UserEntity) session.getAttribute("account");
@@ -59,6 +62,8 @@ public class OrderController {
             order.setTotalPrice(cart.getTotalPrice());
             order.setSatus(1);
             order.setDeliveryAddress(address);
+            order.setEmail(email);
+            order.setPhone(phone);
             orderServiceImpl.saveOrder(order);
 
 

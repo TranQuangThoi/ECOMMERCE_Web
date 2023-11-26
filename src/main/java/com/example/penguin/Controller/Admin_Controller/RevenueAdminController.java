@@ -1,6 +1,7 @@
 package com.example.penguin.Controller.Admin_Controller;
 
 import com.example.penguin.Entities.OrderEntity;
+import com.example.penguin.Service.OrderService;
 import com.example.penguin.Service.ServiceImpl.OrderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -17,7 +18,7 @@ import java.util.List;
 public class RevenueAdminController {
 
     @Autowired
-    OrderServiceImpl orderServiceImpl;
+    private OrderService orderServiceImpl;
     @GetMapping("Admin_Revenue")
     public String showRevenue(Model model)
     {

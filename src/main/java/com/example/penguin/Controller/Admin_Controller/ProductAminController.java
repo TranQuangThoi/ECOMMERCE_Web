@@ -4,6 +4,9 @@ import com.example.penguin.Entities.CategoryEntity;
 import com.example.penguin.Entities.ImagesEntity;
 import com.example.penguin.Entities.ProductEntity;
 import com.example.penguin.Entities.UserEntity;
+import com.example.penguin.Service.CartDetailService;
+import com.example.penguin.Service.ImageService;
+import com.example.penguin.Service.ProductService;
 import com.example.penguin.Service.ServiceImpl.CategoryServiceImpl;
 import com.example.penguin.Service.ServiceImpl.CloudinaryService;
 import com.example.penguin.Service.ServiceImpl.ImageServiceImpl;
@@ -26,14 +29,16 @@ import java.util.List;
 public class ProductAminController {
 
     @Autowired
-    ProductServiceImpl productServiceImpl;
+    private ProductService productServiceImpl;
 
     @Autowired
-    ImageServiceImpl imageServiceImpl;
+    private ImageService imageServiceImpl;
     @Autowired
     CloudinaryService cloudinaryService;
     @Autowired
     HttpSession session;
+    @Autowired
+    private CartDetailService cartDetailService;
 
     @Autowired
     CategoryServiceImpl categoryServiceImpl;
@@ -155,6 +160,7 @@ public class ProductAminController {
         ProductEntity product = productServiceImpl.findById(id);
 
         rd.addFlashAttribute("message","đã xóa sản phẩm " +product.getProductName()  +"thành công");
+        cartDetailService.deleteAllByProduct(product);
         productServiceImpl.deleteProById(id);
 
         return "redirect:/Admin_Product";

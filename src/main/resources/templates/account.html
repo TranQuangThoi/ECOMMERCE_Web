@@ -68,45 +68,59 @@
         <!-- infomaton user -->
 
         <section  class="section-p1">
+
             <div class="user-info-container">
-              <div class="user-info">
-                    <div class="user-avatar" >
-                        <img src="/images/logo2.png" alt="User Avatar" style="width: 100%;">
-                    </div>
-                    <h3 class="user-name" th:text="${session.account.name}">Quang Thời </h3><span >( nam )</span>
-                
-                    <div class="user-info-item" >
-                        <p class="address">Địa chỉ :<span>Street 32, San Franciscoời</span></p>
-                    
-                    </div>
-                    <div>
-                        <p>Ngày sinh : <span >2002/10</span>  </p> 
-                    </div>
-                    <div class="user-info-item" >
-                        <p class="u">Email :<span>quang@gmail</span></p>
-                    
-                    </div>
-                    <div class="user-info-item" >
-                        <p class="u">Username :<span>quang thời</span></p>
-                    
-                    </div>
-                    <div class="user-info-item">
-                        <p> Password: <span>*************</span></p>
-                    
-                    </div>
+              <div class="user-info" style=" margin-top: 30px;">
 
-                    <div class="user-info-item">
-                        <p> Phone: <span>01 2222 365</span></p>
-                    
-                    </div>
+                  <form th:action="@{/account/update}" method="post">
 
-                    <div>
-                        <a class="btn"  th:href="@{/logout}">Đăng xuất</a>
-                        <button class="btn update " type="submit">Cập nhật</button>
-                        <button class="btn">Đổi mật khẩu</button>
-                    </div>
-               
-               
+
+                  <div class="contain-info">
+                      <div th:if="${error}"  id="alertError1" >
+                          [[${error}]]
+                      </div>
+                      <div class="user-info-item" >
+                          <p class="address">User name :</p>
+                          <input th:value="${session.account.name}" name="name" >
+
+                      </div>
+                      <div class="user-info-item" >
+                          <p class="address">Địa chỉ :</p>
+                          <input th:value="${session.account.address}" name="address" >
+
+                      </div>
+                      <div>
+                          <p>Ngày sinh :   </p>
+                          <input th:value="${session.account.birthDate}" name="birthday"   type="date">
+                      </div>
+                      <div class="user-info-item" >
+                          <p class="u">Email : </p>
+                          <input th:value="${session.account.email}" name="email"  >
+
+                      </div>
+                      <div class="user-info-item">
+                          <p> Phone:</p>
+                          <input th:value="${session.account.phone}" name="phone">
+
+                      </div>
+                      <div style="display: flex ; justify-content: start ;margin-left: -2px;margin-bottom: 10px">
+                          <div class="user-info-item" style="margin-right: 10px">
+                              <p> Password:</p>
+                              <input name="oldPassword"style="padding: 8px;width: 100%;" type="password">
+                          </div>
+                          <div class="user-info-item">
+                              <p> New Password:</p>
+                              <input name="newPassword" style="padding: 8px;width: 100%;" type="password">
+                          </div>
+                      </div>
+                  </div>
+                  <div class="action">
+                      <a class="btn" style="text-decoration: none" th:href="@{/logout}">Đăng xuất</a>
+                      <button class="btn update "type="submit" >Cập nhật</button>
+                  </div>
+
+                  </form>
+
                 </div>
               
               <div class="user_history">
@@ -118,7 +132,6 @@
                             <th>Tổng giá</th>
                             <th>Trạng thái</th>
                             <th>Ngày mua</th>
-                            <th>Chi tiết đơn hàng</th>
                         </tr>
                     </thead>
                     <th:block th:each="orderItem : ${orderList}">
@@ -176,6 +189,32 @@
 
         <!-- End Coupon And Subtotal Section -->
         <style>
+            #alertError1{
+                text-align: center;
+                margin-right: 40px;
+                border-radius: 19px;
+                padding: 15px;
+                background: antiquewhite;
+                color: red;
+            }
+            .user-info-item input{
+                border-radius: 8px;
+                width: 60%;
+                text-align: start;
+                padding: 8px;
+                border: 1px solid;
+            }
+            .action{
+                display: flex;
+                width: 75%;
+                display: flex;
+                justify-content: space-around;
+            }
+            .contain-info{
+                border: 2px solid antiquewhite;
+                width: 75%;
+                border-radius: 11px;
+            }
             .user-info-container{
                display: flex;
                justify-content: center;
@@ -200,7 +239,7 @@
             }
 
             .user_history thead {
-            background-color: #f0d4e6; /* Background color for the table header */
+            background-color: aliceblue; /* Background color for the table header */
             }
 
             /* Optional: Alternate row colors */
@@ -238,6 +277,7 @@
                 margin-top: 10px;
             }
             .user-info div{
+                margin-left: 21px;
                 margin-top: 10px;
             }
             .user-avatar{
@@ -330,4 +370,12 @@
         <script src="js/main.js"></script>
     </body>
 
+<script>
+    setTimeout(function() {
+        var alertError = document.getElementById("alertError1");
+        if (alertError) {
+            alertError.style.display = "none"; // Ẩn phần tử
+        }
+    }, 3000);
+</script>
 </html>

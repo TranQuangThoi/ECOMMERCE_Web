@@ -49,8 +49,6 @@ public class CartController {
                 List<CartDetailEntity> cartDetailList = cart.getCartDetailList();
                 Iterator<CartDetailEntity> iterator = cartDetailList.iterator();
                 int total=0;
-                // xét tổng tiền của sản phẩm ( có nhiều cái)
-                // tránh trường hợp đổi s liệu ở dưới dữ liệu những kh cập nhật giá
                 if(cartDetailList!=null)
                 {
                     while (iterator.hasNext())
@@ -58,7 +56,6 @@ public class CartController {
                         CartDetailEntity c = iterator.next();
                         c.setPrice(c.getProduct().getPrice() * c.getQuantity());
                     }
-                    // tổng price
                     for(CartDetailEntity c : cartDetailList)
                     {
                         total += c.getPrice();
@@ -89,7 +86,6 @@ public class CartController {
                 if(cartDetailList!= null)
                 {
                     Iterator<CartDetailEntity> iterator = cartDetailList.iterator();
-//                Duyệt các phần tử từ đầu đến cuối của một collection.
 //                Iterator cho phép xóa phần tử khi lặp một collection.
                     boolean found = false;
                     while (iterator.hasNext()) {
@@ -111,7 +107,6 @@ public class CartController {
                         }
                     }
 
-                    // Nếu found là false
                     if (!found) {
                         cartDetail = new CartDetailEntity();
                         cartDetailList.add(cartDetail);

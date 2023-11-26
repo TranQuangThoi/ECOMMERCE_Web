@@ -2,9 +2,13 @@ package com.example.penguin.Controller;
 
 import com.example.penguin.Entities.ImagesEntity;
 import com.example.penguin.Entities.ProductEntity;
+import com.example.penguin.Service.ImageService;
+import com.example.penguin.Service.ProductService;
 import com.example.penguin.Service.ServiceImpl.ImageServiceImpl;
 import com.example.penguin.Service.ServiceImpl.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,9 +21,9 @@ import java.util.List;
 public class HomeController {
 
     @Autowired
-    ProductServiceImpl productServiceImpl;
+    private ProductService productServiceImpl;
     @Autowired
-    ImageServiceImpl imageServiceImpl;
+    private ImageService imageServiceImpl;
     @GetMapping("/")
     public String showHomePage(){
         return "home";
@@ -54,9 +58,13 @@ public class HomeController {
 
         List<ImagesEntity> imagesList = imageServiceImpl.findByIdPro(id);
         ProductEntity product = productServiceImpl.findById(id);
+        Pageable pageable = PageRequest.of(0,4);
+
+        List<ProductEntity> productEntities = productServiceImpl.findRelateProduce(product.getCategory().getIdCategory(),pageable);
 
         model.addAttribute("imagesList",imagesList);
         model.addAttribute("product",product);
+        model.addAttribute("productRelate",productEntities);
         return "sproduct";
     }
 

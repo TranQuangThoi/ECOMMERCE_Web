@@ -45,8 +45,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OrderEntity> findOrderOfDate(String startDate, String endDate) {
-
-//        // Chuyển đổi kiểu dữ liệu từ String sang java.util.Date hoặc java.sql.Date
 //        Date start = java.sql.Date.valueOf(startDate);
 //        Date end = java.sql.Date.valueOf(endDate);
         return orderRepository.findOrderSoldByDateRange(startDate, endDate);
@@ -65,6 +63,7 @@ public class OrderServiceImpl implements OrderService {
     {
         orderRepository.save(orderEntity);
     }
+
 
 
 }

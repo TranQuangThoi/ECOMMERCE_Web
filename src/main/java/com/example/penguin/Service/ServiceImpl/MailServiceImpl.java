@@ -7,6 +7,7 @@ import com.example.penguin.Service.MailService;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailSendException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -38,9 +39,9 @@ public class MailServiceImpl implements MailService {
     public void sendOrderMail(OrderEntity order) {
 
         Mail mail = new Mail();
-        mail.setMailFrom("thoidepzai@gmail.com");
-        mail.setMailTo(order.getUserEntity().getEmail());
-        mail.setMailSubject("Nhà cái đến từ châu âu - chúc mừng bạn đã tin tưởng dịch vụ cầm đồ");
+        mail.setMailFrom("tranquangthoi420632@gmail.com");
+        mail.setMailTo(order.getEmail());
+        mail.setMailSubject("Cảm ơn đã tin tưởng và mua hàng ở cửa hàng chúng tôi");
         String content = "Tổng giá : " + order.getTotalPrice() +"\n";
 
         List<OrderDetailEntity> orderDetailList = order.getOrderDetailList();

@@ -18,20 +18,10 @@ public interface ProductReposity extends JpaRepository<ProductEntity , Integer> 
 
     public ProductEntity findById(int id);
 
-    // lấy danh sách sản phẩm theo idcategory
     @Query("select pro from ProductEntity pro where pro.category.idCategory=:id")
     List<ProductEntity> findByCate(int id);
 
-
-
-
-
-
-
-
-
-
-
-
+    @Query("select pro from ProductEntity pro where pro.category.idCategory=:cateId ")
+    List<ProductEntity> findProdcutRelateCate(int cateId,Pageable pageable);
 
 }

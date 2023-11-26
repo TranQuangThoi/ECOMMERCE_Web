@@ -2,6 +2,8 @@ package com.example.penguin.Controller;
 
 import com.example.penguin.Entities.CategoryEntity;
 import com.example.penguin.Entities.ProductEntity;
+import com.example.penguin.Service.CategoryService;
+import com.example.penguin.Service.ProductService;
 import com.example.penguin.Service.ServiceImpl.CategoryServiceImpl;
 import com.example.penguin.Service.ServiceImpl.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +18,10 @@ public class ProductController {
 
 
     @Autowired
-    ProductServiceImpl productServiceImpl;
+    private ProductService productServiceImpl;
 
     @Autowired
-    CategoryServiceImpl categoryServiceImpl;
+    private CategoryService categoryServiceImpl;
 
     @GetMapping("/shop")
     public String showPageShop(Model model)

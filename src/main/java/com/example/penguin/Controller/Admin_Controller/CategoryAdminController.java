@@ -2,6 +2,10 @@ package com.example.penguin.Controller.Admin_Controller;
 
 import com.example.penguin.Entities.CategoryEntity;
 import com.example.penguin.Entities.ProductEntity;
+import com.example.penguin.Service.CartDetailService;
+import com.example.penguin.Service.CartService;
+import com.example.penguin.Service.CategoryService;
+import com.example.penguin.Service.ProductService;
 import com.example.penguin.Service.ServiceImpl.CategoryServiceImpl;
 import com.example.penguin.Service.ServiceImpl.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +24,11 @@ import java.util.List;
 public class CategoryAdminController {
 
     @Autowired
-    ProductServiceImpl productServiceImpl;
+    private ProductService productServiceImpl;
     @Autowired
-    CategoryServiceImpl categoryServiceImpl;
+    private CategoryService categoryServiceImpl;
+    @Autowired
+    private CartDetailService cartDetailService;
     @GetMapping("/Admin_Category")
     public String showCategory(Model model)
     {
@@ -56,6 +62,7 @@ public class CategoryAdminController {
             {
 //                productService.delete(itemPro);
                 productServiceImpl.deleteProById(itemPro.getIdProduct());
+                cartDetailService.deleteAllByProduct(itemPro);
             }
 
             this.categoryServiceImpl.deleteById(id);

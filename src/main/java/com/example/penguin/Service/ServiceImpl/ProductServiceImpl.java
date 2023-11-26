@@ -81,6 +81,11 @@ public class ProductServiceImpl implements ProductService {
         productReposity.deleteById(id);
     }
 
+    @Override
+    public List<ProductEntity> findRelateProduce(int id, Pageable pageable) {
+        List<ProductEntity> productEntities = productReposity.findProdcutRelateCate(id,pageable);
+        return productEntities;
+    }
 
 
 }

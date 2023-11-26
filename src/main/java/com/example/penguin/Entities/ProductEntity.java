@@ -27,6 +27,7 @@ public class ProductEntity {
 
     private int rating;
     private String reviews;
+    @Column(columnDefinition = "text")
     private String description;
 
     @Column(nullable = false)
