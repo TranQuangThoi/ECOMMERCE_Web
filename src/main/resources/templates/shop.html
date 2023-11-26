@@ -27,7 +27,7 @@
         <section id="header">
 
             <a href=""> <img src="images/logo2.png" class="logo" style="height: 70px;"></a>
-                
+
             <div>
 
                 <ul id="navbar">
@@ -67,53 +67,43 @@
                 </span>
 
             </div>
-        </section>
-        <!-- End Header -->
-
-        <!-- Start page-header Section -->
-        <section id="page-header">
-
-            <h2>Stayhome</h2>
-            <p>Save more with couppns & up to 70% off!</p>
 
         </section>
-        <!--End page-header Section -->
+        <section id="page-Category">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="dropdown">
 
-        <!-- start button category --->
+                            <th:block th:each="itemcate : ${categoryList}">
+                                <a class="dropdown-item" style="text-decoration: none" th:href="'#'+${itemcate.nameCategory}" >
+                                    <div th:text="${itemcate.nameCategory}" class="itemCate">
+                                    </div>
 
-            <section id="page-Category">
-                <th:block th:each="itemcate : ${categoryList}">
-                    <div class="page-Category-item" style="min-width: 80px">
-                        <a href="" th:text="${itemcate.nameCategory}" data-category-id="${itemcate.id}">
-                            Giày nam
-                        </a>
-
+                                </a>
+                            </th:block>
+                        </div>
                     </div>
-                </th:block>
-
-            </section>
-
-
-
-        <!-- end button Category --->
-
+                </div>
+            </div>
+        </section>
         <!-- Start Product  Section -->
 
         <th:block th:each="itemCate : ${categoryList}">
-            <section id="product1" class="section-p1" data-category-id="${itemcate.id}">
-                <h3 class="title-category" style="color: #464144; font-size: 30px " th:text="${itemCate.nameCategory}" th:if="${itemCate.productEntities!=null and itemCate.productEntities.size()>0}">Giày Nam</h3>
-                <div class="pro-container">
-
+            <section id="product1" class="section-p1">
+                <div class="titleCate">
+                    <a >
+                        <h3  th:id="${itemCate.nameCategory}" class="title-category" style="color: #464144; font-size: 30px " th:text="${itemCate.nameCategory}" th:if="${itemCate.productEntities!=null and itemCate.productEntities.size()>0}">Giày Nam</h3>
+                    </a>
+                </div>
+                <div class="pro-container custom-background">
                     <th:block   th:each="item : ${itemCate.productEntities}" >
                         <div class="pro">
                             <a class="pro_a" th:href="@{/sproduct/{id}(id=${item.idProduct})}">
                                 <img th:src="${item.imageList.get(0).getUrl()}" style="height: 67% ; width: 100% ; border: 1px solid #9fc1a5">
                                 <div class="des">
-
                                     <span th:text="${item.category.nameCategory}">adidas</span>
-
                                     <h5 th:text="${item.productName}">Cartoon Astronaut T-Shirts</h5>
-
                                     <div class="star">
                                         <span th:text="${item.rating}"></span>
                                         <i class="fas fa-star"></i>
@@ -123,63 +113,15 @@
                                     <h4 th:text="${item.price} + VND">$78</h4>
                                 </div>
                                 <div class="cart" >
-
                                     <i class="fas fa-cart-shopping gg"></i>
-
                                 </div>
                             </a>
                         </div>
-
                     </th:block>
-
-
                 </div>
 
             </section>
         </th:block>
-
-
-        <!-- End Product  Section -->
-
-        <!-- Start pagination -->
-
-        <section id="pagination" class="section-p1">
-
-            <a href="#">1</a>
-            <a href="#">2</a>
-            <a href="#"><span><i class="fas fa-long-arrow-alt-right"></i></span></a>
-
-        </section>
-
-
-
-        <!-- End pagination -->
-
-
-
-
-
-        <!-- Start News Laters -->
-
-        <section id="newsletter" class="section-p1 section-m1">
-
-            <div class="newstext">
-                <h4>Sign Up For newsletters</h4>
-                <p>Get E-mail updates about our lastest shop and <span>special offers.</span></p>
-
-            </div>
-
-            <div class="form">
-
-
-                <input type="text" placeholder="Your email address">
-                <button class="normal">sign Up</button>
-
-
-            </div>
-        </section>
-
-        <!-- End News Laters -->
 
         <!-- Start Footer Section -->
 
@@ -221,11 +163,6 @@
                         </div>
 
                     </div>
-
-
-
-
-
                 </div>
 
             </div>
@@ -238,11 +175,8 @@
                 <a href="#">Privacy Policy</a>
                 <a href="#">Terms & Conditions</a>
                 <a href="#">Contact Us</a>
-
             </div>
-
             <div class="col">
-
                 <h4>My Account</h4>
                 <a href="#">Sign In</a>
                 <a href="#">View Cart</a>
@@ -251,12 +185,7 @@
                 <a href="#">Help</a>
 
             </div>
-
-
-
-
             <div class="col install">
-
                 <h4>Install App</h4>
                 <p>From App Store or Google play</p>
                 <div class="row">
@@ -271,17 +200,8 @@
             <div class="copyright">
                 <p>&copy; 2022, Tech2 etc -HTML CSS Ecommerce Template</p>
             </div>
-
-
         </footer>
-
-
-
         <!-- End Footer Section -->
-
-
-
-
         </script>
 
         <script src="js/main.js"></script>

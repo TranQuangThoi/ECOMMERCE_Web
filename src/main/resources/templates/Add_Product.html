@@ -116,7 +116,7 @@
                   </g>
                 </svg>
               </span>
-                    <span class="app-brand-text demo menu-text fw-bolder ms-2">GIZA</span>
+                    <span class="app-brand-text demo menu-text fw-bolder ms-2">BEE</span>
                 </a>
 
                 <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -235,7 +235,6 @@
                                         <div class="mb-3">
                                             <label class="form-label" >Danh mục</label>
                                             <select class="form-select" name="category" aria-label="Default select example" required="required">
-                                                <option selected="">Chọn danh mục sản phẩm</option>
                                                 <option th:each="itemCate : ${listCategory}" th:text="${itemCate.nameCategory}" th:value="${itemCate.idCategory}" ></option>
                                             </select>
                                         </div>
@@ -248,8 +247,7 @@
                                         <div class="mb-3">
                                             <label for="exampleFormControlSelect1" class="form-label" required="required">TRẠNG THÁI</label>
                                             <select class="form-select" name="available" id="exampleFormControlSelect1" aria-label="Default select example" >
-                                                <option selected="">Trạng thái sản phẩm</option>
-                                                <option value=1 >Còn hàng trong kho</option>
+                                                <option value=1 >Sẵn sàng</option>
                                                 <option value=0 >Đang nhập</option>
 
                                             </select>
