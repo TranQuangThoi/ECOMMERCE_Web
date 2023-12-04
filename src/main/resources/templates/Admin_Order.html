@@ -229,7 +229,7 @@
                                 <thead class="table-light">
                                 <tr>
                                     <th>Mã đơn hàng</th>
-                                    <th>Tên khách hàng</th>
+<!--                                    <th>Tên khách hàng</th>-->
                                     <th>Địa chỉ</th>
                                     <th>Ngày đặt</th>
                                     <th>Tổng giá trị</th>
@@ -241,7 +241,7 @@
                                 <th:block th:each="itemOrder : ${orders}">
                                     <tr>
                                         <td th:text="${itemOrder.orderId}"></td>
-                                        <td th:text="${itemOrder.userEntity.name}"></td>
+<!--                                        <td th:text="${itemOrder.userEntity.name}"></td>-->
                                         <td th:text="${itemOrder.deliveryAddress}"></td>
                                         <td
                                                 th:text="${itemOrder.orderDate}"
