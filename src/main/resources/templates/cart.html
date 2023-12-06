@@ -103,7 +103,7 @@
                     <th:block th:if="${cart!=null}" th:each="itemcartDetail : ${cartDetailList}"  >
                             <tr>
                                 <td><img th:src="${itemcartDetail.getProduct().imageList.get(0).getUrl()}" alt=""></td>
-                                <td th:text="${itemcartDetail.getProduct().getProductName()}" ></td>
+                                <td th:text="${itemcartDetail.getProduct().getProductName()}" class="td-limit-width"></td>
                                 <td th:text="${itemcartDetail.getProduct().getPrice()}" >$118.19</td>
                                 <td>
                                     <input  type="number" th:value="${itemcartDetail.quantity}" name="quantity" style="width: 35px; border: none; height: 40px;"
@@ -274,5 +274,12 @@
         <script src="js/all.min.js"></script>
         <script src="js/main.js"></script>
     </body>
+    <style>
+        .td-limit-width {
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            word-wrap: break-word;}
+    </style>
 
 </html>

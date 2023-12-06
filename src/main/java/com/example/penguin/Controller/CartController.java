@@ -68,7 +68,7 @@ public class CartController {
         return "cart";
     }
     @GetMapping("/Cart/{id}")
-    private String addToCart(Model model, @PathVariable int id,
+    private String addToCart( @PathVariable int id,
                              @RequestParam(name = "quantity") int quantity,
                              @RequestParam(name = "size") int size) {
 
@@ -159,7 +159,7 @@ public class CartController {
         return "redirect:/cart";
     }
     @PostMapping("/Cart/update")
-    public String updateCart(@RequestParam(name = "quantity") int[] quantity , Model model)
+    public String updateCart(@RequestParam(name = "quantity",required = false) int[] quantity , Model model)
     {
         UserEntity customer = (UserEntity) session.getAttribute("account");
         if(customer != null){
