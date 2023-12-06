@@ -108,15 +108,15 @@
                                 <td>
                                     <input  type="number" th:value="${itemcartDetail.quantity}" name="quantity" style="width: 35px; border: none; height: 40px;"
                                             th:min="1" th:max="${itemcartDetail.getProduct().getQuantity()}"></td>
-                                <!--                            <td>-->
-                                <!--                                <select th:value="${itemcartDetail.size}" name="size" th:each="item : ${itemcartDetail}">-->
-                                <!--                                    <option value=1 th:if="${itemcartDetail.size==1}">XL</option>-->
-                                <!--                                    <option value=2 th:if="${itemcartDetail.size==2}" >XXL</option>-->
-                                <!--                                    <option value=3 th:if="${itemcartDetail.size==3}">Small</option>-->
-                                <!--                                    <option value=4 th:if="${itemcartDetail.size==4}">Large</option>-->
-                                <!--                                </select>-->
+                                                            <td>
+                                                                <select th:value="${itemcartDetail.size}" name="size" th:each="item : ${itemcartDetail}">
+                                                                    <option value=1 th:if="${itemcartDetail.size==1}">XL</option>
+                                                                    <option value=2 th:if="${itemcartDetail.size==2}" >XXL</option>
+                                                                    <option value=3 th:if="${itemcartDetail.size==3}">Small</option>
+                                                                    <option value=4 th:if="${itemcartDetail.size==4}">Large</option>
+                                                                </select>
 
-                                <!--                            </td>-->
+                                                            </td>
                                 <td th:text="${itemcartDetail.price}+ VND">$118.19</td>
                                 <td >
                                     <a th:href="@{/Cart/Delete/{id}(id=${itemcartDetail.id})}" type="submit" style="color: crimson; font-size: 23px;" >

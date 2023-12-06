@@ -102,7 +102,7 @@
                     </select>
 
                     <label>Số lượng</label>
-                    <input type="number" value=1 name="quantity" >
+                    <input type="number" value=1 name="quantity" th:min="1" th:max="${product.getQuantity()}">
 
                     <button class="btn-addCart" type="submit"  >Add To Cart</button>
                     <h4>Mô tả sản phẩm</h4>
