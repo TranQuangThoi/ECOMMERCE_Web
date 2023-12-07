@@ -29,7 +29,7 @@ public class OrderAdminController {
     @GetMapping("/Admin_Order/page/{pageNumber}")
     public String getOnePage(@PathVariable(value = "pageNumber") int pageNumber, Model model) {
 
-        int pageSize = 15;
+        int pageSize = 12;
         Page<OrderEntity> orderEntityPage = orderServiceImpl.findPage(pageNumber, pageSize);
 
         int totalPage = orderEntityPage.getTotalPages();

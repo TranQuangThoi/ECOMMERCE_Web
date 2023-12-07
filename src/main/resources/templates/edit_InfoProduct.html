@@ -8,7 +8,7 @@
 <!--        data-template="vertical-menu-template-free"-->
 <!--&gt;-->
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta
             name="viewport"
             content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
@@ -16,31 +16,31 @@
 
     <title>ADMIN</title>
 
-    <meta name="description" content="" />
+    <meta name="description" content=""/>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/assets/img/favicon/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon/favicon.ico"/>
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link
             href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
             rel="stylesheet"
     />
 
     <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="/assets/vendor/fonts/boxicons.css" />
+    <link rel="stylesheet" href="/assets/vendor/fonts/boxicons.css"/>
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="/assets/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="/assets/css/demo.css" />
+    <link rel="stylesheet" href="/assets/vendor/css/core.css" class="template-customizer-core-css"/>
+    <link rel="stylesheet" href="/assets/vendor/css/theme-default.css" class="template-customizer-theme-css"/>
+    <link rel="stylesheet" href="/assets/css/demo.css"/>
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
 
-    <link rel="stylesheet" href="/assets/vendor/libs/apex-charts/apex-charts.css" />
+    <link rel="stylesheet" href="/assets/vendor/libs/apex-charts/apex-charts.css"/>
 
     <!-- Page CSS -->
 
@@ -60,7 +60,7 @@
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
             <div class="app-brand demo">
-                <a th:href="@{/}"  class="app-brand-link">
+                <a th:href="@{/}" class="app-brand-link">
               <span class="app-brand-logo demo">
                 <svg
                         width="25"
@@ -226,17 +226,22 @@
                         <div class="col-xl">
                             <div class="card mb-4">
                                 <div class="card-body">
-                                    <form th:action="@{/edit_InfoProduct/update/{id}(id=${product.idProduct})}" method="post" enctype="multipart/form-data">
+                                    <form th:action="@{/edit_InfoProduct/update/{id}(id=${product.idProduct})}"
+                                          method="post" enctype="multipart/form-data">
                                         <div class="mb-3">
                                             <label class="form-label" for="basic-default-fullname">Tên sản phẩm</label>
-                                            <input type="text" class="form-control" id="basic-default-fullname" name="name" th:value="${product.productName}">
+                                            <input type="text" class="form-control" id="basic-default-fullname"
+                                                   name="name" th:value="${product.productName}">
                                         </div>
                                         <div class="mb-3">
                                             <label for="exampleFormControlSelect1" class="form-label">Danh mục</label>
                                             <select class="form-select" name="category">
                                                 <th:block th:if="${itemCategory != null}">
-                                                    <option th:value="${itemCategory.idCategory}"  selected="selected" th:text="${itemCategory.nameCategory}"></option>
-                                                    <option th:each="cate : ${listCategory}" th:value="${cate.idCategory}" th:text="${cate.nameCategory}" th:default="cate.itemCategory"></option>
+                                                    <option th:value="${itemCategory.idCategory}" selected="selected"
+                                                            th:text="${itemCategory.nameCategory}"></option>
+                                                    <option th:each="cate : ${listCategory}"
+                                                            th:value="${cate.idCategory}" th:text="${cate.nameCategory}"
+                                                            th:default="cate.itemCategory"></option>
                                                 </th:block>
                                             </select>
 
@@ -245,41 +250,51 @@
 
                                         <div class="mb-3">
                                             <label class="form-label" for="basic-default-fullname">Số lượng</label>
-                                            <input class="form-control"  name="quantity" th:value="${product.quantity}">
+                                            <input class="form-control" name="quantity" th:value="${product.quantity}">
                                         </div>
 
                                         <div class="mb-3">
                                             <label for="exampleFormControlSelect1" class="form-label">TRẠNG THÁI</label>
-                                            <select class="form-select" name="available" th:value="${product.available}" id="exampleFormControlSelect1" aria-label="Default select example" >
+                                            <select class="form-select" name="available" th:value="${product.available}"
+                                                    id="exampleFormControlSelect1" aria-label="Default select example">
 
-                                                <option th:value="1" th:selected="${product.available==1}" >Còn hàng trong kho</option>
-                                                <option th:value="0" th:selected="${product.available==0}" >Đang nhập</option>
+                                                <option th:value="1" th:selected="${product.available==1}">Còn hàng
+                                                    trong kho
+                                                </option>
+                                                <option th:value="0" th:selected="${product.available==0}">Đang nhập
+                                                </option>
 
                                             </select>
                                         </div>
 
                                         <div class="mb-3">
                                             <label class="form-label">Mô tả sản phẩm</label>
-                                            <textarea class="form-control" id="exampleFormControlTextarea1" name="description" th:text="${product.description}" th:value="${product.description}"></textarea>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1"
+                                                      name="description" th:text="${product.description}"
+                                                      th:value="${product.description}"></textarea>
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Hình ảnh sản phẩm</label>
                                             <div class="row">
-                                                 <div class="col-lg-6"  th:each="image :${listImage}"  >
-                                                         <div class="input-group mb-3 px-2 py-2  bg-white shadow-sm">
-                                                           <img id="previewImage" th:src="${image.url}" width="424" height="238" >
-                                                          <input id="upload" name="image" type="file" onchange="previewFile(this);"  accept="image/*" class="form-control border-0 " multiple>
+                                                <div class="col-lg-6" th:each="image :${listImage}">
+                                                    <div class="input-group mb-3 px-2 py-2  bg-white shadow-sm">
+                                                        <img id="previewImage" th:src="${image.url}" width="424"
+                                                             height="238">
+                                                        <input id="upload" name="image" type="file"
+                                                               onchange="previewFile(this);" accept="image/*"
+                                                               class="form-control border-0 " multiple>
 
-                                                         </div>
+                                                    </div>
 
-                                                 </div>
+                                                </div>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label">Thêm hình ảnh</label>
                                                 <div class="row">
-                                                        <div class="input-group mb-3 px-2 py-2  bg-white shadow-sm">
-                                                            <input name="image" type="file" onchange="readUrl(this);"  accept="image/*" class="form-control border-0 " multiple>
-                                                        </div>
+                                                    <div class="input-group mb-3 px-2 py-2  bg-white shadow-sm">
+                                                        <input name="image" type="file" onchange="readUrl(this);"
+                                                               accept="image/*" class="form-control border-0 " multiple>
+                                                    </div>
 
                                                 </div>
                                             </div>
@@ -288,10 +303,12 @@
 
                                         <div class="mb-3">
                                             <label class="form-label">Giá</label>
-                                            <input type="text" class="form-control" name="price" th:value="${product.price}">
+                                            <input type="text" class="form-control" name="price"
+                                                   th:value="${product.price}">
                                         </div>
-                                        <button type="submit"  class="btn btn-primary mr-3">Cập nhật</button>
-                                        <button type="button"  class="btn btn-primary" onclick="cancelForm()">Cancel</button>
+                                        <button type="submit" class="btn btn-primary mr-3">Cập nhật</button>
+                                        <button type="button" class="btn btn-primary" onclick="cancelForm()">Cancel
+                                        </button>
                                     </form>
                                 </div>
                             </div>
@@ -310,7 +327,6 @@
     <div class="layout-overlay layout-menu-toggle"></div>
 </div>
 <!-- / Layout wrapper -->
-
 
 
 <!-- Core JS -->
@@ -338,9 +354,8 @@
 
 <script type="text/javascript">
 
-    function cancelForm()
-    {
-        window.location="[[@{/Admin_Product}]]";
+    function cancelForm() {
+        window.location = "[[@{/Admin_Product}]]";
     }
 
 
@@ -361,7 +376,6 @@
             preview.src = "";
         }
     }
-
 
 
 </script>

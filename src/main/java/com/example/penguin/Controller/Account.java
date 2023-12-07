@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,7 +54,7 @@ public class Account {
     public String getOnePage(Model model, @PathVariable(name = "pageNumber") int pageNumber) {
         UserEntity account = (UserEntity) session.getAttribute("account");
 
-        int pageSize = 9;
+        int pageSize = 10;
 
         model.addAttribute("account", account);
         if (account != null) {

@@ -1,376 +1,396 @@
 <!DOCTYPE html>
-<html lang="en"    xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/css/all.min.css">
-        <link rel="stylesheet" href="/css/main.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-
-
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/all.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
 
-        <title>Ecommerce Website</title>
-    </head>
+    <title>Ecommerce Website</title>
+</head>
 
-    <body>
+<body>
 
-        <!-- Start Header -->
-        <section id="header">
-            <a href=""> <img src="/images/logo2.png" class="logo" style="height: 70px;"></a>
+<!-- Start Header -->
+<section id="header">
+    <a href=""> <img src="/images/logo2.png" class="logo" style="height: 70px;"></a>
 
 
-            <div>
-                <ul id="navbar">
-                    <li>
-                        <div class="search-box">
-                          <input class="search-box_input" type="text" placeholder="bạn muốn tìm gì ?" required>
-                          <button class="search-box_btn" ><i class="bi bi-search"></i> </button>
-                        </div>
-                       </li>
-                    <li><a th:href="@{/}" class="active">Home</a></li>
-                    <li><a th:href="@{/shop}">Shope</a></li>
-                    <li><a th:href="@{/blog}">Blog</a></li>
-                    <li><a th:href="@{/about}" >About</a></li>
-                    <li><a th:href="@{contact}">Contact</a></li>
-                    <li ><a th:href="@{/cart}"><i class="bi bi-cart3" style="font-size: 25px;"></i></a></li>
-                    <li th:if="${session.account == null}" >
-                        <a th:href="@{/login}">Đăng nhập</a>
-                    </li>
-                    <li th:if="${session.account != null}" class="active">
-                        <a th:href="@{/account}">
-                            <i class="bi bi-person-circle" style="font-size: 25px;"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div id="mobile">
-                <a href="cart.html"><i class="fa-solid fa-bag-shopping"></i></a>
-                <span id="bar">
+    <div>
+        <ul id="navbar">
+            <li>
+                <div class="search-box">
+                    <input class="search-box_input" type="text" placeholder="bạn muốn tìm gì ?" required>
+                    <button class="search-box_btn"><i class="bi bi-search"></i></button>
+                </div>
+            </li>
+            <li><a th:href="@{/}" class="active">Home</a></li>
+            <li><a th:href="@{/shop}">Shope</a></li>
+            <li><a th:href="@{/blog}">Blog</a></li>
+            <li><a th:href="@{/about}">About</a></li>
+            <li><a th:href="@{contact}">Contact</a></li>
+            <li><a th:href="@{/cart}"><i class="bi bi-cart3" style="font-size: 25px;"></i></a></li>
+            <li th:if="${session.account == null}">
+                <a th:href="@{/login}">Đăng nhập</a>
+            </li>
+            <li th:if="${session.account != null}" class="active">
+                <a th:href="@{/account}">
+                    <i class="bi bi-person-circle" style="font-size: 25px;"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div id="mobile">
+        <a href="cart.html"><i class="fa-solid fa-bag-shopping"></i></a>
+        <span id="bar">
                     <i class="fas fa-outdent"></i>
                 </span>
-            </div>
-        </section>
-        <!-- End Header -->
+    </div>
+</section>
+<!-- End Header -->
 
 
-
-        <!-- Start page header Section -->
-        <section id="page-header" class="about-header">
-            <h2>Xin chào Quang thời</h2>
-            <p>Chúc bạn có một ngày tốt lành <3 </p>
-        </section>
-        <!-- End  page header Section -->
-
-
-        <!-- infomaton user -->
-
-        <section  class="section-p1">
-
-            <div class="user-info-container">
-              <div class="user-info" style=" margin-top: 30px;">
-
-                  <form th:action="@{/account/update}" method="post">
+<!-- Start page header Section -->
+<section id="page-header" class="about-header">
+    <h2>CHÀO MỪNG QUÝ KHÁCH</h2>
+    <p>Chúc bạn có một ngày tốt lành <3 </p>
+</section>
+<!-- End  page header Section -->
 
 
-                  <div class="contain-info">
-                      <div th:if="${error}"  id="alertError1" >
-                          [[${error}]]
-                      </div>
-                      <div class="user-info-item" >
-                          <p class="address">User name :</p>
-                          <input th:value="${session.account.name}" name="name" >
+<!-- infomaton user -->
 
-                      </div>
-                      <div class="user-info-item" >
-                          <p class="address">Địa chỉ :</p>
-                          <input th:value="${session.account.address}" name="address" >
+<section class="section-p1">
 
-                      </div>
-                      <div>
-                          <p>Ngày sinh :   </p>
-                          <input th:value="${session.account.birthDate}" name="birthday"   type="date">
-                      </div>
-                      <div class="user-info-item" >
-                          <p class="u">Email : </p>
-                          <input th:value="${session.account.email}" name="email"  >
+    <div class="user-info-container">
+        <div class="user-info" style=" margin-top: 30px;">
 
-                      </div>
-                      <div class="user-info-item">
-                          <p> Phone:</p>
-                          <input th:value="${session.account.phone}" name="phone">
-
-                      </div>
-                      <div style="display: flex ; justify-content: start ;margin-left: -2px;margin-bottom: 10px">
-                          <div class="user-info-item" style="margin-right: 10px">
-                              <p> Password:</p>
-                              <input name="oldPassword"style="padding: 8px;width: 100%;" type="password">
-                          </div>
-                          <div class="user-info-item">
-                              <p> New Password:</p>
-                              <input name="newPassword" style="padding: 8px;width: 100%;" type="password">
-                          </div>
-                      </div>
-                  </div>
-                  <div class="action">
-                      <a class="btn" style="text-decoration: none" th:href="@{/logout}">Đăng xuất</a>
-                      <button class="btn update "type="submit" >Cập nhật</button>
-                  </div>
-
-                  </form>
-
-                </div>
-              
-              <div class="user_history">
-                <table>
-                    <h3 style="margin-bottom: 10px; color:#24081a ;"> <i class="bi bi-clock-history" style="margin-right: 10px;"></i>Lịch sử mua hàng</h3>
-                    <thead>
-                        <tr>
-                            <th>Mã đơn hàng</th>
-                            <th>Tổng giá</th>
-                            <th>Trạng thái</th>
-                            <th>Ngày mua</th>
-                        </tr>
-                    </thead>
-                    <th:block th:each="orderItem : ${orderList}">
-                        <tbody>
-                        <tr>
-                            <td th:text="${orderItem.orderId}">123456</td>
-                            <td th:text="${orderItem.totalPrice}">$50.00</td>
-                            <td>
-                                <span th:if="${orderItem.satus ==0}">Đặt hàng</span>
-                                <span th:if="${orderItem.satus ==1}">Đã xác nhận</span>
-                                <span th:if="${orderItem.satus ==2}">Đang vận chuyển</span>
-                                <span th:if="${orderItem.satus ==3}">Đã giao hàng</span>
-                                <span th:if="${orderItem.satus ==4}">Đã hủy</span>
-                            </td>
-                            <td th:text="${#dates.format(orderItem.orderDate ,'dd-MMM-yyyy')}">2023-07-25</td>
-                        </tr>
-                        </tbody>
-                    </th:block>
-
-                </table>
-                  <nav >
-                      <ul id="paging">
-                          <li class="page-item">
-                              <a class="page-link" th:if="${currentPage > 1}" th:href="@{/account/page/1}">
-                                  <i class="bi bi-chevron-double-left"></i>
-                              </a>
-                          </li>
-                          <!-- Hiển thị các trang -->
-                          <li class="page-item" th:each="i: ${#numbers.sequence(1, totalPage)}">
-                              <a class="page-link" th:href="@{'/account/page/' + ${i}}" th:classappend="${currentPage == i} ? 'active'" style="margin-right: 5px;">[[${i}]]</a>
-                          </li>
-                          <!-- Thêm trang cuối -->
-                          <li class="page-item">
-                              <a class="page-link" th:if="${currentPage < totalPage}" th:href="@{'/account/page/' + ${currentPage+1} }">
-                                  <i class="bi bi-chevron-double-right"></i>
-                              </a>
-                              <span th:unless="${currentPage < totalPage}"></span>
-                          </li>
-                      </ul>
-                  </nav>
+            <form th:action="@{/account/update}" method="post">
 
 
-              </div>
+                <div class="contain-info">
+                    <div th:if="${error}" id="alertError1">
+                        [[${error}]]
+                    </div>
+                    <div class="user-info-item">
+                        <p class="address">User name :</p>
+                        <input th:value="${session.account.name}" name="name">
 
-            </div>
+                    </div>
+                    <div class="user-info-item">
+                        <p class="address">Địa chỉ :</p>
+                        <input th:value="${session.account.address}" name="address">
 
+                    </div>
+                    <div>
+                        <p>Ngày sinh : </p>
+                        <input th:value="${session.account.birthDate}" name="birthday" type="date">
+                    </div>
+                    <div class="user-info-item">
+                        <p class="u">Email : </p>
+                        <input th:value="${session.account.email}" name="email">
 
-           
-            
+                    </div>
+                    <div class="user-info-item">
+                        <p> Phone:</p>
+                        <input th:value="${session.account.phone}" name="phone">
 
-          </section>
-          
-        <!-- End Cart -->
-
-        <!-- End Coupon And Subtotal Section -->
-        <style>
-            #alertError1{
-                text-align: center;
-                margin-right: 40px;
-                border-radius: 19px;
-                padding: 15px;
-                background: antiquewhite;
-                color: red;
-            }
-            .user-info-item input{
-                border-radius: 8px;
-                width: 60%;
-                text-align: start;
-                padding: 8px;
-                border: 1px solid;
-            }
-            .action{
-                display: flex;
-                width: 75%;
-                display: flex;
-                justify-content: space-around;
-            }
-            .contain-info{
-                border: 2px solid antiquewhite;
-                width: 75%;
-                border-radius: 11px;
-            }
-            .user-info-container{
-               display: flex;
-               justify-content: center;
-                width: 100%;  
-                
-            }
-            .user-history{
-                width: 55%;
-            }
-            /* CSS for styling the user_history table */
-            .user_history table {
-            width: 100%;
-            border-collapse: collapse;
-            border: 1px solid #e1a9cc ; /* Border for the entire table */
-            }
-
-            .user_history th,
-            .user_history td {
-            /* Borders for table cells */
-            border-bottom: 1px solid #ccc; 
-            padding: 15px; /* Add padding to cells for spacing */
-            }
-
-            .user_history thead {
-            background-color: aliceblue; /* Background color for the table header */
-            }
-
-            /* Optional: Alternate row colors */
-            .user_history tbody tr:nth-child(even) {
-            background-color: #f9f9f9;
-            }
-
-            .user-info{
-                display: flex;
-                width: 45%;
-                flex-direction: column;
-                justify-content: center;
-                
-            }
-            .update{
-              
-                margin-right: 30px;
-                
-                
-            }
-        
-            
-            .btn{
-                padding: 15px 35px 10px 35px;
-               border-radius: 15px;
-               border: 0.5px solid #ffe6e6 ;
-               background-color: #99cc99;
-               color: black;
-               font-size: 15px;
-               cursor: pointer;
-             
-
-            }
-            .user-info h3{
-                margin-top: 10px;
-            }
-            .user-info div{
-                margin-left: 21px;
-                margin-top: 10px;
-            }
-            .user-avatar{
-                width: 150px;
-                height: 150px;
-                border-radius: 50%;
-                overflow: hidden;
-                border: 3px solid #e6f2e6;
-                box-shadow:  0px -10px 10px 4px #f59e9e; /* Add the vignette shadow effect */
-                box-sizing: border-box;
-        
-            }
-            .user-avatar img{
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                object-position: center top;
-            }
-        
-        </style>
-        
-
-
-
-        <!-- Start Footer -->
-        <footer class="section-p1" style="border-top: 1px solid black;" >
-            <div class="col">
-                <a href=""> <img src="/images/logo2.png" class="logo" style="height: 70px;"></a>
-                <h4>Contact</h4>
-                <p><strong>Address: </strong> 562 Wellington Roadm Street 32, San Francisco</p>
-                <p><strong>Phone: </strong> +01 2222 365 /(+91) 01 2345 6789</p>
-                <p><strong>Hours: </strong> 10:00 - 18:00. Mon - Sat</p>
-                <div class="follow">
-                    <h4>Follow us</h4>
-                    <div class="icons">
-                        <div class="icon">
-                            <i class="fab fa-facebook"></i>
+                    </div>
+                    <div style="display: flex ; justify-content: start ;margin-left: -2px;margin-bottom: 10px">
+                        <div class="user-info-item" style="margin-right: 10px">
+                            <p> Password:</p>
+                            <input name="oldPassword" style="padding: 8px;width: 100%;" type="password">
                         </div>
-                        <div class="icon">
-                            <i class="fab fa-twitter"></i>
-                        </div>
-                        <div class="icon">
-                            <i class="fab fa-instagram"></i>
-                        </div>
-                        <div class="icon">
-                            <i class="fab fa-pinterest-p"></i>
-                        </div>
-                        <div class="icon">
-                            <i class="fab fa-youtube"></i>
+                        <div class="user-info-item">
+                            <p> New Password:</p>
+                            <input name="newPassword" style="padding: 8px;width: 100%;" type="password">
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="col">
-                <h4>About</h4>
-                <a href="#">About Us</a>
-                <a href="#">Delivery Information</a>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms & Conditions</a>
-                <a href="#">Contact Us</a>
-            </div>
-
-            <div class="col">
-                <h4>My Account</h4>
-                <a href="#">Sign In</a>
-                <a href="#">View Cart</a>
-                <a href="#">My Wishlist</a>
-                <a href="#">Track My Order</a>
-                <a href="#">Help</a>
-            </div>
-
-            <div class="col install">
-                <h4>Install App</h4>
-                <p>From App Store or Google Play</p>
-                <div class="row">
-                    <img src="/images/pay/app.jpg" alt="">
-                    <img src="/images/pay/play.jpg" alt="">
+                <div class="action">
+                    <a class="btn" style="text-decoration: none" th:href="@{/logout}">Đăng xuất</a>
+                    <button class="btn update " type="submit">Cập nhật</button>
                 </div>
-                <p>Secured Payment Gateways</p>
-                <img src="images/pay/pay.png" alt="">
-            </div>
 
-            <div class="copyright">
-                <p>&copy; 2022, Tech2 etc - HTML CSS Ecommerce Template</p>
+            </form>
+
+        </div>
+
+        <div class="user_history">
+            <table>
+                <h3 style="margin-bottom: 10px; color:#24081a ;"><i class="bi bi-clock-history"
+                                                                    style="margin-right: 10px;"></i>Lịch sử mua hàng
+                </h3>
+                <thead>
+                <tr>
+                    <th>Mã đơn hàng</th>
+                    <th>Tổng giá</th>
+                    <th>Trạng thái</th>
+                    <th>Ngày mua</th>
+                </tr>
+                </thead>
+                <th:block th:each="orderItem : ${orderList}">
+                    <tbody>
+                    <tr>
+                        <td th:text="${orderItem.orderId}">123456</td>
+                        <td th:text="${orderItem.totalPrice}">$50.00</td>
+                        <td>
+                            <span th:if="${orderItem.satus ==0}">Đặt hàng</span>
+                            <span th:if="${orderItem.satus ==1}">Đã xác nhận</span>
+                            <span th:if="${orderItem.satus ==2}">Đang vận chuyển</span>
+                            <span th:if="${orderItem.satus ==3}">Đã giao hàng</span>
+                            <span th:if="${orderItem.satus ==4}">Đã hủy</span>
+                        </td>
+                        <td th:text="${#dates.format(orderItem.orderDate ,'dd-MMM-yyyy')}">2023-07-25</td>
+                    </tr>
+                    </tbody>
+                </th:block>
+
+            </table>
+            <nav>
+                <ul id="paging">
+                    <li class="page-item">
+                        <a class="page-link" th:if="${currentPage > 1}" th:href="@{/account/page/1}">
+                            <i class="bi bi-chevron-double-left"></i>
+                        </a>
+                    </li>
+                    <li class="page-item" th:each="i: ${#numbers.sequence(1, totalPage)}">
+                        <a class="page-link" th:href="@{'/account/page/' + ${i}}"
+                           th:classappend="${currentPage == i} ? 'active'" style="margin-right: 5px;">[[${i}]]</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" th:if="${currentPage < totalPage}"
+                           th:href="@{'/account/page/' + ${currentPage+1} }">
+                            <i class="bi bi-chevron-double-right"></i>
+                        </a>
+                        <span th:unless="${currentPage < totalPage}"></span>
+                    </li>
+                </ul>
+            </nav>
+
+
+        </div>
+
+    </div>
+
+
+</section>
+
+<!-- End Cart -->
+
+<!-- End Coupon And Subtotal Section -->
+<style>
+    .page-link {
+        display: inline-block;
+        padding: 8px 12px;
+        background-color: white;
+        border: 1px solid #ccc;
+        color: #333;
+        text-decoration: none;
+        border-radius: 4px;
+    }
+
+    .page-link.active {
+        background-color: #007BFF;
+        color: white;
+        border-color: #007BFF;
+    }
+    #alertError1 {
+        text-align: center;
+        margin-right: 40px;
+        border-radius: 19px;
+        padding: 15px;
+        background: antiquewhite;
+        color: red;
+    }
+
+    .user-info-item input {
+        border-radius: 8px;
+        width: 60%;
+        text-align: start;
+        padding: 8px;
+        border: 1px solid;
+    }
+
+    .action {
+        display: flex;
+        width: 75%;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .contain-info {
+        border: 2px solid antiquewhite;
+        width: 75%;
+        border-radius: 11px;
+    }
+
+    .user-info-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+
+    }
+
+    .user-history {
+        width: 55%;
+    }
+
+    /* CSS for styling the user_history table */
+    .user_history table {
+        width: 100%;
+        border-collapse: collapse;
+        border: 1px solid #e1a9cc; /* Border for the entire table */
+    }
+
+    .user_history th,
+    .user_history td {
+        /* Borders for table cells */
+        border-bottom: 1px solid #ccc;
+        padding: 15px; /* Add padding to cells for spacing */
+    }
+
+    .user_history thead {
+        background-color: aliceblue; /* Background color for the table header */
+    }
+
+    /* Optional: Alternate row colors */
+    .user_history tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .user-info {
+        display: flex;
+        width: 45%;
+        flex-direction: column;
+        justify-content: center;
+
+    }
+
+    .update {
+
+        margin-right: 30px;
+
+
+    }
+
+
+    .btn {
+        padding: 15px 35px 10px 35px;
+        border-radius: 15px;
+        border: 0.5px solid #ffe6e6;
+        background-color: #99cc99;
+        color: black;
+        font-size: 15px;
+        cursor: pointer;
+
+
+    }
+
+    .user-info h3 {
+        margin-top: 10px;
+    }
+
+    .user-info div {
+        margin-left: 21px;
+        margin-top: 10px;
+    }
+
+    .user-avatar {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 3px solid #e6f2e6;
+        box-shadow: 0px -10px 10px 4px #f59e9e; /* Add the vignette shadow effect */
+        box-sizing: border-box;
+
+    }
+
+    .user-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+    }
+
+</style>
+
+
+<!-- Start Footer -->
+<footer class="section-p1" style="border-top: 1px solid black;">
+    <div class="col">
+        <a href=""> <img src="/images/logo2.png" class="logo" style="height: 70px;"></a>
+        <h4>Contact</h4>
+        <p><strong>Address: </strong> 562 Wellington Roadm Street 32, San Francisco</p>
+        <p><strong>Phone: </strong> +01 2222 365 /(+91) 01 2345 6789</p>
+        <p><strong>Hours: </strong> 10:00 - 18:00. Mon - Sat</p>
+        <div class="follow">
+            <h4>Follow us</h4>
+            <div class="icons">
+                <div class="icon">
+                    <i class="fab fa-facebook"></i>
+                </div>
+                <div class="icon">
+                    <i class="fab fa-twitter"></i>
+                </div>
+                <div class="icon">
+                    <i class="fab fa-instagram"></i>
+                </div>
+                <div class="icon">
+                    <i class="fab fa-pinterest-p"></i>
+                </div>
+                <div class="icon">
+                    <i class="fab fa-youtube"></i>
+                </div>
             </div>
-        </footer>
-        <!-- End Footer -->
-        <script src="js/all.min.js"></script>
-        <script src="js/main.js"></script>
-    </body>
+        </div>
+    </div>
+
+    <div class="col">
+        <h4>About</h4>
+        <a href="#">About Us</a>
+        <a href="#">Delivery Information</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+        <a href="#">Contact Us</a>
+    </div>
+
+    <div class="col">
+        <h4>My Account</h4>
+        <a href="#">Sign In</a>
+        <a href="#">View Cart</a>
+        <a href="#">My Wishlist</a>
+        <a href="#">Track My Order</a>
+        <a href="#">Help</a>
+    </div>
+
+    <div class="col install">
+        <h4>Install App</h4>
+        <p>From App Store or Google Play</p>
+        <div class="row">
+            <img src="/images/pay/app.jpg" alt="">
+            <img src="/images/pay/play.jpg" alt="">
+        </div>
+        <p>Secured Payment Gateways</p>
+        <img src="images/pay/pay.png" alt="">
+    </div>
+
+    <div class="copyright">
+        <p>&copy; 2022, Tech2 etc - HTML CSS Ecommerce Template</p>
+    </div>
+</footer>
+<!-- End Footer -->
+<script src="js/all.min.js"></script>
+<script src="js/main.js"></script>
+</body>
 
 <script>
-    setTimeout(function() {
+    setTimeout(function () {
         var alertError = document.getElementById("alertError1");
         if (alertError) {
             alertError.style.display = "none"; // Ẩn phần tử

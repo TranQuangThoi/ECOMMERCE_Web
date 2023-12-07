@@ -44,7 +44,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Page<OrderEntity> findPageByUser(int pageNumber, int pageSize , int userId) {
 
-        Pageable pageable = PageRequest.of(pageNumber-1 , pageSize);
+        Pageable pageable = PageRequest.of(pageNumber-1 , pageSize, Sort.by(Sort.Direction.DESC, "orderDate"));
         return orderRepository.findOrderEntitiesByUserEntityId(userId,pageable);
     }
 

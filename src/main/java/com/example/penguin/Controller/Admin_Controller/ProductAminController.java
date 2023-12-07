@@ -129,7 +129,7 @@ public class ProductAminController {
 //        {
 //            return "redirect:/" ;
 //        }
-        int pageSize = 5;
+        int pageSize = 10;
         Page<ProductEntity> productEntitiesPage = productServiceImpl.findPage(pageNumber, pageSize);
 
         int totalPage = productEntitiesPage.getTotalPages();

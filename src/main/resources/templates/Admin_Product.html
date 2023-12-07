@@ -231,6 +231,7 @@
                                     <th>Tên sản phẩm</th>
                                     <th>Danh mục</th>
                                     <th>số lượng</th>
+                                    <th>Đã bán</th>
                                     <th>Trạng thái</th>
                                     <th>Giá</th>
                                     <th>Chức năng</th>
@@ -247,6 +248,7 @@
                                         </td>
                                         <td th:text="${itemProduct.category.nameCategory}"></td>
                                         <td th:text="${itemProduct.quantity}">
+                                        <td th:text="${itemProduct.sold}">
                                         </td>
                                         <td >
                                             <span th:text="${itemProduct.available == 1 ? 'Sẵn sàng' : 'Đang nhập'}"></span>

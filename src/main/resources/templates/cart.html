@@ -3,283 +3,301 @@
       xmlns:th="http://www.thymeleaf.org"
 >
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="css/all.min.css">
-        <link rel="stylesheet" href="css/main.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
-        <title>Ecommerce Website</title>
-    </head>
+    <title>Ecommerce Website</title>
+</head>
 
-    <body>
+<body>
 
-        <!-- Start Header -->
-        <section id="header">
-            <a href=""> <img src="images/logo2.png" class="logo" style="height: 70px;"></a>
+<!-- Start Header -->
+<section id="header">
+    <a href=""> <img src="images/logo2.png" class="logo" style="height: 70px;"></a>
 
 
-            <div>
-                <ul id="navbar">
-                    <li>
-                        <div class="search-box">
-                          <input class="search-box_input" type="text" placeholder="bạn muốn tìm gì ?" required>
-                          <button class="search-box_btn" ><i class="bi bi-search"></i> </button>
-                        </div>
-                       </li>
-                    <li><a th:href="@{/}">Home</a></li>
-                    <li><a th:href="@{/shop}">Shope</a></li>
-                    <li><a th:href="@{/blog}">Blog</a></li>
-                    <li><a th:href="@{/about}" >About</a></li>
-                    <li><a th:href="@{contact}">Contact</a></li>
-                    <li ><a th:href="@{/cart}" class="active"><i class="bi bi-cart3" style="font-size: 25px;"></i></a></li>
-                    <li th:if="${session.account == null}">
-                        <a th:href="@{/login}">Đăng nhập</a>
-                    </li>
-                    <li th:if="${session.account != null}">
-                        <a th:href="@{/account}">
-                            <i class="bi bi-person-circle" style="font-size: 25px;"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div id="mobile">
-                <a href="cart.html"><i class="fa-solid fa-bag-shopping"></i></a>
-                <span id="bar">
+    <div>
+        <ul id="navbar">
+            <li>
+                <div class="search-box">
+                    <input class="search-box_input" type="text" placeholder="bạn muốn tìm gì ?" required>
+                    <button class="search-box_btn"><i class="bi bi-search"></i></button>
+                </div>
+            </li>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/shop}">Shope</a></li>
+            <li><a th:href="@{/blog}">Blog</a></li>
+            <li><a th:href="@{/about}">About</a></li>
+            <li><a th:href="@{/contact}">Contact</a></li>
+            <li><a th:href="@{/cart}" class="active"><i class="bi bi-cart3" style="font-size: 25px;"></i></a></li>
+            <li th:if="${session.account == null}">
+                <a th:href="@{/login}">Đăng nhập</a>
+            </li>
+            <li th:if="${session.account != null}">
+                <a th:href="@{/account}">
+                    <i class="bi bi-person-circle" style="font-size: 25px;"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div id="mobile">
+        <a href="cart.html"><i class="fa-solid fa-bag-shopping"></i></a>
+        <span id="bar">
                     <i class="fas fa-outdent"></i>
                 </span>
-            </div>
-        </section>
-        <!-- End Header -->
+    </div>
+</section>
+<!-- End Header -->
 
 
+<!-- Start page header Section -->
+<section id="page-header" class="about-header">
+    <h2>Hãy để lại đánh giá</h2>
+    <p>Chúng tôi muốn lắng nghe ý kiến của bạn về sản phẩm của chúng tôi !</p>
+</section>
+<!-- End  page header Section -->
+
+<th:block th:if="${session.account== null}">
+    <section class="section-p1"
+             style="margin-top: 5%; margin-bottom: 5%; ; display: flex; justify-content: center;align-items: center; ">
+
+        <h3 style="font-size: 25px;">Hãy đăng nhập để có thể trải nhiệm mua hàng nào </h3>
+        <a th:href="@{/login}" style="color: #6ac950">
+            <i class="bi bi-door-open" style="font-size: 60px; margin-left: 6px"></i>
+        </a>
+
+    </section>
+
+</th:block>
+
+<!-- Start Cart -->
+<th:block th:if="${session.account!= null}">
+
+    <section id="cart" class="section-p1">
+        <form method="post">
+
+            <table width="100%">
+                <thead>
+                <tr>
+                    <td>Image</td>
+                    <td>Product</td>
+                    <td>Price</td>
+                    <td>Quantity</td>
+                    <td>Size</td>
+                    <td>Subtotal</td>
+                    <td>Remove</td>
+                </tr>
 
 
+                </thead>
 
-        <!-- Start page header Section -->
-        <section id="page-header" class="about-header">
-            <h2>Hãy để lại đánh giá</h2>
-            <p>Chúng tôi muốn lắng nghe ý kiến của bạn về sản phẩm của chúng tôi !</p>
-        </section>
-        <!-- End  page header Section -->
+                <tbody>
 
-        <th:block th:if="${session.account== null}">
-            <section class="section-p1" style="margin-top: 5%; margin-bottom: 5%; ; display: flex; justify-content: center;align-items: center; ">
-
-                <h3 style="font-size: 25px;">Hãy đăng nhập để có thể trải nhiệm mua hàng nào </h3>
-                <a th:href="@{/login}" style="color: #6ac950">
-                    <i class="bi bi-door-open" style="font-size: 60px; margin-left: 6px"  ></i>
-                </a>
-
-            </section>
-
-        </th:block>
-
-        <!-- Start Cart -->
-        <th:block th:if="${session.account!= null}">
-
-            <section id="cart" class="section-p1">
-                <form method="post">
-
-                <table width="100%">
-                    <thead>
+                <th:block th:if="${cart!=null}" th:each="itemcartDetail : ${cartDetailList}">
                     <tr>
-                        <td>Image</td>
-                        <td>Product</td>
-                        <td>Price</td>
-                        <td>Quantity</td>
-<!--                        <td>Size</td>-->
-                        <td>Subtotal</td>
-                        <td>Remove</td>
+                        <td><img th:src="${itemcartDetail.getProduct().imageList.get(0).getUrl()}" alt=""></td>
+                        <td th:text="${itemcartDetail.getProduct().getProductName()}" class="td-limit-width"></td>
+                        <td>
+                            <h3 th:text="${#numbers.formatInteger(itemcartDetail.getProduct().getPrice(), 0, 'COMMA')} + ' đ'"
+                                style="color: #66c732;padding: 7px;"></h3>
+                        </td>
+                        <td>
+                            <div style="display: flex; align-items: center;justify-content: center;">
+                                <button type="button" onclick="decreaseQuantity(this)">-</button>
+                                <input type="number" th:value="${itemcartDetail.quantity}" name="quantity"
+                                       style="width: 35px; border: none; height: 40px; margin-left: 22px;"
+                                       th:min="1" th:max="${itemcartDetail.getProduct().getQuantity()}">
+                                <button type="button" onclick="increaseQuantity(this)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                        <span th:text="${itemcartDetail.size == 1 ? 'XL' : (itemcartDetail.size == 2 ? 'XXL' : (itemcartDetail.size == 3 ? 'Small' : 'Large'))}"></span>
+                        </td>
+                        <td>
+                            <h3 th:text="${#numbers.formatInteger(itemcartDetail.price, 0, 'COMMA')} + ' đ'"
+                                style="color: #66c732;padding: 7px;"></h3>
+
+                        </td>
+                        <td>
+                            <a th:href="@{/Cart/Delete/{id}(id=${itemcartDetail.id})}" type="submit"
+                               style="color: crimson; font-size: 23px;margin-left: 16px">
+                                <i class="bi bi-trash3"></i>
+                            </a>
+                        </td>
                     </tr>
 
 
-                    </thead>
+                </th:block>
+                </tbody>
 
-                    <tbody>
+            </table>
+            <!--                <form method="post" th:href="@{Cart/update}">-->
+            <!--                    <button class="btn_update"  type="submit" style="text-decoration: none ; color: white"> Update</button>-->
+            <!--                </form>-->
+            <!--                <div class="btn_update">-->
+            <!--                    <a th:href="@{/Cart/update}" style="text-decoration: none;padding: 10px 20px 11px 25px;color: white">Update</a>-->
+            <!--                </div>-->
+            <button class="btn_update" formaction="/Cart/update">Update</button>
+        </form>
 
-                    <th:block th:if="${cart!=null}" th:each="itemcartDetail : ${cartDetailList}"  >
-                            <tr>
-                                <td><img th:src="${itemcartDetail.getProduct().imageList.get(0).getUrl()}" alt=""></td>
-                                <td th:text="${itemcartDetail.getProduct().getProductName()}" class="td-limit-width"></td>
-                                <td th:text="${itemcartDetail.getProduct().getPrice()}" >$118.19</td>
-                                <td>
-                                    <input  type="number" th:value="${itemcartDetail.quantity}" name="quantity" style="width: 35px; border: none; height: 40px;"
-                                            th:min="1" th:max="${itemcartDetail.getProduct().getQuantity()}"></td>
-                                                            <td>
-                                                                <select th:value="${itemcartDetail.size}" name="size" th:each="item : ${itemcartDetail}">
-                                                                    <option value=1 th:if="${itemcartDetail.size==1}">XL</option>
-                                                                    <option value=2 th:if="${itemcartDetail.size==2}" >XXL</option>
-                                                                    <option value=3 th:if="${itemcartDetail.size==3}">Small</option>
-                                                                    <option value=4 th:if="${itemcartDetail.size==4}">Large</option>
-                                                                </select>
-
-                                                            </td>
-                                <td th:text="${itemcartDetail.price}+ VND">$118.19</td>
-                                <td >
-                                    <a th:href="@{/Cart/Delete/{id}(id=${itemcartDetail.id})}" type="submit" style="color: crimson; font-size: 23px;" >
-                                        <i class="bi bi-trash3"></i>
-                                    </a>
-                                </td>
-                            </tr>
+    </section>
 
 
+    <!-- Start Coupon And Subtotal Section -->
 
-                    </th:block>
-                    </tbody>
+    <section id="cart-add" class="section-p1">
 
-                </table>
-<!--                <form method="post" th:href="@{Cart/update}">-->
-<!--                    <button class="btn_update"  type="submit" style="text-decoration: none ; color: white"> Update</button>-->
-<!--                </form>-->
-<!--                <div class="btn_update">-->
-<!--                    <a th:href="@{/Cart/update}" style="text-decoration: none;padding: 10px 20px 11px 25px;color: white">Update</a>-->
-<!--                </div>-->
-                <button class="btn_update" formaction="/Cart/update">Update</button>
-            </form>
+        <div id="coupon">
 
-            </section>
+            <h3>Apply Coupon</h3>
+            <div>
+                <input type="text" placeholder="Enter Your Coupon">
+                <button class="normal">Apply</button>
+            </div>
+
+        </div>
+
+        <div id="subtotal">
+
+            <h3>Cart Totals</h3>
+
+            <table>
+
+                <tr>
+                    <td>Cart Subtotal</td>
+                    <td th:if="${cart!=null}">
+                        <h3 th:text="${#numbers.formatInteger(cart.getTotalPrice(), 0, 'COMMA')} + ' đ'"
+                            style="color: #66c732;padding: 7px;"></h3>
+
+                    </td>
+                </tr>
 
 
+                <tr>
+                    <td>Shipping</td>
+                    <td>Free</td>
+                </tr>
 
-            <!-- Start Coupon And Subtotal Section -->
 
-            <section id="cart-add" class="section-p1">
+                <tr>
+                    <td><strong>Total</strong></td>
+                    <td><strong th:if="${cart!=null}">
+                        <h3 th:text="${#numbers.formatInteger(cart.getTotalPrice(), 0, 'COMMA')} + ' đ'"
+                            style="color: #66c732;padding: 7px;"></h3>
 
-                <div id="coupon">
 
-                    <h3>Apply Coupon</h3>
-                    <div>
-                        <input type="text" placeholder="Enter Your Coupon">
-                        <button class="normal">Apply</button>
-                    </div>
+                    </strong></td>
 
+                </tr>
+
+            </table>
+
+            <a class="checkout" th:href="@{checkOut}" type="submit">proceed to checkout</a>
+
+
+        </div>
+
+
+    </section>
+
+
+    <!-- End Coupon And Subtotal Section -->
+
+</th:block>
+
+
+<!-- End Cart -->
+
+
+<!-- Start Footer -->
+<footer class="section-p1 ">
+    <div class="col">
+        <a href=""> <img src="images/logo2.png" class="logo" style="height: 70px;"></a>
+        <h4>Contact</h4>
+        <p><strong>Address: </strong> 562 Wellington Roadm Street 32, San Francisco</p>
+        <p><strong>Phone: </strong> +01 2222 365 /(+91) 01 2345 6789</p>
+        <p><strong>Hours: </strong> 10:00 - 18:00. Mon - Sat</p>
+        <div class="follow">
+            <h4>Follow us</h4>
+            <div class="icons">
+                <div class="icon">
+                    <i class="fab fa-facebook"></i>
                 </div>
-
-                <div id="subtotal">
-
-                    <h3>Cart Totals</h3>
-
-                    <table>
-
-                        <tr>
-                            <td>Cart Subtotal</td>
-                            <td th:if="${cart!=null}" th:text="${cart.totalPrice}+ VND">$ 335</td>
-                        </tr>
-
-
-                        <tr>
-                            <td>Shipping</td>
-                            <td>Free</td>
-                        </tr>
-
-
-                        <tr>
-                            <td><strong >Total</strong></td>
-                            <td><strong  th:if="${cart!=null}" th:text="${cart.totalPrice} +VND" >$ 335</strong></td>
-
-                        </tr>
-
-                    </table>
-
-                        <a  class="checkout" th:href="@{checkOut}" type="submit" >proceed to checkout</a>
-
-
-
-
+                <div class="icon">
+                    <i class="fab fa-twitter"></i>
                 </div>
-
-
-            </section>
-
-
-            <!-- End Coupon And Subtotal Section -->
-
-        </th:block>
-
-
-        <!-- End Cart -->
-
-
-
-
-
-
-        <!-- Start Footer -->
-        <footer class="section-p1 ">
-            <div class="col">
-                <a href=""> <img src="images/logo2.png" class="logo" style="height: 70px;"></a>
-                <h4>Contact</h4>
-                <p><strong>Address: </strong> 562 Wellington Roadm Street 32, San Francisco</p>
-                <p><strong>Phone: </strong> +01 2222 365 /(+91) 01 2345 6789</p>
-                <p><strong>Hours: </strong> 10:00 - 18:00. Mon - Sat</p>
-                <div class="follow">
-                    <h4>Follow us</h4>
-                    <div class="icons">
-                        <div class="icon">
-                            <i class="fab fa-facebook"></i>
-                        </div>
-                        <div class="icon">
-                            <i class="fab fa-twitter"></i>
-                        </div>
-                        <div class="icon">
-                            <i class="fab fa-instagram"></i>
-                        </div>
-                        <div class="icon">
-                            <i class="fab fa-pinterest-p"></i>
-                        </div>
-                        <div class="icon">
-                            <i class="fab fa-youtube"></i>
-                        </div>
-                    </div>
+                <div class="icon">
+                    <i class="fab fa-instagram"></i>
+                </div>
+                <div class="icon">
+                    <i class="fab fa-pinterest-p"></i>
+                </div>
+                <div class="icon">
+                    <i class="fab fa-youtube"></i>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <div class="col">
-                <h4>About</h4>
-                <a href="#">About Us</a>
-                <a href="#">Delivery Information</a>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms & Conditions</a>
-                <a href="#">Contact Us</a>
-            </div>
+    <div class="col">
+        <h4>About</h4>
+        <a href="#">About Us</a>
+        <a href="#">Delivery Information</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+        <a href="#">Contact Us</a>
+    </div>
 
-            <div class="col">
-                <h4>My Account</h4>
-                <a href="#">Sign In</a>
-                <a href="#">View Cart</a>
-                <a href="#">My Wishlist</a>
-                <a href="#">Track My Order</a>
-                <a href="#">Help</a>
-            </div>
+    <div class="col">
+        <h4>My Account</h4>
+        <a href="#">Sign In</a>
+        <a href="#">View Cart</a>
+        <a href="#">My Wishlist</a>
+        <a href="#">Track My Order</a>
+        <a href="#">Help</a>
+    </div>
 
-            <div class="col install">
-                <h4>Install App</h4>
-                <p>From App Store or Google Play</p>
-                <div class="row">
-                    <img src="images/pay/app.jpg" alt="">
-                    <img src="images/pay/play.jpg" alt="">
-                </div>
-                <p>Secured Payment Gateways</p>
-                <img src="images/pay/pay.png" alt="">
-            </div>
+    <div class="col install">
+        <h4>Install App</h4>
+        <p>From App Store or Google Play</p>
+        <div class="row">
+            <img src="images/pay/app.jpg" alt="">
+            <img src="images/pay/play.jpg" alt="">
+        </div>
+        <p>Secured Payment Gateways</p>
+        <img src="images/pay/pay.png" alt="">
+    </div>
 
-            <div class="copyright">
-                <p>&copy; 2023</p>
-            </div>
-        </footer>
-        <!-- End Footer -->
-        <script src="js/all.min.js"></script>
-        <script src="js/main.js"></script>
-    </body>
-    <style>
-        .td-limit-width {
-            max-width: 200px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            word-wrap: break-word;}
-    </style>
+    <div class="copyright">
+        <p>&copy; 2023</p>
+    </div>
+</footer>
+<!-- End Footer -->
+<script src="js/all.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+<style>
+    .td-limit-width {
+        max-width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-wrap: break-word;
+    }
+</style>
+<script>
+    function increaseQuantity(button) {
+        var input = button.parentElement.querySelector('input[name="quantity"]');
+        input.stepUp();
+    }
 
+    function decreaseQuantity(button) {
+        var input = button.parentElement.querySelector('input[name="quantity"]');
+        input.stepDown();
+    }
+</script>
 </html>
