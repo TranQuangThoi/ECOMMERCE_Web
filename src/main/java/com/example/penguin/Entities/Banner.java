@@ -9,7 +9,7 @@ import lombok.Data;
 public class Banner {
 
     @Id
-    @GeneratedValue( strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int idBanner;
     private String name;
 }

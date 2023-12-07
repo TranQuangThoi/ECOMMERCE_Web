@@ -11,17 +11,16 @@ import java.util.List;
 public class CartEntity {
 
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int cartId;
     private long totalPrice;
 
     @OneToOne
-    @JoinColumn(name ="userId")
+    @JoinColumn(name = "userId")
     private UserEntity userEntity;
 
     @OneToMany(mappedBy = "cart")
     private List<CartDetailEntity> cartDetailList;
-
 
 
 }

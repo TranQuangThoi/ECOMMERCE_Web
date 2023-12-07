@@ -53,26 +53,24 @@ public class ProductAminController {
     //-------------------------ADMIN----------------------------------\\
 
     @GetMapping("/Add_Product")
-    public String addPro_Page(Model model)
-    {
+    public String addPro_Page(Model model) {
         List<CategoryEntity> listCategory = categoryServiceImpl.findAll();
-        model.addAttribute("listCategory",listCategory);
+        model.addAttribute("listCategory", listCategory);
         return "Add_Product";
     }
 
     @PostMapping("/Add_Product/save")
     public String saveProduct(
-                              @ModelAttribute(name = "name") String name  ,
-                              @ModelAttribute(name ="description") String description,
-                              @ModelAttribute(name="price") int price,
-                              @ModelAttribute(name ="quantity") int quantity,
-                              @ModelAttribute(name = "available") int availble,
-                              @ModelAttribute(name = "category") int category,
-                              @ModelAttribute(name = "image") MultipartFile[] image,
-                              RedirectAttributes rd
+            @ModelAttribute(name = "name") String name,
+            @ModelAttribute(name = "description") String description,
+            @ModelAttribute(name = "price") int price,
+            @ModelAttribute(name = "quantity") int quantity,
+            @ModelAttribute(name = "available") int availble,
+            @ModelAttribute(name = "category") int category,
+            @ModelAttribute(name = "image") MultipartFile[] image,
+            RedirectAttributes rd
 
-                              )
-    {
+    ) {
 
 
         ProductEntity product = new ProductEntity();
@@ -84,51 +82,46 @@ public class ProductAminController {
         product.setCategory(categoryServiceImpl.findById(category));
         productServiceImpl.saveProduct(product);
 
-            for (MultipartFile itemmage : image) {
-                    if(!itemmage.isEmpty())
-                    {
-                        String urlImage = cloudinaryService.uploadFile(itemmage);
-                        ImagesEntity imagesEntity = new ImagesEntity();
-                        imagesEntity.setUrl(urlImage);
-                        imagesEntity.setProduct(product);
-                        imageServiceImpl.saveImage(imagesEntity);
-                    }
-
-
+        for (MultipartFile itemmage : image) {
+            if (!itemmage.isEmpty()) {
+                String urlImage = cloudinaryService.uploadFile(itemmage);
+                ImagesEntity imagesEntity = new ImagesEntity();
+                imagesEntity.setUrl(urlImage);
+                imagesEntity.setProduct(product);
+                imageServiceImpl.saveImage(imagesEntity);
             }
 
-        rd.addFlashAttribute("message" , "Đã thêm "+ product.getProductName() + "thành công");
+
+        }
+
+        rd.addFlashAttribute("message", "Đã thêm " + product.getProductName() + "thành công");
         return "redirect:/Admin_Product";
     }
 
     @GetMapping("/Admin_Product/info_Product/{id}")
     public String showInforProdcut(@PathVariable(value = "id") Integer id,
                                    Model model
-                                   )
-    {
+    ) {
 
         ProductEntity product = productServiceImpl.findById(id);
 
         List<ImagesEntity> listImage = imageServiceImpl.findByIdPro(id);
 
-        model.addAttribute("listImage",listImage);
-        model.addAttribute("product" , product);
+        model.addAttribute("listImage", listImage);
+        model.addAttribute("product", product);
         return "/info_Product";
     }
 
     @GetMapping("/Admin_Product")
-    public String viewHomePage(Model model )
-    {
-        UserEntity account =  (UserEntity) session.getAttribute("account");
+    public String viewHomePage(Model model) {
+        UserEntity account = (UserEntity) session.getAttribute("account");
 
 
-        return getOnePage(1,model) ;
+        return getOnePage(1, model);
     }
 
     @GetMapping("/Admin_Product/page/{pageNumber}")
-    public String getOnePage(@PathVariable(value = "pageNumber") int pageNumber , Model model)
-    {
-
+    public String getOnePage(@PathVariable(value = "pageNumber") int pageNumber, Model model) {
 
 
 //        UserAccountEntity account =  (UserAccountEntity) session.getAttribute("account");
@@ -137,29 +130,25 @@ public class ProductAminController {
 //            return "redirect:/" ;
 //        }
         int pageSize = 5;
-        Page<ProductEntity> productEntitiesPage = productServiceImpl.findPage(pageNumber,pageSize);
+        Page<ProductEntity> productEntitiesPage = productServiceImpl.findPage(pageNumber, pageSize);
 
         int totalPage = productEntitiesPage.getTotalPages();
         List<ProductEntity> productEntities = productEntitiesPage.getContent();
 
 
-
-        model.addAttribute("totalPage",totalPage);
-        model.addAttribute("currentPage",pageNumber);
-        model.addAttribute("products",productEntities);
+        model.addAttribute("totalPage", totalPage);
+        model.addAttribute("currentPage", pageNumber);
+        model.addAttribute("products", productEntities);
 
         return "Admin_Product";
     }
 
 
-
-
     @GetMapping("/Admin_Product/Delete/{id}")
-    public String Delete(@PathVariable(value = "id") int id , RedirectAttributes rd)
-    {
+    public String Delete(@PathVariable(value = "id") int id, RedirectAttributes rd) {
         ProductEntity product = productServiceImpl.findById(id);
 
-        rd.addFlashAttribute("message","đã xóa sản phẩm " +product.getProductName()  +"thành công");
+        rd.addFlashAttribute("message", "đã xóa sản phẩm " + product.getProductName() + "thành công");
         cartDetailService.deleteAllByProduct(product);
         productServiceImpl.deleteProById(id);
 
@@ -168,34 +157,33 @@ public class ProductAminController {
     }
 
     @GetMapping("/Admin_Product/edit_InfoProduct/{id}")
-    public String showPageEdit(@PathVariable(value = "id")int id , Model model)
-    {
+    public String showPageEdit(@PathVariable(value = "id") int id, Model model) {
 
         List<CategoryEntity> categoryEntityList = categoryServiceImpl.findAll();
-        List<ImagesEntity> imagesEntityList=  imageServiceImpl.findByIdPro(id);
+        List<ImagesEntity> imagesEntityList = imageServiceImpl.findByIdPro(id);
 
         ProductEntity product = productServiceImpl.findById(id);
         CategoryEntity category = product.getCategory();
 
 
         // danh mục hiện tại
-        model.addAttribute("itemCategory",category);
+        model.addAttribute("itemCategory", category);
         model.addAttribute("listCategory", categoryEntityList);
-        model.addAttribute("product" , product);
-        model.addAttribute("listImage",imagesEntityList);
+        model.addAttribute("product", product);
+        model.addAttribute("listImage", imagesEntityList);
         return "/edit_InfoProduct";
     }
+
     @PostMapping("/edit_InfoProduct/update/{id}")
     public String editProduct(@PathVariable(value = "id") int id,
-                              @ModelAttribute(name = "name") String name ,
-                              @ModelAttribute(name ="description") String description,
-                              @ModelAttribute(name="price") int price,
-                              @ModelAttribute(name ="quantity") int quantity,
+                              @ModelAttribute(name = "name") String name,
+                              @ModelAttribute(name = "description") String description,
+                              @ModelAttribute(name = "price") int price,
+                              @ModelAttribute(name = "quantity") int quantity,
                               @ModelAttribute(name = "available") int availble,
                               @ModelAttribute(name = "category") int category,
-                              @ModelAttribute(name = "image") MultipartFile[] image ,
-                              RedirectAttributes rd)
-    {
+                              @ModelAttribute(name = "image") MultipartFile[] image,
+                              RedirectAttributes rd) {
 
         ProductEntity product = productServiceImpl.findById(id);
 
@@ -210,14 +198,12 @@ public class ProductAminController {
         List<ImagesEntity> imagesEntityList = imageServiceImpl.findByIdPro(id);
 
 //        thay đổi ảnh theo anh goc
-        for (int i=0 ; i<imagesEntityList.size() ; i++)
-        {
+        for (int i = 0; i < imagesEntityList.size(); i++) {
             ImagesEntity imagesEntity = imagesEntityList.get(i);
             MultipartFile imageM = image[i];
 
             // Kiểm tra ảnh có được chọn thay đổi hay không
-            if(imageM!= null && !imageM.isEmpty() )
-            {
+            if (imageM != null && !imageM.isEmpty()) {
                 String url = cloudinaryService.uploadFile(imageM);
                 imagesEntity.setUrl(url);
                 imageServiceImpl.saveImage(imagesEntity);
@@ -226,12 +212,9 @@ public class ProductAminController {
 
 //        productService.deleteImageByPro(id);
         // theem anh
-        if(imagesEntityList.size()<image.length)
-        {
-            for(MultipartFile itemImage: image)
-            {
-                if(!itemImage.isEmpty() )
-                {
+        if (imagesEntityList.size() < image.length) {
+            for (MultipartFile itemImage : image) {
+                if (!itemImage.isEmpty()) {
                     String url = cloudinaryService.uploadFile(itemImage);
                     ImagesEntity imagesEntity = new ImagesEntity();
                     imagesEntity.setUrl(url);
@@ -242,13 +225,9 @@ public class ProductAminController {
         }
 
 
-
-        rd.addFlashAttribute("message","Đã lưu thay đổi thành công");
+        rd.addFlashAttribute("message", "Đã lưu thay đổi thành công");
         return "redirect:/Admin_Product";
     }
-
-
-
 
 
     //------------------------------------USER------------------------------------\\

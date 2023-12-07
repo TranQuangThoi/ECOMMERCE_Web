@@ -17,24 +17,21 @@ public class CartServiceImpl implements CartService {
     CartRepository cartRepository;
     @Autowired
     CartDetailReposity cartDetailReposity;
+
     @Override
-    public CartEntity findCartByUserId(int id)
-    {
+    public CartEntity findCartByUserId(int id) {
         return cartRepository.findByIdUser(id);
     }
 
     @Override
-    public void saveCart(CartEntity cart)
-    {
+    public void saveCart(CartEntity cart) {
         cartRepository.save(cart);
     }
 
     @Override
-    public void deleteByCart(CartEntity cart)
-    {
+    public void deleteByCart(CartEntity cart) {
         List<CartDetailEntity> cartDetailList = cart.getCartDetailList();
-        for(CartDetailEntity cartDetail : cartDetailList)
-        {
+        for (CartDetailEntity cartDetail : cartDetailList) {
             cartDetailReposity.delete(cartDetail);
         }
         cartRepository.delete(cart);

@@ -17,39 +17,32 @@ public class OrderAdminController {
 
     @Autowired
     private OrderService orderServiceImpl;
+
     @GetMapping("/Admin_Order")
-    public String showOrder(Model model)
-    {
+    public String showOrder(Model model) {
 
 //        List<OrderEntity> orderList  = orderService.findAll();
 //
 //        model.addAttribute("orderList" ,orderList);
 
-        return getOnePage(1,model);
+        return getOnePage(1, model);
     }
 
     @GetMapping("/Admin_Order/page/{pageNumber}")
-    public String getOnePage(@PathVariable(value = "pageNumber") int pageNumber , Model model)
-    {
+    public String getOnePage(@PathVariable(value = "pageNumber") int pageNumber, Model model) {
 
         int pageSize = 15;
-        Page<OrderEntity> orderEntityPage = orderServiceImpl.findPage(pageNumber,pageSize);
+        Page<OrderEntity> orderEntityPage = orderServiceImpl.findPage(pageNumber, pageSize);
 
         int totalPage = orderEntityPage.getTotalPages();
         List<OrderEntity> orderEntityList = orderEntityPage.getContent();
 
-        model.addAttribute("totalPage",totalPage);
-        model.addAttribute("currentPage",pageNumber);
-        model.addAttribute("orders",orderEntityList);
+        model.addAttribute("totalPage", totalPage);
+        model.addAttribute("currentPage", pageNumber);
+        model.addAttribute("orders", orderEntityList);
         return "Admin_Order";
 
     }
-
-
-
-
-
-
 
 
 }

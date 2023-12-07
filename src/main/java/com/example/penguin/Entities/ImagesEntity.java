@@ -12,14 +12,14 @@ import java.util.List;
 public class ImagesEntity {
 
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idImage;
 
 
     private String url;
 
     @ManyToOne
-    @JoinColumn(name="ProductId")
+    @JoinColumn(name = "ProductId")
     private ProductEntity product;
 
 

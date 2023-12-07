@@ -24,17 +24,14 @@ public class ProductController {
     private CategoryService categoryServiceImpl;
 
     @GetMapping("/shop")
-    public String showPageShop(Model model)
-    {
+    public String showPageShop(Model model) {
         List<ProductEntity> productList = productServiceImpl.findAll();
         List<CategoryEntity> categoryList = categoryServiceImpl.findAll();
 
-        model.addAttribute("categoryList",categoryList);
-        model.addAttribute("productList",productList);
+        model.addAttribute("categoryList", categoryList);
+        model.addAttribute("productList", productList);
         return "shop";
     }
-
-
 
 
 }

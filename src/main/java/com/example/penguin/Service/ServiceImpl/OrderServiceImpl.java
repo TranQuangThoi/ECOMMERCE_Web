@@ -47,7 +47,9 @@ public class OrderServiceImpl implements OrderService {
     public List<OrderEntity> findOrderOfDate(String startDate, String endDate) {
 //        Date start = java.sql.Date.valueOf(startDate);
 //        Date end = java.sql.Date.valueOf(endDate);
-        return orderRepository.findOrderSoldByDateRange(startDate, endDate);
+        List<OrderEntity> orderEntityList = orderRepository.findOrderSoldByDateRange(startDate,endDate);
+        System.out.println(orderEntityList);
+        return orderEntityList;
     }
 
 

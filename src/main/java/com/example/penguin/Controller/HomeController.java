@@ -24,47 +24,42 @@ public class HomeController {
     private ProductService productServiceImpl;
     @Autowired
     private ImageService imageServiceImpl;
+
     @GetMapping("/")
-    public String showHomePage(){
+    public String showHomePage() {
         return "home";
     }
 
 
-
     @GetMapping("/about")
-    public String showPageAbout()
-    {
+    public String showPageAbout() {
         return "about";
     }
 
 
     @GetMapping("/blog")
-    public String showPageBlog()
-    {
+    public String showPageBlog() {
         return "blog";
     }
 
 
-
     @GetMapping("/contact")
-    public String showContact()
-    {
+    public String showContact() {
         return "contact";
     }
 
     @GetMapping("/sproduct/{id}")
-    public String showPageProduct(Model model , @PathVariable(name = "id")int id)
-    {
+    public String showPageProduct(Model model, @PathVariable(name = "id") int id) {
 
         List<ImagesEntity> imagesList = imageServiceImpl.findByIdPro(id);
         ProductEntity product = productServiceImpl.findById(id);
-        Pageable pageable = PageRequest.of(0,4);
+        Pageable pageable = PageRequest.of(0, 4);
 
-        List<ProductEntity> productEntities = productServiceImpl.findRelateProduce(product.getCategory().getIdCategory(),pageable);
+        List<ProductEntity> productEntities = productServiceImpl.findRelateProduce(product.getCategory().getIdCategory(), pageable);
 
-        model.addAttribute("imagesList",imagesList);
-        model.addAttribute("product",product);
-        model.addAttribute("productRelate",productEntities);
+        model.addAttribute("imagesList", imagesList);
+        model.addAttribute("product", product);
+        model.addAttribute("productRelate", productEntities);
         return "sproduct";
     }
 
@@ -72,7 +67,6 @@ public class HomeController {
     public String handleUnknownPage() {
         return "error"; // Trả về trang lỗi hoặc trang mặc định khác
     }
-
 
 
 }

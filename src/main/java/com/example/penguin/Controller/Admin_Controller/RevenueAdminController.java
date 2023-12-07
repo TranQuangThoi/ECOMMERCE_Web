@@ -19,27 +19,26 @@ public class RevenueAdminController {
 
     @Autowired
     private OrderService orderServiceImpl;
+
     @GetMapping("Admin_Revenue")
-    public String showRevenue(Model model)
-    {
+    public String showRevenue(Model model) {
         List<OrderEntity> orderSold = orderServiceImpl.findOrderSold();
 
-        model.addAttribute("orderSold",orderSold);
-            return "/Admin_Revenue";
+        model.addAttribute("orderSold", orderSold);
+        return "/Admin_Revenue";
     }
+
     @PostMapping("/findOrderOfDate")
-    public String findOrderByDate(Model model , @ModelAttribute("fromDate") @DateTimeFormat(pattern = "yyyy-MM-dd") String startDate,
-                                  @ModelAttribute("toDate") @DateTimeFormat(pattern = "yyyy-MM-dd") String endDate ,
+    public String findOrderByDate(Model model, @ModelAttribute("fromDate") @DateTimeFormat(pattern = "yyyy-MM-dd") String startDate,
+                                  @ModelAttribute("toDate") @DateTimeFormat(pattern = "yyyy-MM-dd") String endDate,
                                   RedirectAttributes rd
-    )
-    {
-        List<OrderEntity> orderEntityList = orderServiceImpl.findOrderOfDate(startDate,endDate);
-        if (orderEntityList.isEmpty())
-        {
-            rd.addFlashAttribute("error","Không có đơn hàng nào trong thời gian này");
+    ) {
+        List<OrderEntity> orderEntityList = orderServiceImpl.findOrderOfDate(startDate, endDate);
+        if (orderEntityList.isEmpty()) {
+            rd.addFlashAttribute("error", "Không có đơn hàng nào trong thời gian này");
         }
-        model.addAttribute("orderList",orderEntityList);
-        System.out.println(startDate +" và"+ endDate);
+        model.addAttribute("orderList", orderEntityList);
+        System.out.println(startDate + " và" + endDate);
         return "Admin_Revenue";
     }
 
