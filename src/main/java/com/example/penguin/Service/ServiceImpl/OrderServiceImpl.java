@@ -7,8 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -32,7 +37,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Page<OrderEntity> findPage(int pageNumber , int pageSize)
     {
-        Pageable pageable = PageRequest.of(pageNumber -1,pageSize);
+        Pageable pageable = PageRequest.of(pageNumber -1,pageSize, Sort.by(Sort.Direction.DESC, "orderDate"));
         return this.orderRepository.findAll(pageable);
     }
 
@@ -45,11 +50,18 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OrderEntity> findOrderOfDate(String startDate, String endDate) {
-//        Date start = java.sql.Date.valueOf(startDate);
-//        Date end = java.sql.Date.valueOf(endDate);
-        List<OrderEntity> orderEntityList = orderRepository.findOrderSoldByDateRange(startDate,endDate);
-        System.out.println(orderEntityList);
-        return orderEntityList;
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date start = dateFormat.parse(startDate);
+            Date end = dateFormat.parse(endDate);
+
+            List<OrderEntity> orderEntityList = orderRepository.findOrderSoldByDateRange(start, end);
+            System.out.println(orderEntityList.size());
+            return orderEntityList;
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
     }
 
 
@@ -66,6 +78,11 @@ public class OrderServiceImpl implements OrderService {
         orderRepository.save(orderEntity);
     }
 
+    @Override
+    public OrderEntity findById(int id) {
+        OrderEntity order = orderRepository.findById(id).orElse(null);
+        return order;
+    }
 
 
 }

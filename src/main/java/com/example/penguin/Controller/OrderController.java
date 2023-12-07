@@ -1,6 +1,7 @@
 package com.example.penguin.Controller;
 
 import com.example.penguin.Entities.*;
+import com.example.penguin.Repository.ProductReposity;
 import com.example.penguin.Service.*;
 import com.example.penguin.Service.ServiceImpl.*;
 import jakarta.servlet.http.HttpSession;
@@ -27,13 +28,14 @@ public class OrderController {
 
     @Autowired
     private OrderDetailService orderDetailServiceImpl;
-    @Autowired
-    private UserAccService userAccServiceImpl;
+
     @Autowired
     private ProductService productServiceImpl;
 
     @Autowired
     private MailService mailService;
+    @Autowired
+    private ProductReposity productReposity;
 
     @GetMapping("checkOut")
     public String pageCheckOut(Model model) {
@@ -48,7 +50,7 @@ public class OrderController {
     }
 
     @PostMapping("Cart/checkOut/{id}")
-    public String compliteCheckOut(@PathVariable(name = "id") int idUser, Model model,
+    public String compliteCheckOut(@PathVariable(name = "id") int idUser,
                                    @RequestParam(name = "address") String address,
                                    @RequestParam(name = "email") String email,
                                    @RequestParam(name = "phone") String phone) {
@@ -59,7 +61,7 @@ public class OrderController {
         OrderEntity order = new OrderEntity();
         order.setUserEntity(user);
         order.setTotalPrice(cart.getTotalPrice());
-        order.setSatus(1);
+        order.setSatus(0);
         order.setDeliveryAddress(address);
         order.setEmail(email);
         order.setPhone(phone);
@@ -72,10 +74,13 @@ public class OrderController {
             orderDetail.setPrice(cartDetail.getPrice());
             orderDetail.setOrder(order);
             orderDetail.setProductName(cartDetail.getProduct().getProductName());
+            orderDetail.setProductId(cartDetail.getProduct().getIdProduct());
             orderDetailServiceImpl.saveOrderDetail(orderDetail);
 
             ProductEntity product = productServiceImpl.findById(cartDetail.getProduct().getIdProduct());
             product.setQuantity(product.getQuantity() - orderDetail.getQuantity());
+            product.setSold(cartDetail.getQuantity() + product.getSold());
+            productReposity.save(product);
 
         }
 

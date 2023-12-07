@@ -2,7 +2,6 @@ package com.example.penguin.Entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.lang.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,10 +38,6 @@ public class ProductEntity {
 
     @OneToMany(mappedBy = "product")
     private List<ImagesEntity>imageList;
-
-
-
-
-
+    private int sold;
 
 }

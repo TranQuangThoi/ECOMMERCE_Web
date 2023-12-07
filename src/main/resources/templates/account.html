@@ -143,9 +143,8 @@
                                 <span th:if="${orderItem.satus ==0}">Đặt hàng</span>
                                 <span th:if="${orderItem.satus ==1}">Đã xác nhận</span>
                                 <span th:if="${orderItem.satus ==2}">Đang vận chuyển</span>
-                                <span th:if="${orderItem.satus ==3}">Đã hoàn tất</span>
+                                <span th:if="${orderItem.satus ==3}">Đã giao hàng</span>
                                 <span th:if="${orderItem.satus ==4}">Đã hủy</span>
-                                <span th:if="${orderItem.satus ==5}">Hoàn lại hàng</span>
                             </td>
                             <td th:text="${#dates.format(orderItem.orderDate ,'dd-MMM-yyyy')}">2023-07-25</td>
                         </tr>

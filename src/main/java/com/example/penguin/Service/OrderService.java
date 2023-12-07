@@ -21,6 +21,8 @@ public interface OrderService {
 
     void saveOrder(OrderEntity orderEntity);
 
+    OrderEntity findById(int id);
+
 
 
 

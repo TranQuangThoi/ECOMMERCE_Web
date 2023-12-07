@@ -90,8 +90,14 @@
                 <div class="single-pro-details" >
 
                     <h5>Home / <span th:text="${product.category.nameCategory}"></span> </h5>
-                    <h2 th:text="${product.productName}">Men Fashion T Shirt</h2>
-                    <h3 th:text="${product.price}">$139.00</h3>
+                    <h2 th:text="${product.productName}" style="font-size: 20px">Men Fashion T Shirt</h2>
+                    <div style="display: flex;color: yellowgreen;margin: 4px 10px">
+                        <!-- Assuming product is your model attribute containing product information -->
+                        <!-- Assuming product is your model attribute containing product information -->
+                        <h3 th:text="${#numbers.formatInteger(product.price, 0, 'COMMA')} + ' đ'"></h3>
+
+                    </div>
+
 
                     <label>Kích thước</label>
                     <select name="size" required>
@@ -150,7 +156,7 @@
 
                                     </div>
 
-                                    <h4 th:text="${item.price} + VND">$78</h4>
+                                    <h3 th:text="${#numbers.formatInteger(item.price, 0, 'COMMA')} + ' đ'" style="color: #66c732;padding: 7px;"></h3>
                                 </div>
                                 <div class="cart" >
                                     <i class="fas fa-cart-shopping gg"></i>

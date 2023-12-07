@@ -132,11 +132,12 @@ public class CartController {
                     for (CartDetailEntity a : cart.getCartDetailList()) {
                         totalPrice += a.getPrice();
                     }
+                }else {
+                    totalPrice = cartDetail1.getPrice();
                 }
 
 
             }
-
             cart.setTotalPrice(totalPrice);
             cartServiceImpl.saveCart(cart);
         }

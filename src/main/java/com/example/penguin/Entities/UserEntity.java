@@ -1,5 +1,6 @@
 package com.example.penguin.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -31,9 +32,8 @@ public class UserEntity {
     private CartEntity cart;
 
     @OneToMany(mappedBy = "userEntity")
+    @JsonIgnore
     private List<OrderEntity> order;
-
-
 
 
 }

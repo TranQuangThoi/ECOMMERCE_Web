@@ -1,14 +1,15 @@
 package com.example.penguin.Controller.Admin_Controller;
 
+import com.example.penguin.Entities.OrderDetailEntity;
 import com.example.penguin.Entities.OrderEntity;
+import com.example.penguin.Entities.ProductEntity;
 import com.example.penguin.Service.OrderService;
-import com.example.penguin.Service.ServiceImpl.OrderServiceImpl;
+import com.example.penguin.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,14 +18,11 @@ public class OrderAdminController {
 
     @Autowired
     private OrderService orderServiceImpl;
+    @Autowired
+    private ProductService productService;
 
     @GetMapping("/Admin_Order")
     public String showOrder(Model model) {
-
-//        List<OrderEntity> orderList  = orderService.findAll();
-//
-//        model.addAttribute("orderList" ,orderList);
-
         return getOnePage(1, model);
     }
 
@@ -42,6 +40,53 @@ public class OrderAdminController {
         model.addAttribute("orders", orderEntityList);
         return "Admin_Order";
 
+    }
+
+    @PostMapping("/Admin_Order/{id}")
+    public String updateStatusOrder(@PathVariable int id,@RequestParam("action") String action)
+    {
+        OrderEntity order = orderServiceImpl.findById(id);
+        if (order.getSatus()==4 || order.getSatus()==3)
+        {
+            return "redirect:/Admin_Order";
+        }
+        switch (action) {
+            case "pendding":
+                order.setSatus(0);
+                break;
+            case "confirmed":
+                order.setSatus(1);
+                break;
+            case "ship":
+                order.setSatus(2);
+                break;
+            case "delivered":
+                order.setSatus(3);
+                break;
+            case "cancel":
+                order.setSatus(4);
+                break;
+
+        }
+        if (order.getSatus()==4)
+        {
+            List<OrderDetailEntity> list = order.getOrderDetailList();
+            for(OrderDetailEntity item : list)
+            {
+                ProductEntity product = productService.findById(item.getProductId());
+                if (product==null)
+                {
+                    throw new RuntimeException("not found product");
+                }
+                product.setQuantity(item.getQuantity() + product.getQuantity());
+                product.setSold(product.getSold() - item.getQuantity());
+                productService.saveProduct(product);
+            }
+
+        }
+
+        orderServiceImpl.saveOrder(order);
+        return "redirect:/Admin_Order";
     }
 
 

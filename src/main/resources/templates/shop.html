@@ -104,13 +104,13 @@
                                 <div class="des">
                                     <span th:text="${item.category.nameCategory}">adidas</span>
                                     <h5 th:text="${item.productName}">Cartoon Astronaut T-Shirts</h5>
-                                    <div class="star">
-                                        <span th:text="${item.rating}"></span>
-                                        <i class="fas fa-star"></i>
+<!--                                    <div class="star">-->
+<!--                                        <span th:text="${item.rating}"></span>-->
+<!--                                        <i class="fas fa-star"></i>-->
 
-                                    </div>
+<!--                                    </div>-->
+                                    <h3 th:text="${#numbers.formatInteger(item.price, 0, 'COMMA')} + ' đ'" style="color: #66c732;padding: 7px;"></h3>
 
-                                    <h4 th:text="${item.price} + VND">$78</h4>
                                 </div>
                                 <div class="cart" >
                                     <i class="fas fa-cart-shopping gg"></i>

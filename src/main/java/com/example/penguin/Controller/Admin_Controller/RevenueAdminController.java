@@ -34,13 +34,15 @@ public class RevenueAdminController {
                                   RedirectAttributes rd
     ) {
         List<OrderEntity> orderEntityList = orderServiceImpl.findOrderOfDate(startDate, endDate);
+        System.out.println("tổng đơn hàng"+orderEntityList.size());
         if (orderEntityList.isEmpty()) {
             rd.addFlashAttribute("error", "Không có đơn hàng nào trong thời gian này");
         }
-        model.addAttribute("orderList", orderEntityList);
+        model.addAttribute("orderSold", orderEntityList);
         System.out.println(startDate + " và" + endDate);
         return "Admin_Revenue";
     }
+
 
 
 }
