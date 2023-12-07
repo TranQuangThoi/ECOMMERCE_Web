@@ -1,6 +1,8 @@
 package com.example.penguin.Controller.Admin_Controller;
 
+import com.example.penguin.Entities.OrderEntity;
 import com.example.penguin.Service.UserAccService;
+import org.springframework.data.domain.Page;
 import org.springframework.ui.Model;
 import com.example.penguin.Entities.UserEntity;
 import com.example.penguin.Service.ServiceImpl.UserAccServiceImpl;
@@ -25,9 +27,22 @@ public class AccAdminController {
     public String showUser(Model model)
     {
 
-        List<UserEntity> userAcc = userAccServiceImpl.findAllUser();
-        model.addAttribute("userAcc" , userAcc);
+        return getOnePage(model, 1);
+    }
+    @GetMapping("/user/page/{pageNumber}")
+    public String getOnePage(Model model, @PathVariable(name = "pageNumber") int pageNumber) {
+
+        int pageSize = 6;
+
+        Page<UserEntity> userList = userAccServiceImpl.findAllUser(pageNumber, pageSize);
+        int totalPage = userList.getTotalPages();
+        List<UserEntity> userEntities = userList.getContent();
+        model.addAttribute("totalPage", totalPage);
+        model.addAttribute("currentPage", pageNumber);
+        model.addAttribute("userAcc", userList);
+
         return "Admin_User";
+
     }
 
     @GetMapping("DeleteUser/{id}")

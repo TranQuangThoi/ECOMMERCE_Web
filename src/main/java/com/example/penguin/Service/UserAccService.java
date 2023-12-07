@@ -1,6 +1,7 @@
 package com.example.penguin.Service;
 
 import com.example.penguin.Entities.UserEntity;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,4 +18,5 @@ public interface UserAccService {
     Optional<UserEntity> findById(int id);
 
     UserEntity findByPhone(String phone);
+    Page<UserEntity> findAllUser(int pageNumber,int pageSize);
 }

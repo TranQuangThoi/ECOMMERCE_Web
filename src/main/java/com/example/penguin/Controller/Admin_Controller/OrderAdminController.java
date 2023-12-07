@@ -51,9 +51,6 @@ public class OrderAdminController {
             return "redirect:/Admin_Order";
         }
         switch (action) {
-            case "pendding":
-                order.setSatus(0);
-                break;
             case "confirmed":
                 order.setSatus(1);
                 break;
