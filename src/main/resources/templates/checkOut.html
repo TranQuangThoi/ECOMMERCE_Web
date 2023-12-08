@@ -104,7 +104,7 @@
                 <input placeholder="email" name="email" th:value="${session.account.email}">
             </div>
             <div class="info-user-item">
-                <label>Phương thức thanh toán</label>
+                <label>Phương thức thanh toán : COD</label>
 
             </div>
         </div>
@@ -114,9 +114,11 @@
 
             <th:block th:each="itemCart : ${cartDetailList}">
                 <div class="info-order-item infoPro">
-                    <label th:text="${itemCart.getProduct().productName}"></label>
-                    <label th:text="${itemCart.quantity}"></label>
-                    <label th:text="${itemCart.price}"></label>
+                    <label th:text="${itemCart.getProduct().productName}" style="margin: 0px 5px"></label>
+                    <label th:text="${itemCart.quantity}" style="margin: 0px 16px"></label>
+                    <h3 th:text="${#numbers.formatInteger(itemCart.price, 0, 'COMMA')} + 'đ'"
+                        style="color: #66c732;padding: 7px;"></h3>
+<!--                    <label th:text="${itemCart.price}"></label>-->
                 </div>
             </th:block>
 
@@ -126,7 +128,9 @@
 
             <div class="info-order-item">
                 <label>Tổng tiền hàng</label>
-                <label th:text="${cart.totalPrice} + VND">$</label>
+                <h3 th:text="${#numbers.formatInteger(cart.totalPrice, 0, 'COMMA')} + ' đ'"
+                    style="color: #66c732;padding: 7px;"></h3>
+<!--                <label th:text="${cart.totalPrice} + VND">$</label>-->
             </div>
             <div class="info-order-item">
                 <label> Tổng tiền phí vận chuyển</label>
@@ -138,7 +142,9 @@
             </div>
             <div class="info-order-item">
                 <label> Tổng thanh toán</label>
-                <label th:text="${cart.totalPrice} + VND">$</label>
+                <h3 th:text="${#numbers.formatInteger(cart.totalPrice, 0, 'COMMA')} + ' đ'"
+                    style="color: #66c732;padding: 7px;"></h3>
+<!--                <label th:text="${cart.totalPrice} + VND">$</label>-->
             </div>
 
             <button class="info-order-btn" type="submit">Đặt hàng</button>

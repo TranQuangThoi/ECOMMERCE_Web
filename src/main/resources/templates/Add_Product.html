@@ -239,8 +239,8 @@
                                         </div>
 
                                         <div class="mb-3">
-                                            <label class="form-label" for="basic-default-fullname" required="required">Số lượng</label>
-                                            <input class="form-control"  name="quantity" value="">
+                                            <label class="form-label" for="basic-default-fullname" >Số lượng</label>
+                                            <input class="form-control"  name="quantity" value=""required="required">
                                         </div>
 
                                         <div class="mb-3">
@@ -260,14 +260,14 @@
                                             <label class="form-label">Hình ảnh sản phầm</label>
                                             <div class="col-lg-6 mx-auto">
                                                 <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
-                                                    <input id="upload" name="image" type="file" onchange="readURL(this);"  accept="image/*" class="form-control border-0 " multiple>
+                                                    <input id="upload" name="image" type="file" onchange="readURL(this);"  accept="image/*" class="form-control border-0 " multiple required="required">
                                                 </div>
                                             </div>
 
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Giá</label>
-                                            <input type="number" class="form-control" name="price" value="">
+                                            <input type="number" class="form-control" name="price" value="" required="required">
                                         </div>
                                         <button type="submit"  class="btn btn-primary mr-3">Thêm</button>
                                         <button type="button"  class="btn btn-primary" onclick="cancelForm()">Cancel</button>

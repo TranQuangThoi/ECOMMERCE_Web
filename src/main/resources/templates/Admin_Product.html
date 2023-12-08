@@ -253,7 +253,10 @@
                                         <td >
                                             <span th:text="${itemProduct.available == 1 ? 'Sẵn sàng' : 'Đang nhập'}"></span>
                                         </td>
-                                        <td><span class="badge bg-label-success me-1" style="color:black" th:text="${itemProduct.price}+  VND">
+                                        <td>
+                                            <span th:text="${#numbers.formatInteger(itemProduct.price, 0, 'COMMA')} + ' đ'"
+                                                style="color: #66c732;padding: 7px;"></span>
+<!--                                            <span class="badge bg-label-success me-1" style="color:black" th:text="${itemProduct.price}+  VND">-->
 
                                         </span>
                                         </td>

@@ -206,23 +206,24 @@ public class ProductAminController {
             if (imageM != null && !imageM.isEmpty()) {
                 String url = cloudinaryService.uploadFile(imageM);
                 imagesEntity.setUrl(url);
+                imagesEntity.setProduct(product);
                 imageServiceImpl.saveImage(imagesEntity);
             }
         }
 
 //        productService.deleteImageByPro(id);
         // theem anh
-        if (imagesEntityList.size() < image.length) {
-            for (MultipartFile itemImage : image) {
-                if (!itemImage.isEmpty()) {
-                    String url = cloudinaryService.uploadFile(itemImage);
-                    ImagesEntity imagesEntity = new ImagesEntity();
-                    imagesEntity.setUrl(url);
-                    imagesEntity.setProduct(product);
-                    imageServiceImpl.saveImage(imagesEntity);
-                }
-            }
-        }
+//        if (imagesEntityList.size() < image.length) {
+//            for (MultipartFile itemImage : image) {
+//                if (!itemImage.isEmpty()) {
+//                    String url = cloudinaryService.uploadFile(itemImage);
+//                    ImagesEntity imagesEntity = new ImagesEntity();
+//                    imagesEntity.setUrl(url);
+//                    imagesEntity.setProduct(product);
+//                    imageServiceImpl.saveImage(imagesEntity);
+//                }
+//            }
+//        }
 
 
         rd.addFlashAttribute("message", "Đã lưu thay đổi thành công");
