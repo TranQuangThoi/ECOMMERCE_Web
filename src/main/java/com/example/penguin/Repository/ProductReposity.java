@@ -24,4 +24,6 @@ public interface ProductReposity extends JpaRepository<ProductEntity , Integer> 
     @Query("select pro from ProductEntity pro where pro.category.idCategory=:cateId ")
     List<ProductEntity> findProdcutRelateCate(int cateId,Pageable pageable);
 
+    @Query("select pro FROM ProductEntity pro order by pro.sold DESC ")
+    List<ProductEntity> findTop10Hot(Pageable pageable);
 }

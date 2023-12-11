@@ -23,5 +23,6 @@ public interface ProductService {
     void deleteProById(int id);
 
     List<ProductEntity> findRelateProduce(int id , Pageable pageable);
+    List<ProductEntity> findTop10(Pageable pageable);
 
 }

@@ -26,7 +26,10 @@ public class HomeController {
     private ImageService imageServiceImpl;
 
     @GetMapping("/")
-    public String showHomePage() {
+    public String showHomePage(Model model) {
+        Pageable pageable = PageRequest.of(0,10);
+        List<ProductEntity> productEntities = productServiceImpl.findTop10(pageable);
+        model.addAttribute("top10",productEntities);
         return "home";
     }
 

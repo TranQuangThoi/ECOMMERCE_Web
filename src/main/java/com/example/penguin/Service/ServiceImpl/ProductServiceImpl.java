@@ -87,5 +87,11 @@ public class ProductServiceImpl implements ProductService {
         return productEntities;
     }
 
+    @Override
+    public List<ProductEntity> findTop10(Pageable pageable) {
+        List<ProductEntity> productEntities = productReposity.findTop10Hot(pageable);
+        return productEntities;
+    }
+
 
 }

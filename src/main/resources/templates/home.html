@@ -151,7 +151,7 @@
     <h2>Featured Products</h2>
     <p>Summer Collection New Morden Desigin</p>
     <div class="pro-container custom-background">
-        <th:block   th:each="item : ${productRelate}" >
+        <th:block   th:each="item : ${top10}" >
             <div class="pro">
                 <a class="pro_a" th:href="@{/sproduct/{id}(id=${item.idProduct})}">
                     <img th:src="${item.imageList.get(0).getUrl()}" style="height: 67% ; width: 100% ; border: 1px solid #9fc1a5">
